@@ -3,9 +3,11 @@ const { Checklist, User } = require("../models");
 const resolvers = {
   Query: {
     checklists: async () => {
+      console.log("checklists query");
       return Checklist.find();
     },
     checklist: async (parent, { checklistId }) => {
+        console.log("checklist query");
       const params = checklistId ? { _id: checklistId } : {};
       return Checklist.findOne(params);
     },

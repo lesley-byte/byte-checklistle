@@ -33,7 +33,7 @@ const New = () => {
 
   return (
     <div>
-      <h2>Add a new checklist</h2>
+      <h2>New checklist</h2>
       <form onSubmit={handleFormSubmit}>
         <div>
           <label htmlFor="title">Title:</label>

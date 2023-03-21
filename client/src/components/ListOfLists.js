@@ -6,21 +6,24 @@ import { QUERY_CHECKLISTS } from "../utils/queries";
 
 const ListOfLists = () => {
   const { loading, data } = useQuery(QUERY_CHECKLISTS);
+  console.log("data: ", data);
 
   const checklists = data?.checklists || [];
+  console.log("checklists: ", checklists);
 
   return (
     <div>
+      <h2>Checklists</h2>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div>
-          <h2>This is ListOfLists</h2>
-          {checklists &&
-            checklists.map((checklist) => (
-              <div>{checklist.title}</div>
-            ))}
-        </div>
+        <ul>
+          {checklists.map((checklist) => (
+            <li key={checklist._id}>
+              <a href={`/checklist/${checklist._id}`}>{checklist.title}</a>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
