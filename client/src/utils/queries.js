@@ -1,37 +1,26 @@
-import { gql } from '@apollo/client';
-
-export const QUERY_USERS = gql`
-    query users {
-        users {
-            _id
-            username
-            email
-            password
-            checklists {
-                _id
-                title
-            }
-        }
-    }
-`;
+import { gql } from "@apollo/client";
 
 export const QUERY_CHECKLISTS = gql`
-    query checklists {
-        checklists {
-            _id
-            title
-        }
+  query checklists {
+    checklists {
+      _id
+      title
     }
+  }
 `;
 
-export const QUERY_CONDITIONS = gql`
-    query conditions {
-        conditions {
-            _id
-            title
-            value
-        }
+export const QUERY_CHECKLIST = gql`
+  query checklist($checklistId: ID!) {
+    checklist(checklistId: $checklistId) {
+      _id
+      title
+      steps {
+        _id
+        text
+        position
+        conditionType
+        conditionValue
+      }
     }
+  }
 `;
-
-

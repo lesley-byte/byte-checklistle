@@ -17,6 +17,7 @@ const resolvers = {
     },
     updateChecklist: async (parent, { checklistId, title, steps }) => {
       console.log("steps: ", steps);
+      // this is super important
       const updatedChecklist = await Checklist.findOneAndUpdate(
         { _id: checklistId },
         { $set: { title: title }, $push: { steps: steps } },
