@@ -31,7 +31,7 @@ const typeDefs = gql`
 
   type Query {
     checklists: [Checklist]
-    checklist(checklistId: ID): Checklist
+    checklist(checklistId: ID!): Checklist
   }
 
   type Mutation {

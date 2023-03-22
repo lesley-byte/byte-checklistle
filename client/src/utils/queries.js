@@ -15,7 +15,6 @@ export const QUERY_CHECKLIST = gql`
       _id
       title
       steps {
-        _id
         text
         position
         conditionType

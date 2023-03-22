@@ -8,6 +8,7 @@ import NavTabs from "./components/NavTabs";
 import Footer from "./components/Footer";
 import Editor from "./pages/Editor";
 import ChecklistManagement from "./pages/ChecklistManagement";
+import SingleChecklist from "./pages/SingleChecklist";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -29,6 +30,9 @@ function App() {
               element={<ChecklistManagement />}
             />
             <Route path="*" element={<Landing />} />
+            <Route 
+            path="/checklist/:checklistId" 
+            element={<SingleChecklist/>} />
           </Routes>
 
           <Footer />

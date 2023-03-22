@@ -3,13 +3,13 @@ const { Checklist, User } = require("../models");
 const resolvers = {
   Query: {
     checklists: async () => {
-      console.log("checklists query");
+      console.log("All checklists query");
       return Checklist.find();
     },
+
     checklist: async (parent, { checklistId }) => {
-        console.log("checklist query");
-      const params = checklistId ? { _id: checklistId } : {};
-      return Checklist.findOne(params);
+      console.log("Single checklist query");
+      return Checklist.findOne({ _id: checklistId });
     },
   },
 
