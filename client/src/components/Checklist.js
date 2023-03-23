@@ -9,16 +9,22 @@ const Checklist = (props) => {
   return (
     <div>
       <h2>ChecklistTitle is : {props.title}</h2>
-      {props.steps && props.steps.map((step) => (
-        <div key={step.text} className="flex-row justify-space-between my-2">
-          <div className="col-12 col-lg-3">
-            <span className="step-header">Step {step.position}</span>
-          </div>
-          <div className="col-12 col-lg-9">
-            <span className="step-text">{step.text}</span>
-          </div>
+      {props.steps ? (
+        <div>
+          {props.steps.map((step) => (
+            
+              <div key={step.text}>
+              <p>
+                Step text is:<strong> {step.text} </strong> Step is in position:{" "}
+                <strong> {step.position} </strong>
+              </p>
+            </div>
+
+          ))}
         </div>
-      ))}
+      ) : (
+        <h3>No Steps Yet</h3>
+      )}
     </div>
   );
 };

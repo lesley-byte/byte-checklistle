@@ -21,6 +21,7 @@ const ListOfLists = () => {
           {checklists.map((checklist) => (
             <li key={checklist._id}>
               <a href={`/checklist/${checklist._id}`}>{checklist.title}</a>
+              <a href={`/editor/${checklist._id}`}>Edit</a>
             </li>
           ))}
         </ul>

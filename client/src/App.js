@@ -24,7 +24,9 @@ function App() {
           <NavTabs />
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/editor" element={<Editor />} />
+            <Route 
+            path="/editor/:checklistId" 
+            element={<Editor/>} />
             <Route
               path="/checklistManagement"
               element={<ChecklistManagement />}

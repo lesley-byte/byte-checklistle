@@ -15,9 +15,11 @@ const resolvers = {
 
   Mutation: {
     addChecklist: async (parent, { title }) => {
+      console.log("Add checklist mutation");
       return Checklist.create({ title });
     },
     updateChecklist: async (parent, { checklistId, title, steps }) => {
+      console.log("update checklist mutation");
       console.log("steps: ", steps);
       // this is super important
       const updatedChecklist = await Checklist.findOneAndUpdate(

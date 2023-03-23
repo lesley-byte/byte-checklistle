@@ -11,15 +11,13 @@ export const ADD_CHECKLIST = gql`
 
 export const UPDATE_CHECKLIST = gql`
   mutation updateChecklist(
-    $checklistId: ID!
+    $checklistId: ID
     $title: String
     $steps: StepInput
   ) {
     updateChecklist(checklistId: $checklistId, title: $title, steps: $steps) {
-      _id
       title
       steps {
-        _id
         text
         position
         conditionType
