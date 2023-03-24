@@ -1,81 +1,99 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-// Import the 'useQuery()' hook from the 'react-query' package
-import { useQuery } from "@apollo/client";
-
-// Import the 'UPDATE_CHECKLIST' mutation from the 'utils/mutations.js' file
 import { UPDATE_CHECKLIST } from "../utils/mutations";
+import { QUERY_CHECKLIST, QUERY_CHECKLISTS } from "../utils/queries";
+import { useNavigate } from "react-router-dom";
 
-// Import the 'QUERY_CHECKLIST' query from the 'utils/queries.js' file
-import { QUERY_CHECKLIST } from "../utils/queries";
+const ChecklistForm = ({ checklistId, checklist }) => {
+  const navigate = useNavigate();
 
-const ChecklistForm = () => {
-  // Create a 'checklistData' object with the 'useState()' hook
-  const [checklistData, setChecklistData] = useState({
-    title: "",
-    steps: [],
-  });
+  const [title, setTitle] = useState(checklist.title);
+  const [steps, setSteps] = useState(checklist.steps);
+  const [updateChecklist, { data, loading, error }] =
+    useMutation(UPDATE_CHECKLIST);
 
-  // Use the 'useQuery()' hook to execute the 'QUERY_CHECKLIST' query
-  const { data } = useQuery(QUERY_CHECKLIST);
-
-  // Use the 'useMutation()' hook to execute the 'UPDATE_CHECKLIST' mutation
-  const [updateChecklist, { error }] = useMutation(UPDATE_CHECKLIST);
-
-  // Create a function to handle the 'onChange' event
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setChecklistData({
-      ...checklistData,
-      [name]: value,
-    });
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  // Create a function to handle the 'onSubmit' event
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleStepsChange = (e, index) => {
+    const newSteps = [...steps];
+    newSteps[index] = {
+      ...newSteps[index],
+      [e.target.name]: e.target.value,
+      position: index + 1,
+    };
+    setSteps(newSteps);
+  };
 
+  const addStep = () => {
+    setSteps([...steps, { text: "", position: steps.length + 1 }]);
+  };
+
+  const deleteStep = (indexToDelete) => {
+    const newSteps = steps.filter((_, index) => index !== indexToDelete);
+    setSteps(newSteps);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
+      // Remove the __typename field from each step object
+      const cleanedSteps = steps.map(({ __typename, ...step }) => step);
+
       await updateChecklist({
-        variables: { ...checklistData },
+        variables: { checklistId, title, steps: cleanedSteps },
+        refetchQueries: [
+          { query: QUERY_CHECKLISTS },
+          { query: QUERY_CHECKLIST, variables: { checklistId } },
+        ],
       });
-    } catch (e) {
-      console.error(e);
+      setTitle("");
+      setSteps([]);
+
+      // Navigate back to the ChecklistManagement component
+      navigate("/checklistManagement");
+    } catch (err) {
+      console.error("Error submitting mutation:", err);
     }
   };
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
-    <div>
-      {data ? (
-        <form onSubmit={handleFormSubmit}>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="checklist-title">Checklist Title:</label>
-            <input
-              placeholder={data.checklist.title}
-              name="title"
-              type="text"
-              id="checklist-title"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row space-between my-2">
-            <label htmlFor="checklist-steps">Checklist Steps:</label>
-            <textarea
-              placeholder={data.checklist.steps}
-              name="steps"
-              type="text"
-              id="checklist-steps"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-row flex-end">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      ) : null}
-      {error && <div>Something went wrong...</div>}
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="title">Title:</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value={title}
+        onChange={handleTitleChange}
+      />
+
+      {steps.map((step, index) => (
+        <div key={index}>
+          <h3>Step {index + 1}</h3>
+          <label htmlFor={`text-${index}`}>Text:</label>
+          <input
+            type="text"
+            id={`text-${index}`}
+            name="text"
+            value={step.text}
+            onChange={(e) => handleStepsChange(e, index)}
+          />
+          <button type="button" onClick={() => deleteStep(index)}>
+            Delete
+          </button>
+        </div>
+      ))}
+
+      <button type="button" onClick={addStep}>
+        Add Step
+      </button>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 

@@ -1,107 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { UPDATE_CHECKLIST } from "../utils/mutations";
-import { QUERY_CHECKLIST, QUERY_CHECKLISTS } from "../utils/queries";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_CHECKLIST } from "../utils/queries";
 import { useParams } from "react-router-dom";
-import { useChecklist } from "../contexts/ChecklistContext";
+import ChecklistForm from "../components/ChecklistForm";
 
 const Editor = () => {
   const { checklistId } = useParams();
-  const [title, setTitle] = useState("");
-  const [steps, setSteps] = useState([]);
-  const { setChecklist } = useChecklist();
-
   const { data: queryData } = useQuery(QUERY_CHECKLIST, {
     variables: { checklistId },
   });
 
+  const [checklist, setChecklist] = useState(null);
+
   useEffect(() => {
     if (queryData) {
-      setTitle(queryData.checklist.title);
-      setSteps(queryData.checklist.steps);
+      setChecklist(queryData.checklist);
     }
   }, [queryData]);
 
-  const [updateChecklist, { data, loading, error }] =
-    useMutation(UPDATE_CHECKLIST);
-
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const handleStepsChange = (e, index) => {
-    const newSteps = [...steps];
-    newSteps[index] = {
-      ...newSteps[index],
-      [e.target.name]: e.target.value,
-      position: index + 1,
-    };
-    setSteps(newSteps);
-  };
-
-  const addStep = () => {
-    setSteps([...steps, { text: "", position: steps.length + 1 }]);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Remove the __typename field from each step object
-      const cleanedSteps = steps.map(({ __typename, ...step }) => step);
-
-      await updateChecklist({
-        variables: { checklistId, title, steps: cleanedSteps },
-        refetchQueries: [{ query: QUERY_CHECKLISTS }, { query: QUERY_CHECKLIST, variables: { checklistId } }],
-      });
-      setTitle("");
-      setSteps([]);
-    } catch (err) {
-      console.error("Error submitting mutation:", err);
-    }
-  };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (!checklist) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
       <h2>Update Checklist</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          onChange={handleTitleChange}
-        />
+      <ChecklistForm checklistId={checklistId} checklist={checklist} />
 
-        {steps.map((step, index) => (
-          <div key={index}>
-            <h3>Step {index + 1}</h3>
-            <label htmlFor={`text-${index}`}>Text:</label>
-            <input
-              type="text"
-              id={`text-${index}`}
-              name="text"
-              value={step.text}
-              onChange={(e) => handleStepsChange(e, index)}
-            />
-          </div>
-        ))}
 
-        <button type="button" onClick={addStep}>
-          Add Step
-        </button>
-        <button type="submit">Submit</button>
-      </form>
-
-      {data && (
-        <div>
-          <h3>Mutation Result:</h3>
-          <pre>{JSON.stringify(data.updateChecklist, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 };
