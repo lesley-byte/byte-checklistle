@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
 
 import { QUERY_CHECKLISTS } from "../utils/queries";
 
@@ -12,7 +12,7 @@ const ListOfLists = () => {
   console.log("checklists: ", checklists);
 
   return (
-    <div>
+    <>
       <h2>Checklists</h2>
       {loading ? (
         <div>Loading...</div>
@@ -20,13 +20,13 @@ const ListOfLists = () => {
         <ul>
           {checklists.map((checklist) => (
             <li key={checklist._id}>
-              <a href={`/checklist/${checklist._id}`}>{checklist.title}</a>
-              <a href={`/editor/${checklist._id}`}>Edit</a>
+              <Link to={`/checklist/${checklist._id}`}>{checklist.title}</Link>
+              <Link to={`/editor/${checklist._id}`}>Edit</Link>
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </>
   );
 };
 

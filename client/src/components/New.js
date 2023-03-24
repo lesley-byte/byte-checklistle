@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-
 import { useMutation } from "@apollo/client";
 import { ADD_CHECKLIST } from "../utils/mutations";
+import { QUERY_CHECKLISTS } from "../utils/queries";
 
 const New = () => {
-  const [addChecklist, { error }] = useMutation(ADD_CHECKLIST);
+  const [addChecklist] = useMutation(ADD_CHECKLIST, {
+    refetchQueries: [{ query: QUERY_CHECKLISTS }],
+  });
 
   const [formState, setFormState] = useState({
     title: "",
@@ -14,9 +16,10 @@ const New = () => {
     event.preventDefault();
 
     try {
-      const { data } = await addChecklist({
+      await addChecklist({
         variables: { ...formState },
       });
+      setFormState({ title: "" });
     } catch (e) {
       console.error(e);
     }
@@ -42,6 +45,7 @@ const New = () => {
             name="title"
             type="text"
             id="title"
+            value={formState.title}
             onChange={handleChange}
           />
         </div>

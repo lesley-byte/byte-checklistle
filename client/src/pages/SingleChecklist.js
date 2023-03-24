@@ -17,10 +17,9 @@ const SingleChecklist = () => {
   const { loading, data } = useQuery(QUERY_CHECKLIST, {
     variables: { checklistId: checklistId },
   });
-  console.log("data: ", data);
 
   const checklist = data?.checklist || [];
-  console.log("checklist: ", checklist);
+
   return (
     <div>
       <h2>Checklist</h2>

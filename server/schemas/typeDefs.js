@@ -3,23 +3,23 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type Checklist {
     _id: ID
-    title: String
+    title: String!
     steps: [Step]
   }
 
   type Step {
-    text: String
-    position: Int
+    text: String!
+    position: Int!
     conditionType: String
     conditionValue: String
   }
 
   input StepInput {
-    text: String
-    position: Int
+    text: String!
+    position: Int!
     conditionType: String
     conditionValue: String
-    }
+  }
 
   type User {
     _id: ID
@@ -35,9 +35,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addChecklist(title: String): Checklist
-    updateChecklist(checklistId: ID, title: String, steps: StepInput): Checklist
-    deleteChecklist(checklistId: ID): Checklist
+    addChecklist(title: String!): Checklist
+    updateChecklist(checklistId: ID!, title: String, steps: [StepInput]): Checklist
+    deleteChecklist(checklistId: ID!): Checklist
   }
 `;
 

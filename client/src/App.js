@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Editor from "./pages/Editor";
 import ChecklistManagement from "./pages/ChecklistManagement";
 import SingleChecklist from "./pages/SingleChecklist";
+import { ChecklistProvider } from "./contexts/ChecklistContext";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -17,30 +18,30 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div>
-          <Header />
-          <NavTabs />
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route 
-            path="/editor/:checklistId" 
-            element={<Editor/>} />
-            <Route
-              path="/checklistManagement"
-              element={<ChecklistManagement />}
-            />
-            <Route path="*" element={<Landing />} />
-            <Route 
-            path="/checklist/:checklistId" 
-            element={<SingleChecklist/>} />
-          </Routes>
-
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
+    <ChecklistProvider>
+      <ApolloProvider client={client}>
+        <Router>
+          <div>
+            <Header />
+            <NavTabs />
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/editor/:checklistId" element={<Editor />} />
+              <Route
+                path="/checklistManagement"
+                element={<ChecklistManagement />}
+              />
+              <Route
+                path="/checklist/:checklistId"
+                element={<SingleChecklist />}
+              />
+              <Route path="*" element={<Landing />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
+      </ApolloProvider>
+    </ChecklistProvider>
   );
 }
 
