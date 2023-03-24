@@ -16,6 +16,7 @@ const SingleChecklist = () => {
 
   const { loading, data } = useQuery(QUERY_CHECKLIST, {
     variables: { checklistId: checklistId },
+    refetchQueries: [{ query: QUERY_CHECKLIST, variables: { checklistId } }],
   });
 
   const checklist = data?.checklist || [];

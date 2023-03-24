@@ -51,7 +51,7 @@ const Editor = () => {
 
       await updateChecklist({
         variables: { checklistId, title, steps: cleanedSteps },
-        refetchQueries: [{ query: QUERY_CHECKLISTS }],
+        refetchQueries: [{ query: QUERY_CHECKLISTS }, { query: QUERY_CHECKLIST, variables: { checklistId } }],
       });
       setTitle("");
       setSteps([]);
