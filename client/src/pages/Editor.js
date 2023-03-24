@@ -46,15 +46,15 @@ const Editor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Remove the __typename field from each step object
+      const cleanedSteps = steps.map(({ __typename, ...step }) => step);
+
       await updateChecklist({
-        variables: { checklistId, title, steps },
+        variables: { checklistId, title, steps: cleanedSteps },
         refetchQueries: [{ query: QUERY_CHECKLISTS }],
       });
       setTitle("");
       setSteps([]);
-      if (data) {
-        setChecklist(data.updateChecklist);
-      }
     } catch (err) {
       console.error("Error submitting mutation:", err);
     }
