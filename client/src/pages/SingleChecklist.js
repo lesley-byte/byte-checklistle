@@ -1,17 +1,12 @@
 import React from "react";
 
-// Import the `useParams()` hook from React Router
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
-// Import the 'Checklist' component from the 'components' folder
 import Checklist from "../components/Checklist";
-
-// Import the 'QUERY_CHECKLIST' query from the 'utils/queries.js' file
 import { QUERY_CHECKLIST } from "../utils/queries";
 
 const SingleChecklist = () => {
-  // Use the 'useParams()' hook to get the 'checklistId' value from the URL
   const { checklistId } = useParams();
 
   const { loading, data } = useQuery(QUERY_CHECKLIST, {
@@ -20,6 +15,8 @@ const SingleChecklist = () => {
   });
 
   const checklist = data?.checklist || [];
+
+  console.log("Checklist data in SingleChecklist:", checklist); // Add this line to log the checklist data
 
   return (
     <div>
