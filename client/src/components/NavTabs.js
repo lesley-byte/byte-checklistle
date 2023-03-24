@@ -10,9 +10,6 @@ const NavTabs = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/editor">Editor</Link>
-          </li>
-          <li>
             <Link to="/checklistManagement">ChecklistManagement</Link>
           </li>
         </ul>
