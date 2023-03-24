@@ -15,7 +15,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
-
+  
   const handleStepsChange = (e, index) => {
     const newSteps = [...steps];
     newSteps[index] = {
@@ -25,6 +25,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     };
     setSteps(newSteps);
   };
+  
 
   const addStep = () => {
     setSteps([...steps, { text: "", position: steps.length + 1 }]);
@@ -86,6 +87,22 @@ const ChecklistForm = ({ checklistId, checklist }) => {
           <button type="button" onClick={() => deleteStep(index)}>
             Delete
           </button>
+          <label htmlFor={`conditionType-${index}`}>Condition Type:</label>
+          <input
+            type="text"
+            id={`conditionType-${index}`}
+            name="conditionType"
+            value={step.conditionType}
+            onChange={(e) => handleStepsChange(e, index)}
+          />
+          <label htmlFor={`conditionValue-${index}`}>Condition Value:</label>
+          <input
+            type="text"
+            id={`conditionValue-${index}`}
+            name="conditionValue"
+            value={step.conditionValue}
+            onChange={(e) => handleStepsChange(e, index)}
+          />
         </div>
       ))}
 
