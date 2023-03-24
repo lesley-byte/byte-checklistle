@@ -21,7 +21,7 @@ const Editor = () => {
   if (!checklist) {
     return <p>Loading...</p>;
   }
-
+// using the checklistId and checklst as props to pass to the ChecklistForm component
   return (
     <div>
       <h2>Update Checklist</h2>
