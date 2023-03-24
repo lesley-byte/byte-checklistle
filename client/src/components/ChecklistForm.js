@@ -35,6 +35,28 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     setSteps(newSteps);
   };
 
+  const moveStepUp = (index) => {
+    if (index === 0) return; // Already at the top
+
+    const newSteps = [...steps];
+    const temp = newSteps[index - 1];
+    newSteps[index - 1] = newSteps[index];
+    newSteps[index] = temp;
+
+    setSteps(newSteps);
+  };
+
+  const moveStepDown = (index) => {
+    if (index === steps.length - 1) return; // Already at the bottom
+
+    const newSteps = [...steps];
+    const temp = newSteps[index + 1];
+    newSteps[index + 1] = newSteps[index];
+    newSteps[index] = temp;
+
+    setSteps(newSteps);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -105,6 +127,13 @@ const ChecklistForm = ({ checklistId, checklist }) => {
             value={step.conditionValue}
             onChange={(e) => handleStepsChange(e, index)}
           />
+          <button type="button" onClick={() => moveStepUp(index)}>
+            Move Up
+          </button>
+          <button type="button" onClick={() => moveStepDown(index)}>
+            Move Down
+          </button>
+
           <button type="button" onClick={() => deleteStep(index)}>
             Delete
           </button>
