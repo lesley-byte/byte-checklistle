@@ -90,7 +90,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
         type="text"
         id="title"
         name="title"
-        value={title}
+        value={title || ""}
         onChange={handleTitleChange}
       />
 
@@ -102,14 +102,14 @@ const ChecklistForm = ({ checklistId, checklist }) => {
             type="text"
             id={`text-${index}`}
             name="text"
-            value={step.text}
+            value={step.text || ""}
             onChange={(e) => handleStepsChange(e, index)}
           />
           <label htmlFor={`conditionType-${index}`}>Condition Type:</label>
           <select
             id={`conditionType-${index}`}
             name="conditionType"
-            value={step.conditionType}
+            value={step.conditionType || ""}
             onChange={(e) => handleStepsChange(e, index)}
           >
             <option value="">N/A</option>
@@ -124,7 +124,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
             type="text"
             id={`conditionValue-${index}`}
             name="conditionValue"
-            value={step.conditionValue}
+            value={step.conditionValue || ""}
             onChange={(e) => handleStepsChange(e, index)}
           />
           <button type="button" onClick={() => moveStepUp(index)}>
