@@ -143,7 +143,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
       <button type="button" onClick={addStep}>
         Add Step
       </button>
-      <button type="submit">Submit</button>
+      <button type="submit">Save Changes</button>
     </form>
   );
 };

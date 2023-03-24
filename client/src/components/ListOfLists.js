@@ -1,15 +1,32 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { useQuery, useMutation } from "@apollo/client";
+import { Link, useNavigate } from "react-router-dom";
 
 import { QUERY_CHECKLISTS } from "../utils/queries";
+import { DELETE_CHECKLIST } from "../utils/mutations";
 
 const ListOfLists = () => {
-  const { loading, data } = useQuery(QUERY_CHECKLISTS);
-  console.log("data: ", data);
-
+  const { loading, data, refetch } = useQuery(QUERY_CHECKLISTS);
   const checklists = data?.checklists || [];
-  console.log("checklists: ", checklists);
+  const navigate = useNavigate();
+
+  const [deleteChecklist] = useMutation(DELETE_CHECKLIST, {
+    onCompleted: () => refetch(),
+  });
+
+  const handleDelete = async (checklistId) => {
+    try {
+      await deleteChecklist({
+        variables: { checklistId },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleEdit = (checklistId) => {
+    navigate(`/editor/${checklistId}`);
+  };
 
   return (
     <>
@@ -21,7 +38,10 @@ const ListOfLists = () => {
           {checklists.map((checklist) => (
             <li key={checklist._id}>
               <Link to={`/checklist/${checklist._id}`}>{checklist.title}</Link>
-              <Link to={`/editor/${checklist._id}`}> Edit</Link>
+              <button onClick={() => handleEdit(checklist._id)}>Edit</button>
+              <button onClick={() => handleDelete(checklist._id)}>
+                Delete
+              </button>
             </li>
           ))}
         </ul>
