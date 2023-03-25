@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { CircularProgress, Typography } from "@mui/material";
+import { CircularProgress, Typography, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import Checklist from "../components/Checklist";
@@ -11,6 +11,8 @@ const StyledSingleChecklist = styled("div")({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  height: "80vh",
+  justifyContent: "center",
 });
 
 const SingleChecklist = () => {
@@ -26,20 +28,22 @@ const SingleChecklist = () => {
   console.log("Checklist data in SingleChecklist:", checklist); // Add this line to log the checklist data
 
   return (
-    <StyledSingleChecklist>
-      <Typography variant="h4" gutterBottom>
-        Checklist
-      </Typography>
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <Checklist
-          checklistId={checklist._id}
-          title={checklist.title}
-          steps={checklist.steps}
-        />
-      )}
-    </StyledSingleChecklist>
+    <Box sx={{ mt: 5 }}>
+      <StyledSingleChecklist>
+        <Typography variant="h4" gutterBottom>
+          Checklist
+        </Typography>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <Checklist
+            checklistId={checklist._id}
+            title={checklist.title}
+            steps={checklist.steps}
+          />
+        )}
+      </StyledSingleChecklist>
+    </Box>
   );
 };
 

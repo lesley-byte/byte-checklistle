@@ -26,7 +26,7 @@ const Editor = () => {
   }
 
   return (
-    <Box sx={{ mt: 5 }}>
+    <Box sx={{ mt: 5, height: "80vh", overflowY: "scroll" }}>
       <Typography variant="h4" gutterBottom>
         Update Checklist
       </Typography>

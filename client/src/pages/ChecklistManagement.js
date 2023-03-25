@@ -5,7 +5,7 @@ import ListOfLists from "../components/ListOfLists";
 
 const ChecklistManagement = () => {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ minHeight: "80vh" }}>
       <Typography variant="h3" component="h1" gutterBottom>
         Checklist Management
       </Typography>

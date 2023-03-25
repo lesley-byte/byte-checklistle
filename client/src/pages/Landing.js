@@ -8,7 +8,7 @@ const Landing = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "80vh",
       }}
     >
       <Box sx={{ textAlign: "center" }}>
