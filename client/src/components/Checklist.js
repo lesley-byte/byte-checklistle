@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Checkbox, FormControlLabel, Typography, Button } from "@mui/material";
 
 const Checklist = ({ title, steps }) => {
   const [checkboxStates, setCheckboxStates] = useState({});
@@ -88,31 +89,40 @@ const Checklist = ({ title, steps }) => {
 
   return (
     <div>
-      <h2>ChecklistTitle is : {title}</h2>
+      <Typography variant="h5" component="h2" gutterBottom>
+        ChecklistTitle is : {title}
+      </Typography>
       {steps ? (
         <div>
           {steps.map((step) => (
             <div key={step.text}>
               {shouldDisplayStep(step) && (
-                <>
-                  <input
-                    type="checkbox"
-                    id={`checkbox-${step.position}`}
-                    checked={checkboxStates[step.position] || false}
-                    onChange={(e) => handleCheckboxChange(e, step)}
-                  />
-                  <label htmlFor={`checkbox-${step.position}`}>
-                    Step text is:<strong> {step.text} </strong> Step is in
-                    position: <strong> {step.position} </strong>
-                  </label>
-                </>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      id={`checkbox-${step.position}`}
+                      checked={checkboxStates[step.position] || false}
+                      onChange={(e) => handleCheckboxChange(e, step)}
+                    />
+                  }
+                  label={`Step text is: ${step.text}. Step is in position: ${step.position}`}
+                />
               )}
             </div>
           ))}
-          <button onClick={resetCheckboxes}>Reset</button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={resetCheckboxes}
+            sx={{ mt: 2 }}
+          >
+            Reset
+          </Button>
         </div>
       ) : (
-        <h3>No Steps Yet</h3>
+        <Typography variant="h6" component="p">
+          No Steps Yet
+        </Typography>
       )}
     </div>
   );
