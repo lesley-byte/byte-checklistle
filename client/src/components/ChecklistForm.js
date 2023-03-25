@@ -3,8 +3,11 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_CHECKLIST } from "../utils/mutations";
 import { QUERY_CHECKLIST, QUERY_CHECKLISTS } from "../utils/queries";
 import { useNavigate } from "react-router-dom";
-import { FormControl } from "@mui/material";
-import { Button, Dialog } from "@mui/material";
+import { FormControl, Button, Dialog } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 import ValidConditionValueInput from "./ValidConditionalValueInput";
 import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
@@ -147,61 +150,53 @@ const ChecklistForm = ({ checklistId, checklist }) => {
   return (
     <div className="checklist-form">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={title || ""}
-          onChange={handleTitleChange}
-        />
-
-        {steps.map((step, index) => (
-          <div key={index}>
-            <h3>Step {index + 1}</h3>
-            <label htmlFor={`text-${index}`}>Text:</label>
-            <input
-              type="text"
-              id={`text-${index}`}
-              name="text"
-              value={step.text || ""}
-              onChange={(e) => handleStepsChange(e, index)}
-            />
-            <label htmlFor={`conditionType-${index}`}>Condition Type:</label>
-            <ValidConditionTypeSelect
-              steps={steps}
-              currentStepIndex={index}
-              value={step.conditionType || ""}
-              onChange={handleStepsChange}
-            />
-
-            <label htmlFor={`conditionValue-${index}`}>Condition Value:</label>
-            <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-              <ValidConditionValueInput
-                steps={steps}
-                currentStepIndex={index}
-                value={step.conditionValue || []}
-                onChange={(e) => handleStepsChange(e, index)}
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Box sx={{ mb: 2 }}>
+              <Typography variant="h6">Title</Typography>
+              <TextField
+                id="title"
+                name="title"
+                value={title}
+                onChange={handleTitleChange}
+                fullWidth
               />
-            </FormControl>
-
-            <button type="button" onClick={() => moveStepUp(index)}>
-              Move Up
-            </button>
-            <button type="button" onClick={() => moveStepDown(index)}>
-              Move Down
-            </button>
-
-            <button type="button" onClick={() => deleteStep(index)}>
-              Delete
-            </button>
-          </div>
-        ))}
-
-        <button type="button" onClick={addStep}>
-          Add Step
-        </button>
-        <button type="submit">Save Changes</button>
+            </Box>
+          </Grid>
+          {steps.map((step, index) => (
+            <Grid item xs={12} key={index}>
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="h6">Step {index + 1}</Typography>
+                <TextField
+                  id={`text-${index}`}
+                  name="text"
+                  value={step.text || ""}
+                  onChange={(e) => handleStepsChange(e, index)}
+                  fullWidth
+                />
+                <ValidConditionTypeSelect
+                  steps={steps}
+                  currentStepIndex={index}
+                  value={step.conditionType || ""}
+                  onChange={handleStepsChange}
+                />
+                <ValidConditionValueInput
+                  steps={steps}
+                  currentStepIndex={index}
+                  value={step.conditionValue || []}
+                  onChange={(e) => handleStepsChange(e, index)}
+                />
+                <Button onClick={() => moveStepUp(index)}>Move Up</Button>
+                <Button onClick={() => moveStepDown(index)}>Move Down</Button>
+                <Button onClick={() => deleteStep(index)}>Delete</Button>
+              </Box>
+            </Grid>
+          ))}
+          <Grid item xs={12}>
+            <Button onClick={addStep}>Add Step</Button>
+            <Button type="submit">Save Changes</Button>
+          </Grid>
+        </Grid>
       </form>
       <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div>{modalText}</div>

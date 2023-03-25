@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_CHECKLIST } from "../utils/queries";
 import { useParams } from "react-router-dom";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
+
 import ChecklistForm from "../components/ChecklistForm";
+import { QUERY_CHECKLIST } from "../utils/queries";
 
 const Editor = () => {
   const { checklistId } = useParams();
@@ -19,14 +22,16 @@ const Editor = () => {
   }, [queryData]);
 
   if (!checklist) {
-    return <p>Loading...</p>;
+    return <Typography variant="h6">Loading...</Typography>;
   }
 
   return (
-    <div className="editor">
-      <h2>Update Checklist</h2>
+    <Box sx={{ mt: 5 }}>
+      <Typography variant="h4" gutterBottom>
+        Update Checklist
+      </Typography>
       <ChecklistForm checklistId={checklistId} checklist={checklist} />
-    </div>
+    </Box>
   );
 };
 

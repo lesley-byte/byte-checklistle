@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_CHECKLIST } from "../utils/mutations";
 import { QUERY_CHECKLISTS } from "../utils/queries";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 const New = () => {
   const [addChecklist] = useMutation(ADD_CHECKLIST, {
@@ -35,25 +36,40 @@ const New = () => {
   };
 
   return (
-    <div className="new-checklist">
-      <h2>New checklist</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="form-group">
-          <label htmlFor="title">Title:</label>
-          <input
-            placeholder="Title"
-            name="title"
-            type="text"
-            id="title"
-            value={formState.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
+    <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
+      <Typography variant="h4" gutterBottom>
+        New Checklist
+      </Typography>
+      <Box
+        component="form"
+        onSubmit={handleFormSubmit}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        width="50%"
+        mt={4}
+      >
+        <TextField
+          label="Title"
+          name="title"
+          id="title"
+          value={formState.title}
+          onChange={handleChange}
+          variant="outlined"
+          margin="normal"
+          fullWidth
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          mt={4}
+        >
+          Submit
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

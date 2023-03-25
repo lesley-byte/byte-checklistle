@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem, Select, OutlinedInput } from "@mui/material";
+import { MenuItem, Select, OutlinedInput, FormControl } from "@mui/material";
 
 const ValidConditionValueInput = ({
   steps,
@@ -34,31 +34,33 @@ const ValidConditionValueInput = ({
   };
 
   return (
-    <Select
-      name="conditionValue"
-      multiple
-      displayEmpty
-      value={value}
-      onChange={handleChange}
-      input={<OutlinedInput />}
-      renderValue={(selected) => {
-        if (selected.length === 0) {
-          return <em>Select a value</em>;
-        }
-        return selected.join(", ");
-      }}
-      inputProps={{ "aria-label": "Without label" }}
-    >
-      <MenuItem disabled value="">
-        <em>Select a value</em>
-      </MenuItem>
-      <MenuItem value="none">None</MenuItem> {/* Add this line */}
-      {validValues.map((val) => (
-        <MenuItem key={val} value={val}>
-          {val}
+    <FormControl fullWidth variant="outlined">
+      <Select
+        name="conditionValue"
+        multiple
+        displayEmpty
+        value={value}
+        onChange={handleChange}
+        input={<OutlinedInput />}
+        renderValue={(selected) => {
+          if (selected.length === 0) {
+            return <em>Select a value</em>;
+          }
+          return selected.join(", ");
+        }}
+        inputProps={{ "aria-label": "Without label" }}
+      >
+        <MenuItem disabled value="">
+          <em>Select a value</em>
         </MenuItem>
-      ))}
-    </Select>
+        <MenuItem value="none">None</MenuItem> {/* Add this line */}
+        {validValues.map((val) => (
+          <MenuItem key={val} value={val}>
+            {val}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 

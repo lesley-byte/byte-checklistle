@@ -1,15 +1,21 @@
-// pages/ChecklistManagement.js
 import React from "react";
+import { Container, Typography, Box } from "@mui/material";
 import New from "../components/New";
 import ListOfLists from "../components/ListOfLists";
 
 const ChecklistManagement = () => {
   return (
-    <div className="checklist-management">
-      <h1>Checklist Management page</h1>
-      <New />
-      <ListOfLists />
-    </div>
+    <Container maxWidth="md">
+      <Typography variant="h3" component="h1" gutterBottom>
+        Checklist Management
+      </Typography>
+      <Box mt={4}>
+        <New />
+      </Box>
+      <Box mt={4}>
+        <ListOfLists />
+      </Box>
+    </Container>
   );
 };
 

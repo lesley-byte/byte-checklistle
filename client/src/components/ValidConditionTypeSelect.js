@@ -1,4 +1,5 @@
 import React from "react";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const ValidConditionTypeSelect = ({
   steps,
@@ -11,22 +12,28 @@ const ValidConditionTypeSelect = ({
   };
 
   return (
-    <select
-      id={`conditionType-${currentStepIndex}`}
-      name="conditionType"
-      value={value || ""}
-      onChange={handleConditionTypeChange}
-    >
-      <option value="">N/A</option>
-      <option value="AND">AND</option>
-      <option value="OR">OR</option>
-      <option value="IF">IF</option>
-      <option value="NOT">NOT</option>
-      <option value="NOR">NOR</option>
-      <option value="NAND">NAND</option>
-      <option value="XOR">XOR</option>
-      <option value="XNOR">XNOR</option>
-    </select>
+    <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel id={`conditionType-label-${currentStepIndex}`}>
+        Condition Type
+      </InputLabel>
+      <Select
+        labelId={`conditionType-label-${currentStepIndex}`}
+        id={`conditionType-${currentStepIndex}`}
+        name="conditionType"
+        value={value || ""}
+        onChange={handleConditionTypeChange}
+      >
+        <MenuItem value="">N/A</MenuItem>
+        <MenuItem value="AND">AND</MenuItem>
+        <MenuItem value="OR">OR</MenuItem>
+        <MenuItem value="IF">IF</MenuItem>
+        <MenuItem value="NOT">NOT</MenuItem>
+        <MenuItem value="NOR">NOR</MenuItem>
+        <MenuItem value="NAND">NAND</MenuItem>
+        <MenuItem value="XOR">XOR</MenuItem>
+        <MenuItem value="XNOR">XNOR</MenuItem>
+      </Select>
+    </FormControl>
   );
 };
 
