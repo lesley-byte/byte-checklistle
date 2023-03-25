@@ -193,14 +193,35 @@ const ChecklistForm = ({ checklistId, checklist }) => {
             </Grid>
           ))}
           <Grid item xs={12}>
-            <Button onClick={addStep}>Add Step</Button>
-            <Button type="submit">Save Changes</Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "20px",
+              }}
+            >
+              <Button variant="contained" type="button" onClick={addStep}>
+                Add Step
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                style={{ marginLeft: "10px" }}
+              >
+                Save Changes
+              </Button>
+            </div>
           </Grid>
         </Grid>
       </form>
       <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div>{modalText}</div>
-        <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+        <Box sx={{ p: 2 }}>
+          <Typography variant="body1">{modalText}</Typography>
+        </Box>
+        <Box sx={{ p: 2 }}>
+          <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+        </Box>
       </Dialog>
     </div>
   );
