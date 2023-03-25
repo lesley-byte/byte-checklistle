@@ -13,6 +13,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 
 import ValidConditionValueInput from "./ValidConditionalValueInput";
+import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
 
 const ChecklistForm = ({ checklistId, checklist }) => {
   const navigate = useNavigate();
@@ -24,6 +25,34 @@ const ChecklistForm = ({ checklistId, checklist }) => {
       conditionValue: step.conditionValue || [],
     }))
   );
+
+  const validateCondition = (steps) => {
+    for (const step of steps) {
+      const { conditionType, conditionValue } = step;
+
+      if (
+        (conditionType === "IF" || conditionType === "NOT") &&
+        conditionValue.length !== 1
+      ) {
+        alert(
+          "Please use exactly one value for conditionValue with IF or NOT operators."
+        );
+        return false;
+      }
+
+      if (
+        (conditionType === "XOR" || conditionType === "XNOR") &&
+        conditionValue.length !== 2
+      ) {
+        alert(
+          "Please use exactly two values for conditionValue with XOR or XNOR operators."
+        );
+        return false;
+      }
+    }
+
+    return true;
+  };
 
   const conditionValues = [
     "value1",
@@ -96,6 +125,10 @@ const ChecklistForm = ({ checklistId, checklist }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateCondition(steps)) {
+      return;
+    }
     try {
       // Remove the __typename field from each step object and set the correct position
       const cleanedSteps = steps.map(({ __typename, ...step }, index) => ({
@@ -157,22 +190,13 @@ const ChecklistForm = ({ checklistId, checklist }) => {
               onChange={(e) => handleStepsChange(e, index)}
             />
             <label htmlFor={`conditionType-${index}`}>Condition Type:</label>
-            <select
-              id={`conditionType-${index}`}
-              name="conditionType"
+            <ValidConditionTypeSelect
+              steps={steps}
+              currentStepIndex={index}
               value={step.conditionType || ""}
-              onChange={(e) => handleStepsChange(e, index)}
-            >
-              <option value="">N/A</option>
-              <option value="and">AND</option>
-              <option value="or">OR</option>
-              <option value="if">IF</option>
-              <option value="not">NOT</option>
-              <option value="nor">NOR</option>
-              <option value="nand">NAND</option>
-              <option value="xor">XOR</option>
-              <option value="xnor">XNOR</option>
-            </select>
+              onChange={handleStepsChange}
+            />
+
             <label htmlFor={`conditionValue-${index}`}>Condition Value:</label>
             <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
               <ValidConditionValueInput
