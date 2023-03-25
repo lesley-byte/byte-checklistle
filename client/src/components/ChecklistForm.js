@@ -3,14 +3,7 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_CHECKLIST } from "../utils/mutations";
 import { QUERY_CHECKLIST, QUERY_CHECKLISTS } from "../utils/queries";
 import { useNavigate } from "react-router-dom";
-import {
-  FormControl,
-  MenuItem,
-  Select,
-  OutlinedInput,
-  Chip,
-} from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { FormControl } from "@mui/material";
 
 import ValidConditionValueInput from "./ValidConditionalValueInput";
 import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
@@ -54,15 +47,6 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     return true;
   };
 
-  const conditionValues = [
-    "value1",
-    "value2",
-    "value3",
-    // ... Add more values as needed
-  ];
-
-  const [conditionValue, setConditionValue] = useState([]);
-
   const [updateChecklist, { data, loading, error }] =
     useMutation(UPDATE_CHECKLIST);
 
@@ -86,10 +70,6 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     }
 
     setSteps(newSteps);
-  };
-
-  const handleConditionValueChange = (event) => {
-    setConditionValue(event.target.value);
   };
 
   const addStep = () => {
@@ -152,16 +132,6 @@ const ChecklistForm = ({ checklistId, checklist }) => {
       console.error("Error submitting mutation:", err);
     }
   };
-
-  const getStyles = (name, conditionValue, theme) => {
-    return {
-      fontWeight:
-        conditionValue.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
-    };
-  };
-  const theme = useTheme();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
