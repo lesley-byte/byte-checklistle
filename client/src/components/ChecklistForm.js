@@ -169,6 +169,9 @@ const ChecklistForm = ({ checklistId, checklist }) => {
               <option value="if">IF</option>
               <option value="not">NOT</option>
               <option value="nor">NOR</option>
+              <option value="nand">NAND</option>
+              <option value="xor">XOR</option>
+              <option value="xnor">XNOR</option>
             </select>
             <label htmlFor={`conditionValue-${index}`}>Condition Value:</label>
             <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
