@@ -4,12 +4,15 @@ import { UPDATE_CHECKLIST } from "../utils/mutations";
 import { QUERY_CHECKLIST, QUERY_CHECKLISTS } from "../utils/queries";
 import { useNavigate } from "react-router-dom";
 import { FormControl } from "@mui/material";
+import { Button, Dialog } from "@mui/material";
 
 import ValidConditionValueInput from "./ValidConditionalValueInput";
 import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
 
 const ChecklistForm = ({ checklistId, checklist }) => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalText, setModalText] = useState("");
 
   const [title, setTitle] = useState(checklist.title);
   const [steps, setSteps] = useState(
@@ -19,6 +22,11 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     }))
   );
 
+  const openModal = (text) => {
+    setModalText(text);
+    setIsModalOpen(true);
+  };
+
   const validateCondition = (steps) => {
     for (const step of steps) {
       const { conditionType, conditionValue } = step;
@@ -27,7 +35,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
         (conditionType === "IF" || conditionType === "NOT") &&
         conditionValue.length !== 1
       ) {
-        alert(
+        openModal(
           "Please use exactly one value for conditionValue with IF or NOT operators."
         );
         return false;
@@ -37,7 +45,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
         (conditionType === "XOR" || conditionType === "XNOR") &&
         conditionValue.length !== 2
       ) {
-        alert(
+        openModal(
           "Please use exactly two values for conditionValue with XOR or XNOR operators."
         );
         return false;
@@ -195,6 +203,10 @@ const ChecklistForm = ({ checklistId, checklist }) => {
         </button>
         <button type="submit">Save Changes</button>
       </form>
+      <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div>{modalText}</div>
+        <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+      </Dialog>
     </div>
   );
 };
