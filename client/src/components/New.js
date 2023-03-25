@@ -35,10 +35,10 @@ const New = () => {
   };
 
   return (
-    <div>
+    <div className="new-checklist">
       <h2>New checklist</h2>
       <form onSubmit={handleFormSubmit}>
-        <div>
+        <div className="form-group">
           <label htmlFor="title">Title:</label>
           <input
             placeholder="Title"
@@ -49,7 +49,7 @@ const New = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <button type="submit">Submit</button>
         </div>
       </form>

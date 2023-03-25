@@ -29,7 +29,7 @@ const ListOfLists = () => {
   };
 
   return (
-    <>
+    <div className="list-of-lists">
       <h2>Checklists</h2>
       {loading ? (
         <div>Loading...</div>
@@ -46,7 +46,7 @@ const ListOfLists = () => {
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 

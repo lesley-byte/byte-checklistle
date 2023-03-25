@@ -11,14 +11,14 @@ const typeDefs = gql`
     text: String!
     position: Int!
     conditionType: String
-    conditionValue: String
+    conditionValue: [String]
   }
 
   input StepInput {
     text: String!
     position: Int!
     conditionType: String
-    conditionValue: String
+    conditionValue: [String]
   }
 
   type User {
@@ -36,7 +36,11 @@ const typeDefs = gql`
 
   type Mutation {
     addChecklist(title: String!): Checklist
-    updateChecklist(checklistId: ID!, title: String, steps: [StepInput]): Checklist
+    updateChecklist(
+      checklistId: ID!
+      title: String
+      steps: [StepInput]
+    ): Checklist
     deleteChecklist(checklistId: ID!): Checklist
   }
 `;

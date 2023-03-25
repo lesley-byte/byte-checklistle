@@ -1,15 +1,14 @@
+// App.js
 import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
-import Header from "./components/Header";
-import NavTabs from "./components/NavTabs";
-import Footer from "./components/Footer";
 import Editor from "./pages/Editor";
 import ChecklistManagement from "./pages/ChecklistManagement";
 import SingleChecklist from "./pages/SingleChecklist";
 import { ChecklistProvider } from "./contexts/ChecklistContext";
+import Layout from "./components/Layout";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -21,9 +20,7 @@ function App() {
     <ChecklistProvider>
       <ApolloProvider client={client}>
         <Router>
-          <div>
-            <Header />
-            <NavTabs />
+          <Layout>
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/editor/:checklistId" element={<Editor />} />
@@ -37,8 +34,7 @@ function App() {
               />
               <Route path="*" element={<Landing />} />
             </Routes>
-            <Footer />
-          </div>
+          </Layout>
         </Router>
       </ApolloProvider>
     </ChecklistProvider>
