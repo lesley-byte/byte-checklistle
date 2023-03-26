@@ -1,4 +1,7 @@
 const { Checklist, User } = require("../models");
+const { signToken } = require("../utils/auth"); // Import the signToken function
+const { AuthenticationError } = require("apollo-server-express");
+// Rest of the resolvers.js file...
 
 const resolvers = {
   Query: {
@@ -22,6 +25,31 @@ const resolvers = {
   },
 
   Mutation: {
+    addUser: async (parent, { username, email, password }) => {
+      // Change 'name' to 'username'
+      const user = await User.create({ username, email, password }); // Change 'name' to 'username'
+      const token = signToken(user);
+
+      return { token, user };
+    },
+
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError("No user with this email found!");
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect password!");
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
+
     addChecklist: async (parent, { title }) => {
       try {
         return Checklist.create({ title });

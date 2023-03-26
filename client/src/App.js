@@ -3,6 +3,9 @@ import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 import Landing from "./pages/Landing";
 import Editor from "./pages/Editor";
 import ChecklistManagement from "./pages/ChecklistManagement";
@@ -32,6 +35,10 @@ function App() {
                 path="/checklist/:checklistId"
                 element={<SingleChecklist />}
               />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+
+              <Route path="/logout" element={<Landing />} />
               <Route path="*" element={<Landing />} />
             </Routes>
           </Layout>

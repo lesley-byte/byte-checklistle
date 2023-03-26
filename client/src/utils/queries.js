@@ -23,3 +23,31 @@ export const QUERY_CHECKLIST = gql`
     }
   }
 `;
+
+export const QUERY_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      _id
+      username
+      email
+      checklists {
+        _id
+        title
+      }
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      email
+      checklists {
+        _id
+        title
+      }
+    }
+  }
+`;

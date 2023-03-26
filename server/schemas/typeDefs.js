@@ -29,12 +29,19 @@ const typeDefs = gql`
     checklists: [Checklist]
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Query {
     checklists: [Checklist]
     checklist(checklistId: ID!): Checklist
   }
 
   type Mutation {
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
     addChecklist(title: String!): Checklist
     updateChecklist(
       checklistId: ID!

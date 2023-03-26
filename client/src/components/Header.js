@@ -1,6 +1,8 @@
-import React from "react";
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../utils/auth";
 
 const theme = createTheme({
   typography: {
@@ -9,6 +11,30 @@ const theme = createTheme({
 });
 
 const Header = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleAuthentication = () => {
+    if (isAuthenticated) {
+      AuthService.logout();
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const handleSignUp = () => {
+    navigate("/signup");
+  };
+
+  const checkAuthStatus = () => {
+    const loggedIn = AuthService.loggedIn();
+    setIsAuthenticated(loggedIn);
+  };
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
   return (
     <>
       <style>
@@ -25,6 +51,14 @@ const Header = () => {
             >
               Checklistle
             </Typography>
+            <Button color="inherit" onClick={toggleAuthentication}>
+              {isAuthenticated ? "Logout" : "Login"}
+            </Button>
+            {!isAuthenticated && (
+              <Button color="inherit" onClick={handleSignUp}>
+                Sign Up
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
       </ThemeProvider>
