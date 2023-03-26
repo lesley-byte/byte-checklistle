@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_CHECKLISTS = gql`
-  query Checklists {
-    checklists {
+  query Checklists($userId: ID) {
+    checklists(userId: $userId) {
       title
       _id
     }

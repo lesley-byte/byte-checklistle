@@ -1,11 +1,17 @@
-// App.js
 import React from "react";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  ApolloLink,
+  HttpLink,
+  concat,
+} from "@apollo/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import authService from "./utils/auth";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
 import Landing from "./pages/Landing";
 import Editor from "./pages/Editor";
 import ChecklistManagement from "./pages/ChecklistManagement";
@@ -13,8 +19,22 @@ import SingleChecklist from "./pages/SingleChecklist";
 import { ChecklistProvider } from "./contexts/ChecklistContext";
 import Layout from "./components/Layout";
 
+const authMiddleware = new ApolloLink((operation, forward) => {
+  const token = authService.getToken();
+
+  operation.setContext({
+    headers: {
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  });
+
+  return forward(operation);
+});
+
+const httpLink = new HttpLink({ uri: "/graphql" });
+
 const client = new ApolloClient({
-  uri: "/graphql",
+  link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache(),
 });
 

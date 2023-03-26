@@ -12,19 +12,53 @@ import {
   Typography,
 } from "@mui/material";
 
+import AuthService from "../utils/auth";
+
 import { QUERY_CHECKLISTS } from "../utils/queries";
 import { DELETE_CHECKLIST } from "../utils/mutations";
 
 const ListOfLists = () => {
-  const { loading, data, refetch } = useQuery(QUERY_CHECKLISTS);
+  const user = AuthService.getProfile();
+  const userId = user._id;
+  console.log("UserId:", userId);
+
+  const { loading, error, data, refetch } = useQuery(QUERY_CHECKLISTS, {
+    variables: { userId },
+    notifyOnNetworkStatusChange: true,
+  });
+
   const checklists = data?.checklists || [];
+  console.log("Checklists:", checklists || "No checklists found to display");
+  console.log("Error:", error || "No error found");
+
   const navigate = useNavigate();
 
   const [deleteChecklist] = useMutation(DELETE_CHECKLIST, {
+    update(cache, { data: { deleteChecklist } }) {
+      const userId = AuthService.getUser()._id;
+      const data = cache.readQuery({
+        query: QUERY_CHECKLISTS,
+        variables: { userId },
+      });
+
+      const updatedChecklists = data.checklists.filter(
+        (checklist) => checklist._id !== deleteChecklist._id
+      );
+
+      cache.writeQuery({
+        query: QUERY_CHECKLISTS,
+        variables: { userId },
+        data: { checklists: updatedChecklists },
+      });
+    },
     onCompleted: () => refetch(),
   });
 
   const handleDelete = async (checklistId) => {
+    console.log(
+      "Delete checklist:",
+      checklistId || "No checklist ID found to delete"
+    );
     try {
       await deleteChecklist({
         variables: { checklistId },
@@ -35,6 +69,10 @@ const ListOfLists = () => {
   };
 
   const handleEdit = (checklistId) => {
+    console.log(
+      "Edit checklist:",
+      checklistId || "No checklist ID found to edit"
+    );
     navigate(`/editor/${checklistId}`);
   };
 

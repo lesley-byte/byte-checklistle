@@ -4,16 +4,17 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 
-import AuthService from "../utils/auth";
+import Auth from "../utils/auth";
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    username: "",
     email: "",
+    username: "",
     password: "",
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [adduser, { error, data }] = useMutation(ADD_USER);
 
+  // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -23,20 +24,28 @@ const Signup = () => {
     });
   };
 
+  // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+
+    console.log("Form state:", formState); // Add this line
 
     try {
-      const { data } = await addUser({
+      const { data } = await adduser({
         variables: { ...formState },
       });
 
-      AuthService.login(data.addUser.token); // Use AuthService directly
+      console.log("Mutation response:", data); // Add this line
+
+      Auth.login(data.addUser.token); // Change 'adduser' to 'addUser' here
     } catch (e) {
       console.error(e);
     }
   };
+
+  if (error) {
+    return <>Signup failed {error.message}</>;
+  }
 
   return (
     <main className="flex-row justify-center mb-4">
@@ -56,9 +65,10 @@ const Signup = () => {
                   placeholder="Your username"
                   name="username"
                   type="text"
-                  value={formState.name}
+                  value={formState.username}
                   onChange={handleChange}
                 />
+
                 <input
                   className="form-input"
                   placeholder="Your email"
@@ -76,7 +86,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="btn btn-block btn-info"
                   style={{ cursor: "pointer" }}
                   type="submit"
                 >

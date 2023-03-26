@@ -3,10 +3,22 @@ import { useMutation } from "@apollo/client";
 import { ADD_CHECKLIST } from "../utils/mutations";
 import { QUERY_CHECKLISTS } from "../utils/queries";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import AuthService from "../utils/auth"; // import AuthService
+import { useNavigate } from "react-router-dom"; // import useNavigate
 
 const New = () => {
+  const navigate = useNavigate();
   const [addChecklist] = useMutation(ADD_CHECKLIST, {
-    refetchQueries: [{ query: QUERY_CHECKLISTS }],
+    refetchQueries: [
+      {
+        query: QUERY_CHECKLISTS,
+        variables: { userId: AuthService.getProfile().id },
+      },
+    ],
+    awaitRefetchQueries: true, // Wait for refetch to complete before navigating
+    onCompleted: () => {
+      navigate("/checklistmanagement"); // Change this to the correct route for ChecklistManagement
+    },
   });
 
   const [formState, setFormState] = useState({
@@ -17,16 +29,20 @@ const New = () => {
     event.preventDefault();
 
     try {
+      console.log("Adding checklist...");
+
       await addChecklist({
-        variables: { ...formState },
+        variables: { ...formState, userId: AuthService.getProfile().id },
       });
+
       setFormState({ title: "" });
     } catch (e) {
-      console.error(e);
+      console.error("Error:", e || "No error found");
     }
   };
 
   const handleChange = (event) => {
+    console.log("Event:", event || "No event found");
     const { name, value } = event.target;
 
     setFormState({

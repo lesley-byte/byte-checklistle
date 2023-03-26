@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 
-import AuthService from "../utils/auth"; // Import AuthService
+import Auth from "../utils/auth";
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -28,7 +28,7 @@ const Login = (props) => {
         variables: { ...formState },
       });
 
-      AuthService.login(data.login.token); // Use AuthService.login() instead of Auth.login()
+      Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
     }
@@ -40,7 +40,6 @@ const Login = (props) => {
     });
   };
 
-  // Add the missing return statement
   return (
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
@@ -71,7 +70,7 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="btn btn-block btn-info"
                   style={{ cursor: "pointer" }}
                   type="submit"
                 >

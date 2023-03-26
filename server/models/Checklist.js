@@ -5,8 +5,13 @@ const checklistSchema = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
     trim: true,
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   steps: [stepSchema],
 });

@@ -3,52 +3,55 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type Checklist {
     _id: ID
-    title: String!
+    title: String
     steps: [Step]
   }
 
   type Step {
-    text: String!
-    position: Int!
+    _id: ID
+    text: String
+    position: Int
     conditionType: String
-    conditionValue: [String]
-  }
-
-  input StepInput {
-    text: String!
-    position: Int!
-    conditionType: String
-    conditionValue: [String]
+    conditionValue: String
   }
 
   type User {
     _id: ID
-    username: String!
-    email: String!
-    password: String!
+    username: String
+    email: String
     checklists: [Checklist]
   }
 
   type Auth {
-    token: ID!
+    token: ID
     user: User
   }
 
   type Query {
-    checklists: [Checklist]
+    checklists(userId: ID): [Checklist]
     checklist(checklistId: ID!): Checklist
+    user(username: String!): User
+    me: User
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(email: String!, username: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addChecklist(title: String!): Checklist
+    addChecklist(title: String!, userId: ID!): Checklist
     updateChecklist(
       checklistId: ID!
       title: String
       steps: [StepInput]
+      userId: ID
     ): Checklist
     deleteChecklist(checklistId: ID!): Checklist
+  }
+
+  input StepInput {
+    text: String
+    position: Int
+    conditionType: String
+    conditionValue: String
   }
 `;
 

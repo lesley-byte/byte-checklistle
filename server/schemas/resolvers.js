@@ -1,33 +1,57 @@
 const { Checklist, User } = require("../models");
 const { signToken } = require("../utils/auth"); // Import the signToken function
 const { AuthenticationError } = require("apollo-server-express");
-// Rest of the resolvers.js file...
 
 const resolvers = {
   Query: {
-    checklists: async () => {
+    checklists: async (parent, { userId }, context) => {
       try {
-        return Checklist.find();
+        const { user } = context;
+        if (!user) {
+          throw new AuthenticationError("You need to be logged in!");
+        }
+        const checklists = await Checklist.find({ user: userId || user._id });
+        return checklists;
       } catch (error) {
         console.error("Error fetching checklists:", error);
         throw new Error("Error fetching checklists.");
       }
     },
 
-    checklist: async (parent, { checklistId }) => {
+    checklist: async (parent, { checklistId }, context) => {
       try {
-        return Checklist.findOne({ _id: checklistId });
+        const { user } = context;
+        if (!user) {
+          throw new AuthenticationError("You need to be logged in!");
+        }
+        return Checklist.findOne({ _id: checklistId, userId: user._id });
       } catch (error) {
         console.error("Error fetching checklist:", error);
         throw new Error("Error fetching checklist.");
       }
     },
+
+    me: async (parent, args, context) => {
+      try {
+        const { user } = context;
+        if (!user) {
+          throw new AuthenticationError("You need to be logged in!");
+        }
+        return User.findOne({ _id: user._id });
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        throw new Error("Error fetching user.");
+      }
+    },
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      // Change 'name' to 'username'
-      const user = await User.create({ username, email, password }); // Change 'name' to 'username'
+    addUser: async (parent, { email, username, password }) => {
+      const user = await User.create({
+        email,
+        username,
+        password,
+      });
       const token = signToken(user);
 
       return { token, user };
@@ -50,17 +74,45 @@ const resolvers = {
       return { token, user };
     },
 
-    addChecklist: async (parent, { title }) => {
+    // In server-side resolver.js
+
+    addChecklist: async (parent, { title, userId }, context) => {
       try {
-        return Checklist.create({ title });
+        const { user } = context;
+        if (!user) {
+          throw new AuthenticationError("You need to be logged in!");
+        }
+        const checklist = await Checklist.create({ title, userId });
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { checklists: checklist._id } }
+        );
+        return checklist;
       } catch (error) {
         console.error("Error adding checklist:", error);
         throw new Error("Error adding checklist.");
       }
     },
 
-    updateChecklist: async (parent, { checklistId, title, steps }) => {
+    updateChecklist: async (
+      parent,
+      { checklistId, title, steps, userId },
+      context
+    ) => {
       try {
+        const { user } = context;
+        if (!user) {
+          throw new AuthenticationError("You need to be logged in!");
+        }
+        const checklist = await Checklist.findOne({
+          _id: checklistId,
+          user: userId || user._id,
+        });
+        if (!checklist) {
+          throw new Error(
+            "You don't have permission to update this checklist."
+          );
+        }
         const update = { ...(title && { title }), ...(steps && { steps }) };
         const updatedChecklist = await Checklist.findOneAndUpdate(
           { _id: checklistId },
@@ -74,12 +126,36 @@ const resolvers = {
       }
     },
 
-    deleteChecklist: async (parent, { checklistId }) => {
+    deleteChecklist: async (parent, { checklistId }, context) => {
       try {
+        const { user } = context;
+        if (!user) {
+          throw new AuthenticationError("You need to be logged in!");
+        }
+        const checklist = await Checklist.findOne({
+          _id: checklistId,
+          user: user._id,
+        });
+        if (!checklist) {
+          throw new Error(
+            "You don't have permission to delete this checklist."
+          );
+        }
         return Checklist.findOneAndDelete({ _id: checklistId });
       } catch (error) {
         console.error("Error deleting checklist:", error);
         throw new Error("Error deleting checklist.");
+      }
+    },
+  },
+
+  User: {
+    checklists: async (parent) => {
+      try {
+        return await Checklist.find({ user: parent._id });
+      } catch (error) {
+        console.error("Error fetching user checklists:", error);
+        throw new Error("Error fetching user checklists.");
       }
     },
   },

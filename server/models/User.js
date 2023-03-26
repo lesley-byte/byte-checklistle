@@ -2,17 +2,17 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-  },
   email: {
     type: String,
     required: true,
     unique: true,
     match: [/.+@.+\..+/, "Must use a valid email address"],
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
   },
   password: {
     type: String,
@@ -40,6 +40,12 @@ userSchema.pre("save", async function (next) {
 // compare the incoming password with the hashed password
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
+};
+
+// Only return the user's own Checklists when populating the checklists field
+userSchema.statics.findByUserId = async function (userId) {
+  const user = await this.findOne({ _id: userId }).populate("checklists");
+  return user;
 };
 
 const User = model("User", userSchema);
