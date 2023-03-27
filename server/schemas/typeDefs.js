@@ -50,7 +50,7 @@ const typeDefs = gql`
     text: String
     position: Int
     conditionType: String
-    conditionValue: String
+    conditionValue: [Int]
   }
 `;
 

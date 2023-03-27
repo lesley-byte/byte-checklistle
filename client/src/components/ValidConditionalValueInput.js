@@ -27,9 +27,14 @@ const ValidConditionValueInput = ({
       }
     }
 
+    // Remove any object ids from the array before updating state
+    const newValue = newSelectedValues.filter(
+      (val) => !val.includes("ObjectId")
+    );
+
     onChange({
       ...event,
-      target: { ...event.target, value: newSelectedValues },
+      target: { ...event.target, value: newValue },
     });
   };
 

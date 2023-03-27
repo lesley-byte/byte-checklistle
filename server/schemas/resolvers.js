@@ -118,7 +118,9 @@ const resolvers = {
           );
         }
 
+        console.log("Before update:", steps); // Check the value of steps before updating
         const update = { ...(title && { title }), ...(steps && { steps }) };
+        console.log("After update:", update.steps); // Check the value of steps after updating
 
         const updatedChecklist = await Checklist.findOneAndUpdate(
           { _id: checklistId },
