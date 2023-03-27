@@ -11,7 +11,7 @@ const typeDefs = gql`
     text: String
     position: Int
     conditionType: String
-    conditionValue: [Int]
+    conditionValue: [String]
   }
 
   type User {
@@ -50,7 +50,7 @@ const typeDefs = gql`
     text: String
     position: Int
     conditionType: String
-    conditionValue: [Int]
+    conditionValue: [String]
   }
 `;
 

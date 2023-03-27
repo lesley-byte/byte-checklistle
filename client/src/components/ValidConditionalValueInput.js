@@ -14,6 +14,11 @@ const ValidConditionValueInput = ({
   const handleChange = (event) => {
     const newSelectedValues = event.target.value;
 
+    // Make sure newSelectedValues is an array
+    if (!Array.isArray(newSelectedValues)) {
+      return;
+    }
+
     if (newSelectedValues.length < value.length) {
       const deselectedValue = value.find(
         (val) => !newSelectedValues.includes(val)
