@@ -14,8 +14,8 @@ const stepSchema = new Schema({
     required: false,
   },
   conditionValue: {
-    type: [String],
-    required: false,
+    type: [Number],
+    default: [],
   },
 });
 
