@@ -8,7 +8,6 @@ const typeDefs = gql`
   }
 
   type Step {
-    _id: ID
     text: String
     position: Int
     conditionType: String

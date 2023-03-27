@@ -29,8 +29,6 @@ const New = () => {
     event.preventDefault();
 
     try {
-      console.log("Adding checklist...");
-
       await addChecklist({
         variables: { ...formState, userId: AuthService.getProfile().id },
       });
@@ -42,7 +40,6 @@ const New = () => {
   };
 
   const handleChange = (event) => {
-    console.log("Event:", event || "No event found");
     const { name, value } = event.target;
 
     setFormState({

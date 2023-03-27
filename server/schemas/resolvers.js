@@ -6,18 +6,11 @@ const resolvers = {
   Query: {
     checklists: async (parent, { userId }, context) => {
       try {
-        console.log("UserId❤️ : ", userId || "No userId found");
         const { user } = context;
         if (!user) {
           throw new AuthenticationError("You need to be logged in!");
         }
-        console.log("User❤️ : ", user || "No user found");
         const checklists = await Checklist.find({ userId: userId });
-
-        console.log(
-          "Checklists❤️ : ",
-          checklists || "No checklists found to display"
-        );
         return checklists;
       } catch (error) {
         console.error("Error fetching checklists:", error);
@@ -54,7 +47,6 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { email, username, password }) => {
-      console.log("Adding user...");
       const user = await User.create({
         email,
         username,
@@ -67,7 +59,6 @@ const resolvers = {
 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-      console.log("logging in User:", user);
 
       if (!user) {
         throw new AuthenticationError("No user with this email found!");
@@ -86,7 +77,6 @@ const resolvers = {
     // In server-side resolver.js
 
     addChecklist: async (parent, { title, userId }, context) => {
-      console.log("Adding checklist...", title, userId);
       try {
         const { user } = context;
         if (!user) {
@@ -144,11 +134,6 @@ const resolvers = {
     },
 
     deleteChecklist: async (parent, { checklistId, userId }, context) => {
-      console.log(
-        "trying to delete checklist... values passed to deleteChecklist function are: ",
-        checklistId,
-        userId
-      );
       try {
         const { user } = context;
         if (!user) {

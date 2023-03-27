@@ -24,9 +24,6 @@ const SingleChecklist = () => {
   });
 
   const checklist = data?.checklist || [];
-
-  console.log("Checklist data in SingleChecklist:", checklist); // Add this line to log the checklist data
-
   return (
     <Box sx={{ mt: 5 }}>
       <StyledSingleChecklist>
