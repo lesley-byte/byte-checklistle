@@ -19,7 +19,7 @@ import { DELETE_CHECKLIST } from "../utils/mutations";
 
 const ListOfLists = () => {
   const user = AuthService.getProfile();
-  const userId = user._id;
+  const userId = user.id;
   console.log("UserId:", userId);
 
   const { loading, error, data, refetch } = useQuery(QUERY_CHECKLISTS, {
@@ -30,6 +30,7 @@ const ListOfLists = () => {
   const checklists = data?.checklists || [];
   console.log("Checklists:", checklists || "No checklists found to display");
   console.log("Error:", error || "No error found");
+  console.log("Data:", data || "No data found");
 
   const navigate = useNavigate();
 
