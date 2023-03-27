@@ -36,33 +36,47 @@ const ListOfLists = () => {
 
   const [deleteChecklist] = useMutation(DELETE_CHECKLIST, {
     update(cache, { data: { deleteChecklist } }) {
-      const userId = AuthService.getUser()._id;
+      const userId = AuthService.getProfile().id;
       const data = cache.readQuery({
         query: QUERY_CHECKLISTS,
         variables: { userId },
       });
 
-      const updatedChecklists = data.checklists.filter(
-        (checklist) => checklist._id !== deleteChecklist._id
-      );
+      if (data && data.checklists) {
+        const updatedChecklists = data.checklists.filter(
+          (checklist) => checklist._id !== deleteChecklist._id
+        );
 
-      cache.writeQuery({
-        query: QUERY_CHECKLISTS,
-        variables: { userId },
-        data: { checklists: updatedChecklists },
-      });
+        cache.writeQuery({
+          query: QUERY_CHECKLISTS,
+          variables: { userId },
+          data: { checklists: updatedChecklists },
+        });
+      }
     },
     onCompleted: () => refetch(),
+    refetchQueries: [
+      {
+        query: QUERY_CHECKLISTS,
+        variables: { userId },
+      },
+    ],
   });
 
   const handleDelete = async (checklistId) => {
+    console.log(
+      "UserId:",
+      userId,
+      "is trying to delete ChecklistId:",
+      checklistId
+    );
     console.log(
       "Delete checklist:",
       checklistId || "No checklist ID found to delete"
     );
     try {
       await deleteChecklist({
-        variables: { checklistId },
+        variables: { checklistId, userId },
       });
     } catch (err) {
       console.error(err);

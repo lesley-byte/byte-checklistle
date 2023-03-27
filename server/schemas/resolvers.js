@@ -111,24 +111,31 @@ const resolvers = {
     ) => {
       try {
         const { user } = context;
-        if (!user) {
-          throw new AuthenticationError("You need to be logged in!");
+        if (!user && !userId) {
+          throw new AuthenticationError(
+            "You need to be logged in or provide a valid userId!"
+          );
         }
+
         const checklist = await Checklist.findOne({
           _id: checklistId,
-          user: userId || user._id,
+          userId: userId || user._id,
         });
+
         if (!checklist) {
           throw new Error(
             "You don't have permission to update this checklist."
           );
         }
+
         const update = { ...(title && { title }), ...(steps && { steps }) };
+
         const updatedChecklist = await Checklist.findOneAndUpdate(
           { _id: checklistId },
           { $set: update },
           { new: true }
         );
+
         return updatedChecklist;
       } catch (error) {
         console.error("Error updating checklist:", error);
@@ -136,19 +143,27 @@ const resolvers = {
       }
     },
 
-    deleteChecklist: async (parent, { checklistId }, context) => {
+    deleteChecklist: async (parent, { checklistId, userId }, context) => {
+      console.log(
+        "trying to delete checklist... values passed to deleteChecklist function are: ",
+        checklistId,
+        userId
+      );
       try {
         const { user } = context;
         if (!user) {
-          throw new AuthenticationError("You need to be logged in!");
+          throw new AuthenticationError(
+            "You need to be logged in! User was !user"
+          );
         }
         const checklist = await Checklist.findOne({
           _id: checklistId,
-          user: user._id,
+          userId: userId,
         });
+
         if (!checklist) {
           throw new Error(
-            "You don't have permission to delete this checklist."
+            "You don't have permission to delete this checklist. checklist was !checklist"
           );
         }
         return Checklist.findOneAndDelete({ _id: checklistId });

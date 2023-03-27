@@ -38,8 +38,14 @@ export const UPDATE_CHECKLIST = gql`
     $checklistId: ID!
     $title: String
     $steps: [StepInput]
+    $userId: ID
   ) {
-    updateChecklist(checklistId: $checklistId, title: $title, steps: $steps) {
+    updateChecklist(
+      checklistId: $checklistId
+      title: $title
+      steps: $steps
+      userId: $userId
+    ) {
       title
       steps {
         text
@@ -52,8 +58,8 @@ export const UPDATE_CHECKLIST = gql`
 `;
 
 export const DELETE_CHECKLIST = gql`
-  mutation deleteChecklist($checklistId: ID!) {
-    deleteChecklist(checklistId: $checklistId) {
+  mutation deleteChecklist($checklistId: ID!, $userId: ID!) {
+    deleteChecklist(checklistId: $checklistId, userId: $userId) {
       _id
       title
     }

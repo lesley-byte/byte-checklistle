@@ -44,7 +44,7 @@ const typeDefs = gql`
       steps: [StepInput]
       userId: ID
     ): Checklist
-    deleteChecklist(checklistId: ID!): Checklist
+    deleteChecklist(checklistId: ID!, userId: ID!): Checklist
   }
 
   input StepInput {

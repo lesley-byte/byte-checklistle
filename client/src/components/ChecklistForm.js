@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid";
 
 import ValidConditionValueInput from "./ValidConditionalValueInput";
 import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
+import AuthService from "../utils/auth";
 
 const ChecklistForm = ({ checklistId, checklist }) => {
   const navigate = useNavigate();
@@ -120,6 +121,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     if (!validateCondition(steps)) {
       return;
     }
+
     try {
       // Remove the __typename field from each step object and set the correct position
       const cleanedSteps = steps.map(({ __typename, ...step }, index) => ({
@@ -127,8 +129,11 @@ const ChecklistForm = ({ checklistId, checklist }) => {
         position: index + 1,
       }));
 
+      const user = AuthService.getProfile();
+      const userId = user.id;
+
       await updateChecklist({
-        variables: { checklistId, title, steps: cleanedSteps },
+        variables: { checklistId, title, steps: cleanedSteps, userId },
         refetchQueries: [
           { query: QUERY_CHECKLISTS },
           { query: QUERY_CHECKLIST, variables: { checklistId } },
