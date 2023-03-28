@@ -135,14 +135,6 @@ The API is built using GraphQL and provides the following queries and mutations:
 - updateChecklist(checklistId: ID!, title: String, steps: [StepInput], userId: ID): Updates an existing checklist by its ID.
 - deleteChecklist(checklistId: ID!, userId: ID!): Deletes a checklist by its ID and returns the deleted checklist.
 
-### Input Types
-
-- StepInput
-- text: String
-- position: Int
-- conditionType: String
-- conditionValue: [String]
-
 ### Client-side
 
 The client-side application is organized into the following directories:
@@ -159,19 +151,26 @@ The client-side application is organized into the following directories:
 
 The client-side application uses the following dependencies:
 
-- `@apollo/client`: Apollo Client for integrating with the GraphQL API.
-- `@emotion/react`: Emotion CSS-in-JS library for styling components.
-- `@emotion/styled`: Emotion Styled Components library for creating styled components.
-- `@mui/material`: Material-UI library for building React components based on Material Design.
-- `intro.js`: A lightweight library for creating step-by-step guided tours.
-- `jwt-decode`: A library for decoding JSON Web Tokens (JWTs).
-- `react`: JavaScript library for building user interfaces.
-- `react-beautiful-dnd`: A library for creating drag-and-drop interfaces in React.
-- `react-dom`: React package for working with the DOM.
-- `react-router-dom`: A library for handling client-side navigation in React applications.
-- `react-scripts`: Scripts and configuration used by Create React App.
-- `uuid`: A library for generating unique IDs.
-- `web-vitals`: A library for measuring web performance metrics.
+```json
+{
+    "@apollo/client": "^3.7.10",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.14",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "intro.js": "^7.0.1",
+    "jwt-decode": "^3.1.2",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.9.0",
+    "react-scripts": "5.0.1",
+    "uuid": "^9.0.0",
+    "web-vitals": "^2.1.4"
+  }
+  ```
 
 ## Frontend Components
 
