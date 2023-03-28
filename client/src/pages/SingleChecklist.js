@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { CircularProgress, Typography, Box } from "@mui/material";
+import { CircularProgress, Typography, Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import Checklist from "../components/Checklist";
@@ -11,8 +11,8 @@ const StyledSingleChecklist = styled("div")({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  height: "80vh",
   justifyContent: "center",
+  minHeight: "80vh",
 });
 
 const SingleChecklist = () => {
@@ -26,20 +26,22 @@ const SingleChecklist = () => {
   const checklist = data?.checklist || [];
   return (
     <Box sx={{ mt: 5 }}>
-      <StyledSingleChecklist>
-        <Typography variant="h4" gutterBottom>
-          Checklist
-        </Typography>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <Checklist
-            checklistId={checklist._id}
-            title={checklist.title}
-            steps={checklist.steps}
-          />
-        )}
-      </StyledSingleChecklist>
+      <Container maxWidth="sm">
+        <StyledSingleChecklist>
+          <Typography variant="h4" gutterBottom>
+            Checklist
+          </Typography>
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <Checklist
+              checklistId={checklist._id}
+              title={checklist.title}
+              steps={checklist.steps}
+            />
+          )}
+        </StyledSingleChecklist>
+      </Container>
     </Box>
   );
 };

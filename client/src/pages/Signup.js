@@ -1,20 +1,26 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
 
-import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../utils/mutations";
+import Auth from '../utils/auth';
 
-import Auth from "../utils/auth";
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Card,
+  CardContent,
+  CardHeader,
+  Box,
+  Alert,
+} from '@mui/material';
 
 const Signup = () => {
-  const [formState, setFormState] = useState({
-    email: "",
-    username: "",
-    password: "",
-  });
-  const [adduser, { error, data }] = useMutation(ADD_USER);
+  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
-  // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -24,87 +30,85 @@ const Signup = () => {
     });
   };
 
-  // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("Form state:", formState); // Add this line
-
     try {
-      const { data } = await adduser({
+      const { data } = await addUser({
         variables: { ...formState },
       });
 
-      console.log("Mutation response:", data); // Add this line
-
-      Auth.login(data.addUser.token); // Change 'adduser' to 'addUser' here
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
+
+    setFormState({
+      username: '',
+      email: '',
+      password: '',
+    });
   };
 
-  if (error) {
-    return <>Signup failed {error.message}</>;
-  }
-
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
+    <Container maxWidth="sm">
+      <Box mt={4}>
+        <Card>
+          <CardHeader title="Signup" />
+          <CardContent>
             {data ? (
-              <p>
-                Success! You may now head{" "}
-                <Link to="/">back to the homepage.</Link>
-              </p>
+              <Typography>
+                Success! You may now head <Link to="/login">to the login page.</Link>
+              </Typography>
             ) : (
               <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your username"
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  label="Username"
+                  variant="outlined"
                   name="username"
                   type="text"
                   value={formState.username}
                   onChange={handleChange}
                 />
-
-                <input
-                  className="form-input"
-                  placeholder="Your email"
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  label="Email"
+                  variant="outlined"
                   name="email"
                   type="email"
                   value={formState.email}
                   onChange={handleChange}
                 />
-                <input
-                  className="form-input"
-                  placeholder="******"
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  label="Password"
+                  variant="outlined"
                   name="password"
                   type="password"
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: "pointer" }}
-                  type="submit"
-                >
+                <Button fullWidth variant="contained" color="primary" type="submit">
                   Submit
-                </button>
+                </Button>
               </form>
             )}
-
+  
             {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
+              <Box mt={2}>
+                <Alert severity="error">{error.message}</Alert>
+              </Box>
             )}
-          </div>
-        </div>
-      </div>
-    </main>
+          </CardContent>
+        </Card>
+      </Box>
+    </Container>
   );
-};
-
-export default Signup;
+  };
+  
+  export default Signup;
+  

@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Checkbox, FormControlLabel, Typography, Button } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  Typography,
+  Button,
+  Box,
+  Container,
+} from "@mui/material";
 
 const Checklist = ({ title, steps }) => {
   const [checkboxStates, setCheckboxStates] = useState({});
@@ -88,43 +95,67 @@ const Checklist = ({ title, steps }) => {
   };
 
   return (
-    <div>
-      <Typography variant="h5" component="h2" gutterBottom>
-        ChecklistTitle is : {title}
-      </Typography>
-      {steps ? (
-        <div>
-          {steps.map((step) => (
-            <div key={step.text}>
-              {shouldDisplayStep(step) && (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      id={`checkbox-${step.position}`}
-                      checked={checkboxStates[step.position] || false}
-                      onChange={(e) => handleCheckboxChange(e, step)}
-                    />
-                  }
-                  label={`Step text is: ${step.text}. Step is in position: ${step.position}`}
-                />
-              )}
-            </div>
-          ))}
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={resetCheckboxes}
-            sx={{ mt: 2 }}
-          >
-            Reset
-          </Button>
-        </div>
-      ) : (
-        <Typography variant="h6" component="p">
-          No Steps Yet
+    <Container maxWidth="sm">
+      <div>
+        <Typography variant="h4" component="h2" gutterBottom>
+          {title}
         </Typography>
-      )}
-    </div>
+        <Box
+          sx={{
+            maxHeight: "400px",
+            width: "100%",
+            overflowY: "auto",
+            overflowX: "hidden",
+            padding: "0 16px",
+          }}
+        >
+          {steps ? (
+            <div>
+              {steps.map((step) => (
+                <div key={step.text}>
+                  {shouldDisplayStep(step) && (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id={`checkbox-${step.position}`}
+                          checked={checkboxStates[step.position] || false}
+                          onChange={(e) => handleCheckboxChange(e, step)}
+                          sx={{
+                            "& .MuiSvgIcon-root": {
+                              transform: "scale(2)", // Updated scale
+                            },
+                          }}
+                        />
+                      }
+                      label={
+                        <Typography
+                          variant="subtitle1"
+                          sx={{ fontSize: "1.5rem" }}
+                        >
+                          {` ${step.text}`}
+                        </Typography>
+                      }
+                    />
+                  )}
+                </div>
+              ))}
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={resetCheckboxes}
+                sx={{ mt: 2 }}
+              >
+                Reset
+              </Button>
+            </div>
+          ) : (
+            <Typography variant="h6" component="p">
+              No Steps Yet
+            </Typography>
+          )}
+        </Box>
+      </div>
+    </Container>
   );
 };
 
