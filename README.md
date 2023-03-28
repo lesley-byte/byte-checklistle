@@ -1,6 +1,6 @@
 # byte-checklistle
 
-Byte-Checklistle is a user-friendly web application that allows users to create, manage, and share customizable checklists. With a sleek interface and intuitive navigation, users can easily add, edit, and delete steps within their checklists while also applying conditional logic for a more personalized experience. Designed for individuals and teams alike, Byte-Checklistle aims to streamline task management and enhance productivity.
+Byte-Checklistle is a user-friendly web application that streamlines task management and enhances productivity. With customizable checklists and conditional logic, users can create personalized checklists that adapt to their specific needs, making it an ideal solution for individuals and teams. Built on the MERN stack with GraphQL API and Material-UI components, Byte-Checklistle offers robust backend support and a visually appealing experience across devices and screen sizes. Simplify your workflow, save time, and increase accuracy with Byte-Checklistle.
 
 ## Table of Contents
 
