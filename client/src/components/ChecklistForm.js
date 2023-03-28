@@ -35,13 +35,8 @@ const ChecklistForm = ({ checklistId, checklist }) => {
             position: "bottom",
           },
           {
-            element: "#condition-type",
-            intro: "Here you can edit the condition type of the step.",
-            position: "bottom",
-          },
-          {
-            element: "#condition-value",
-            intro: "Here you can edit the condition value of the step.",
+            element: "#add-step",
+            intro: "Here you can add a new step to the checklist.",
             position: "bottom",
           },
           {
@@ -225,14 +220,14 @@ const ChecklistForm = ({ checklistId, checklist }) => {
                     fullWidth
                   />
                   <ValidConditionTypeSelect
-                    id="conditionType"
+                    id="condition-type"
                     steps={steps}
                     currentStepIndex={index}
                     value={step.conditionType || ""}
                     onChange={handleStepsChange}
                   />
                   <ValidConditionValueInput
-                    id="conditionValue"
+                    id="condition-value"
                     steps={steps}
                     currentStepIndex={index}
                     value={step.conditionValue || []}
@@ -253,7 +248,12 @@ const ChecklistForm = ({ checklistId, checklist }) => {
                 marginTop: "20px",
               }}
             >
-              <Button variant="contained" type="button" onClick={addStep}>
+              <Button
+                id="add-step"
+                variant="contained"
+                type="button"
+                onClick={addStep}
+              >
                 Add Step
               </Button>
               <Button
