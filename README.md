@@ -1,6 +1,6 @@
 # byte-checklistle
 
-Byte-Checklistle is a powerful online tool that helps you work smarter and avoid mistakes. It's like having a helper who makes sure you don't forget anything important and guides you through your tasks. With Byte-Checklistle, you can work faster, more accurately, and get things done with ease!
+Byte-Checklistle is a customizable checklist tool that allows you to create unique task lists with special rules. It helps you stay organized and work faster and more accurately by guiding you through your tasks and avoiding mistakes. It's a great way to streamline your workflow and get things done more efficiently!
 
 ## Table of Contents
 
