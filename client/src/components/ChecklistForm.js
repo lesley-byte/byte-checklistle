@@ -14,6 +14,7 @@ import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
 import AuthService from "../utils/auth";
 import introJs from "intro.js";
 import "intro.js/minified/introjs.min.css";
+import colors from "../assets/styles/colors";
 
 const ChecklistForm = ({ checklistId, checklist }) => {
   useEffect(() => {
@@ -249,6 +250,15 @@ const ChecklistForm = ({ checklistId, checklist }) => {
               }}
             >
               <Button
+                sx={{
+                  backgroundColor: colors.teal,
+                  color: colors.ice,
+                  "&:hover": {
+                    // Add this block for the hover effect
+                    backgroundColor: colors.lightBlue,
+                    color: colors.dark,
+                  },
+                }}
                 id="add-step"
                 variant="contained"
                 type="button"
@@ -259,7 +269,15 @@ const ChecklistForm = ({ checklistId, checklist }) => {
               <Button
                 id="save"
                 variant="contained"
-                color="primary"
+                sx={{
+                  backgroundColor: colors.teal,
+                  color: colors.ice,
+                  "&:hover": {
+                    // Add this block for the hover effect
+                    backgroundColor: colors.lightBlue,
+                    color: colors.dark,
+                  },
+                }}
                 type="submit"
                 style={{ marginLeft: "10px" }}
               >
@@ -274,7 +292,20 @@ const ChecklistForm = ({ checklistId, checklist }) => {
           <Typography variant="body1">{modalText}</Typography>
         </Box>
         <Box sx={{ p: 2 }}>
-          <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+          <Button
+            sx={{
+              backgroundColor: colors.teal,
+              color: colors.ice,
+              "&:hover": {
+                // Add this block for the hover effect
+                backgroundColor: colors.lightBlue,
+                color: colors.dark,
+              },
+            }}
+            onClick={() => setIsModalOpen(false)}
+          >
+            Close
+          </Button>
         </Box>
       </Dialog>
     </div>

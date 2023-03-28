@@ -7,6 +7,7 @@ import {
   Box,
   Container,
 } from "@mui/material";
+import colors from "../assets/styles/colors";
 
 const Checklist = ({ title, steps }) => {
   const [checkboxStates, setCheckboxStates] = useState({});
@@ -122,7 +123,16 @@ const Checklist = ({ title, steps }) => {
                           onChange={(e) => handleCheckboxChange(e, step)}
                           sx={{
                             "& .MuiSvgIcon-root": {
-                              transform: "scale(2)", // Updated scale
+                              transform: "scale(2)",
+                              color: colors.dark // default color
+                            },
+                            "& .Mui-checked": {
+                              color: colors.dark, // Checked color
+                            },
+                            "&:hover": {
+                              "& .MuiSvgIcon-root": {
+                                color: colors.dark, // Hover color
+                              },
                             },
                           }}
                         />
@@ -141,9 +151,16 @@ const Checklist = ({ title, steps }) => {
               ))}
               <Button
                 variant="outlined"
-                color="secondary"
                 onClick={resetCheckboxes}
-                sx={{ mt: 2 }}
+                sx={{
+                  backgroundColor: colors.teal,
+                  color: colors.ice,
+                  "&:hover": {
+                    // Add this block for the hover effect
+                    backgroundColor: colors.lightBlue,
+                    color: colors.dark,
+                  },
+                }}
               >
                 Reset
               </Button>
