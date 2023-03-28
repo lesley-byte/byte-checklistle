@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { UPDATE_CHECKLIST } from "../utils/mutations";
 import { QUERY_CHECKLIST, QUERY_CHECKLISTS } from "../utils/queries";
@@ -12,8 +12,52 @@ import Grid from "@mui/material/Grid";
 import ValidConditionValueInput from "./ValidConditionalValueInput";
 import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
 import AuthService from "../utils/auth";
+import introJs from "intro.js";
+import "intro.js/minified/introjs.min.css";
 
 const ChecklistForm = ({ checklistId, checklist }) => {
+  useEffect(() => {
+    const editorTutorialShown = sessionStorage.getItem("editorTutorialShown");
+
+    if (!editorTutorialShown) {
+      const intro = introJs();
+
+      intro.setOptions({
+        steps: [
+          {
+            element: "#title",
+            intro: "Here you can edit the title of the checklist.",
+            position: "bottom",
+          },
+          {
+            element: "#step",
+            intro: "Here you can edit the steps of the checklist.",
+            position: "bottom",
+          },
+          {
+            element: "#condition-type",
+            intro: "Here you can edit the condition type of the step.",
+            position: "bottom",
+          },
+          {
+            element: "#condition-value",
+            intro: "Here you can edit the condition value of the step.",
+            position: "bottom",
+          },
+          {
+            element: "#save",
+            intro: "Here you can save the checklist.",
+            position: "bottom",
+          },
+        ],
+      });
+
+      intro.start();
+
+      sessionStorage.setItem("editorTutorialShown", "true");
+    }
+  }, []);
+
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalText, setModalText] = useState("");
@@ -168,35 +212,39 @@ const ChecklistForm = ({ checklistId, checklist }) => {
               />
             </Box>
           </Grid>
-          {steps.map((step, index) => (
-            <Grid item xs={12} key={index}>
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="h6">Step {index + 1}</Typography>
-                <TextField
-                  id={`text-${index}`}
-                  name="text"
-                  value={step.text || ""}
-                  onChange={(e) => handleStepsChange(e, index)}
-                  fullWidth
-                />
-                <ValidConditionTypeSelect
-                  steps={steps}
-                  currentStepIndex={index}
-                  value={step.conditionType || ""}
-                  onChange={handleStepsChange}
-                />
-                <ValidConditionValueInput
-                  steps={steps}
-                  currentStepIndex={index}
-                  value={step.conditionValue || []}
-                  onChange={(e) => handleStepsChange(e, index)}
-                />
-                <Button onClick={() => moveStepUp(index)}>Move Up</Button>
-                <Button onClick={() => moveStepDown(index)}>Move Down</Button>
-                <Button onClick={() => deleteStep(index)}>Delete</Button>
-              </Box>
-            </Grid>
-          ))}
+          <div id="step">
+            {steps.map((step, index) => (
+              <Grid item xs={12} key={index}>
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="h6">Step {index + 1}</Typography>
+                  <TextField
+                    id={`text-${index}`}
+                    name="text"
+                    value={step.text || ""}
+                    onChange={(e) => handleStepsChange(e, index)}
+                    fullWidth
+                  />
+                  <ValidConditionTypeSelect
+                    id="conditionType"
+                    steps={steps}
+                    currentStepIndex={index}
+                    value={step.conditionType || ""}
+                    onChange={handleStepsChange}
+                  />
+                  <ValidConditionValueInput
+                    id="conditionValue"
+                    steps={steps}
+                    currentStepIndex={index}
+                    value={step.conditionValue || []}
+                    onChange={(e) => handleStepsChange(e, index)}
+                  />
+                  <Button onClick={() => moveStepUp(index)}>Move Up</Button>
+                  <Button onClick={() => moveStepDown(index)}>Move Down</Button>
+                  <Button onClick={() => deleteStep(index)}>Delete</Button>
+                </Box>
+              </Grid>
+            ))}
+          </div>
           <Grid item xs={12}>
             <div
               style={{
@@ -209,6 +257,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
                 Add Step
               </Button>
               <Button
+                id="save"
                 variant="contained"
                 color="primary"
                 type="submit"
