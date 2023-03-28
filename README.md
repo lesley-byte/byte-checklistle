@@ -15,7 +15,7 @@ Byte-Checklistle is a user-friendly web application that allows users to create,
 - [State Management](#state-management)
 - [Deployment](#deployment)
 - [Deployed Website](#deployed-website)
-- [Contributing & Support](#contributing--support)
+- [License](#license)
 
 ## Introduction
 
