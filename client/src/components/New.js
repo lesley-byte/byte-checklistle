@@ -5,6 +5,7 @@ import { QUERY_CHECKLISTS } from "../utils/queries";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import AuthService from "../utils/auth"; // import AuthService
 import { useNavigate } from "react-router-dom"; // import useNavigate
+import colors from "../assets/styles/colors";
 
 const New = () => {
   const navigate = useNavigate();
@@ -73,9 +74,17 @@ const New = () => {
           fullWidth
         />
         <Button
+          sx={{
+            backgroundColor: colors.dark,
+            color: colors.gray,
+            "&:hover": {
+              // Add this block for the hover effect
+              backgroundColor: colors.gray,
+              color: colors.dark,
+            },
+          }}
           type="submit"
           variant="contained"
-          color="primary"
           size="large"
           mt={4}
         >

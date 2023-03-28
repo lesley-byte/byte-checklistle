@@ -16,6 +16,7 @@ import AuthService from "../utils/auth";
 
 import { QUERY_CHECKLISTS } from "../utils/queries";
 import { DELETE_CHECKLIST } from "../utils/mutations";
+import colors from "../assets/styles/colors";
 
 const ListOfLists = () => {
   const user = AuthService.getProfile();
@@ -98,13 +99,27 @@ const ListOfLists = () => {
               </Link>
               <ListItemSecondaryAction>
                 <Button
-                  color="secondary"
+                  sx={{
+                    backgroundColor: colors.dark,
+                    color: colors.gray,
+                    "&:hover": {
+                      backgroundColor: colors.gray,
+                      color: colors.dark,
+                    },
+                  }}
                   onClick={() => handleEdit(checklist._id)}
                 >
                   Edit
                 </Button>
                 <Button
-                  color="error"
+                  sx={{
+                    backgroundColor: colors.lightBlue,
+                    color: colors.dark,
+                    "&:hover": {
+                      backgroundColor: colors.gray,
+                      color: colors.ice,
+                    },
+                  }}
                   onClick={() => handleDelete(checklist._id)}
                 >
                   Delete

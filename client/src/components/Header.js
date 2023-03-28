@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../utils/auth";
+import colors from "../assets/styles/colors";
 
 const theme = createTheme({
   typography: {
@@ -42,12 +43,16 @@ const Header = () => {
         url('https://fonts.googleapis.com/css2?family=Iceland&display=swap');
       </style>
       <ThemeProvider theme={theme}>
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: colors.dark }}>
           <Toolbar>
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, fontSize: "36px" }}
+              sx={{
+                flexGrow: 1,
+                fontSize: "36px",
+                color: colors.yellow,
+              }}
             >
               Checklistle
             </Typography>
