@@ -6,7 +6,7 @@ const colors = {
   brown: "#8f4a1d", // warm brown
   teal: "#49978d", // greenish tealish
   lightBlue: "#afc4c3", //lighter gray with hint of blue almost a light blue
-  mustard: "##dc983d", // darker yellowish
+  mustard: "#dc983d", // darker yellowish
   ice: "#e9eef6", //cool grayish white
   putty: "#d5c29c", // putty color
   pink: "#cb9c8d", // weird pinkish

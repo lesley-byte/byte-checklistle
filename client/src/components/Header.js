@@ -43,7 +43,7 @@ const Header = () => {
         url('https://fonts.googleapis.com/css2?family=Iceland&display=swap');
       </style>
       <ThemeProvider theme={theme}>
-        <AppBar position="static" sx={{ backgroundColor: colors.dark }}>
+        <AppBar position="static" sx={{ backgroundColor: colors.ice }}>
           <Toolbar>
             <Typography
               variant="h6"
@@ -51,16 +51,38 @@ const Header = () => {
               sx={{
                 flexGrow: 1,
                 fontSize: "36px",
-                color: colors.yellow,
+                color: colors.gray,
               }}
             >
               Checklistle
             </Typography>
-            <Button color="inherit" onClick={toggleAuthentication}>
+            <Button
+              sx={{
+                backgroundColor: colors.teal,
+                color: colors.ice,
+                "&:hover": {
+                  // Add this block for the hover effect
+                  backgroundColor: colors.lightBlue,
+                  color: colors.dark,
+                },
+              }}
+              onClick={toggleAuthentication}
+            >
               {isAuthenticated ? "Logout" : "Login"}
             </Button>
             {!isAuthenticated && (
-              <Button color="inherit" onClick={handleSignUp}>
+              <Button
+                sx={{
+                  backgroundColor: colors.teal,
+                  color: colors.ice,
+                  "&:hover": {
+                    // Add this block for the hover effect
+                    backgroundColor: colors.lightBlue,
+                    color: colors.dark,
+                  },
+                }}
+                onClick={handleSignUp}
+              >
                 Sign Up
               </Button>
             )}

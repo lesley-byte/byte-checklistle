@@ -75,11 +75,11 @@ const New = () => {
         />
         <Button
           sx={{
-            backgroundColor: colors.dark,
-            color: colors.gray,
+            backgroundColor: colors.teal,
+            color: colors.ice,
             "&:hover": {
               // Add this block for the hover effect
-              backgroundColor: colors.gray,
+              backgroundColor: colors.lightBlue,
               color: colors.dark,
             },
           }}

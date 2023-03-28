@@ -100,10 +100,10 @@ const ListOfLists = () => {
               <ListItemSecondaryAction>
                 <Button
                   sx={{
-                    backgroundColor: colors.dark,
-                    color: colors.gray,
+                    backgroundColor: colors.teal,
+                    color: colors.ice,
                     "&:hover": {
-                      backgroundColor: colors.gray,
+                      backgroundColor: colors.lightBlue,
                       color: colors.dark,
                     },
                   }}
@@ -113,11 +113,11 @@ const ListOfLists = () => {
                 </Button>
                 <Button
                   sx={{
-                    backgroundColor: colors.lightBlue,
+                    backgroundColor: colors.yellow,
                     color: colors.dark,
                     "&:hover": {
-                      backgroundColor: colors.gray,
-                      color: colors.ice,
+                      backgroundColor: colors.putty,
+                      color: colors.brown,
                     },
                   }}
                   onClick={() => handleDelete(checklist._id)}
