@@ -153,30 +153,30 @@ The client-side application uses the following dependencies:
 
 ```json
 {
-    "@apollo/client": "^3.7.10",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@mui/material": "^5.11.14",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "intro.js": "^7.0.1",
-    "jwt-decode": "^3.1.2",
-    "react": "^18.2.0",
-    "react-beautiful-dnd": "^13.1.1",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.9.0",
-    "react-scripts": "5.0.1",
-    "uuid": "^9.0.0",
-    "web-vitals": "^2.1.4"
-  }
-  ```
+  "@apollo/client": "^3.7.10",
+  "@emotion/react": "^11.10.6",
+  "@emotion/styled": "^11.10.6",
+  "@mui/material": "^5.11.14",
+  "@testing-library/jest-dom": "^5.16.5",
+  "@testing-library/react": "^13.4.0",
+  "@testing-library/user-event": "^13.5.0",
+  "intro.js": "^7.0.1",
+  "jwt-decode": "^3.1.2",
+  "react": "^18.2.0",
+  "react-beautiful-dnd": "^13.1.1",
+  "react-dom": "^18.2.0",
+  "react-router-dom": "^6.9.0",
+  "react-scripts": "5.0.1",
+  "uuid": "^9.0.0",
+  "web-vitals": "^2.1.4"
+}
+```
 
 ## Frontend Components
 
 ### Pages
 
-1. `Landing.js`: The landing page of the application that showcases the main features and purpose of Checklistle. It includes a background image, a main heading, a subheading, and a brief description of the application.
+1. `Landing.js`: The landing page of the application that showcases the main features and purpose of Checklistle.
 2. `ChecklistManagement.js`: The Checklist Management page allows users to create new checklists and manage their existing checklists. It also provides a step-by-step tutorial for first-time users using the `introJs` library.
 3. `Editor.js`: The Checklist Editor page enables users to update an existing checklist. It fetches the checklist data using GraphQL and displays a form pre-populated with the current checklist details for modification.
 4. `SingleChecklist.js`: The Single Checklist page displays the details of a specific checklist, including the title and steps. It fetches the checklist data using GraphQL and renders the `Checklist` component with the fetched data.
@@ -199,8 +199,16 @@ This application utilizes React's built-in state management capabilities, primar
 
 ## Deployment
 
-- [Instructions for deploying the application to a production environment]
-- [Maintenance and update procedures]
+- The application is deployed to Heroku using the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+- If you want to develop locally, you can use the following commands once you have installed node.js and cloned the repository:
+
+```bash
+# Install dependencies
+npm install
+
+# Run the app
+npm run develop
+```
 
 ## Deployed Website
 

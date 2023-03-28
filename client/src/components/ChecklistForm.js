@@ -32,7 +32,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
           },
           {
             element: "#step",
-            intro: "Here you can edit the steps of the checklist.",
+            intro: "Here you can edit, or delete steps, and change the conditions (i.e., IF, NOT, XOR, XNOR) associated with each step.",
             position: "bottom",
           },
           {
