@@ -17,6 +17,10 @@ Byte-Checklistle is a powerful online tool that helps you work smarter and avoid
 - [Deployed Website](#deployed-website)
 - [License](#license)
 
+## Screenshot
+
+![Screenshot](./client/src/assets/images/screenshot.png)
+
 ## Introduction
 
 Byte-Checklistle is a powerful and easy-to-use web application designed to help users create, manage, and share customizable checklists for personal and professional use. With a clean and modern interface built on React, the application offers a seamless user experience and simplifies task management.
