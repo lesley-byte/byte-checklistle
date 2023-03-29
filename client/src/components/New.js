@@ -88,7 +88,7 @@ const New = () => {
           size="large"
           mt={4}
         >
-          Submit
+          Create
         </Button>
       </Box>
     </Box>

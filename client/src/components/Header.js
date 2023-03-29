@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AuthService from "../utils/auth";
 import colors from "../assets/styles/colors";
 
@@ -54,7 +54,15 @@ const Header = () => {
                 color: colors.gray,
               }}
             >
-              Checklistle
+              <Link
+                to="/"
+                style={{
+                  textDecoration: "none",
+                  color: colors.gray,
+                }}
+              >
+                Checklistle
+              </Link>
             </Typography>
             <Button
               sx={{

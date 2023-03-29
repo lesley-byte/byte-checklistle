@@ -18,6 +18,7 @@ import ChecklistManagement from "./pages/ChecklistManagement";
 import SingleChecklist from "./pages/SingleChecklist";
 import { ChecklistProvider } from "./contexts/ChecklistContext";
 import Layout from "./components/Layout";
+import Help from "./pages/Help";
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   const token = authService.getToken();
@@ -55,6 +56,7 @@ function App() {
                 path="/checklist/:checklistId"
                 element={<SingleChecklist />}
               />
+              <Route path="/help" element={<Help />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
 
