@@ -16,6 +16,7 @@ import {
   Box,
   Alert,
 } from "@mui/material";
+import colors from "../assets/styles/colors";
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -84,7 +85,14 @@ const Login = (props) => {
                 <Button
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  sx={{
+                    backgroundColor: colors.teal,
+                    color: colors.ice,
+                    "&:hover": {
+                      backgroundColor: colors.lightBlue,
+                      color: colors.dark,
+                    },
+                  }}
                   type="submit"
                 >
                   Submit

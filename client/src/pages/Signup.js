@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 import {
   TextField,
@@ -15,10 +15,15 @@ import {
   CardHeader,
   Box,
   Alert,
-} from '@mui/material';
+} from "@mui/material";
+import colors from "../assets/styles/colors";
 
 const Signup = () => {
-  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
+  const [formState, setFormState] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
@@ -44,9 +49,9 @@ const Signup = () => {
     }
 
     setFormState({
-      username: '',
-      email: '',
-      password: '',
+      username: "",
+      email: "",
+      password: "",
     });
   };
 
@@ -58,7 +63,8 @@ const Signup = () => {
           <CardContent>
             {data ? (
               <Typography>
-                Success! You may now head <Link to="/login">to the login page.</Link>
+                Success! You may now head{" "}
+                <Link to="/login">to the login page.</Link>
               </Typography>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -92,12 +98,24 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <Button fullWidth variant="contained" color="primary" type="submit">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    backgroundColor: colors.teal,
+                    color: colors.ice,
+                    "&:hover": {
+                      backgroundColor: colors.lightBlue,
+                      color: colors.dark,
+                    },
+                  }}
+                  type="submit"
+                >
                   Submit
                 </Button>
               </form>
             )}
-  
+
             {error && (
               <Box mt={2}>
                 <Alert severity="error">{error.message}</Alert>
@@ -108,7 +126,6 @@ const Signup = () => {
       </Box>
     </Container>
   );
-  };
-  
-  export default Signup;
-  
+};
+
+export default Signup;
