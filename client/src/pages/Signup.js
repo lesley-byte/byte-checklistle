@@ -70,6 +70,14 @@ const Signup = () => {
               <form onSubmit={handleFormSubmit}>
                 <TextField
                   fullWidth
+                  sx={{
+                    backgroundColor: colors.ice,
+                    color: colors.teal,
+                    "&:hover": {
+                      backgroundColor: colors.lightBlue,
+                      color: colors.dark,
+                    },
+                  }}
                   margin="normal"
                   label="Username"
                   variant="outlined"
@@ -80,6 +88,14 @@ const Signup = () => {
                 />
                 <TextField
                   fullWidth
+                  sx={{
+                    backgroundColor: colors.ice,
+                    color: colors.teal,
+                    "&:hover": {
+                      backgroundColor: colors.lightBlue,
+                      color: colors.dark,
+                    },
+                  }}
                   margin="normal"
                   label="Email"
                   variant="outlined"
@@ -90,6 +106,14 @@ const Signup = () => {
                 />
                 <TextField
                   fullWidth
+                  sx={{
+                    backgroundColor: colors.ice,
+                    color: colors.teal,
+                    "&:hover": {
+                      backgroundColor: colors.lightBlue,
+                      color: colors.dark,
+                    },
+                  }}
                   margin="normal"
                   label="Password"
                   variant="outlined"

@@ -65,6 +65,14 @@ const Login = (props) => {
                 <TextField
                   fullWidth
                   margin="normal"
+                  sx={{
+                    backgroundColor: colors.ice,
+                    color: colors.teal,
+                    "&:hover": {
+                      backgroundColor: colors.lightBlue,
+                      color: colors.dark,
+                    },
+                  }}
                   label="Email"
                   variant="outlined"
                   name="email"
@@ -75,6 +83,14 @@ const Login = (props) => {
                 <TextField
                   fullWidth
                   margin="normal"
+                  sx={{
+                    backgroundColor: colors.ice,
+                    color: colors.teal,
+                    "&:hover": {
+                      backgroundColor: colors.lightBlue,
+                      color: colors.dark,
+                    },
+                  }}
                   label="Password"
                   variant="outlined"
                   name="password"
@@ -87,7 +103,7 @@ const Login = (props) => {
                   variant="contained"
                   sx={{
                     backgroundColor: colors.teal,
-                    color: colors.ice,
+                    color: colors.teal,
                     "&:hover": {
                       backgroundColor: colors.lightBlue,
                       color: colors.dark,
