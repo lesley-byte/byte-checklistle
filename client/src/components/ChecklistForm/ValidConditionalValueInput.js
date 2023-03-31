@@ -50,7 +50,7 @@ const ValidConditionalValueInput = ({
   };
 
   return (
-    <FormControl fullWidth variant="outlined">
+    <FormControl fullWidth variant="outlined" size="small">
       <Select
         name="conditionValue"
         multiple

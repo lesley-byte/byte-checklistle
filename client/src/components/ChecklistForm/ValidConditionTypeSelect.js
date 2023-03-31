@@ -1,17 +1,13 @@
 import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-const ValidConditionTypeSelect = ({
-  currentStepIndex,
-  value,
-  onChange,
-}) => {
+const ValidConditionTypeSelect = ({ currentStepIndex, value, onChange }) => {
   const handleConditionTypeChange = (e) => {
     onChange(e, currentStepIndex);
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }}>
+    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
       <InputLabel id={`conditionType-label-${currentStepIndex}`}>
         Condition Type
       </InputLabel>
