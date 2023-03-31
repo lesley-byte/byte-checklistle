@@ -55,15 +55,15 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
     setSteps(newSteps);
   };
 
-  const moveStep = (dragIndex, hoverIndex) => {
-    console.log("Moving step from index:", dragIndex, "to index:", hoverIndex);
+  const moveStep = (dragIndex, dropIndex) => {
+    if (dragIndex === dropIndex) return;
 
-    const temp = steps[dragIndex];
-    const newSteps = [...steps];
-    newSteps[dragIndex] = newSteps[hoverIndex];
-    newSteps[hoverIndex] = temp;
+    const updatedSteps = [...steps];
+    const draggedStep = updatedSteps.splice(dragIndex, 1)[0];
 
-    setSteps(newSteps);
+    updatedSteps.splice(dropIndex, 0, draggedStep);
+
+    setSteps(updatedSteps);
   };
 
   const validateCondition = (steps) => {

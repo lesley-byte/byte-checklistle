@@ -45,7 +45,12 @@ const DraggableStep = ({
   return (
     <div ref={(node) => drag(drop(node))}>
       <Grid item xs={12} key={index}>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleClickOpen}
+          sx={{ mb: 1, marginLeft: 2, marginBottom: "16px" }}
+        >
           {step.text || `Step ${index + 1}`}
         </Button>
         <Dialog
