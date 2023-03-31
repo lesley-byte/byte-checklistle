@@ -9,7 +9,7 @@ import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
 
 const DraggableStep = ({
   step,
-    steps,
+  steps,
   index,
   handleStepsChange,
   deleteStep,
@@ -47,7 +47,7 @@ const DraggableStep = ({
   return (
     <div ref={(node) => drag(drop(node))}>
       <Grid item xs={12} key={index}>
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 2, marginLeft: 2 }}>
           <Typography variant="h6">Step {index + 1}</Typography>
           <TextField
             id={`text-${index}`}

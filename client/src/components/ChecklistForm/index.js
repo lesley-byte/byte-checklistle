@@ -107,7 +107,12 @@ const ChecklistForm = ({ checklistId, checklist }) => {
   };
 
   return (
-    <div className="checklist-form">
+    <div
+      className="checklist-form"
+      style={{
+        height: "100%",
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

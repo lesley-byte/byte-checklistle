@@ -103,7 +103,7 @@ const Login = (props) => {
                   variant="contained"
                   sx={{
                     backgroundColor: colors.teal,
-                    color: colors.teal,
+                    color: colors.ice,
                     "&:hover": {
                       backgroundColor: colors.lightBlue,
                       color: colors.dark,
