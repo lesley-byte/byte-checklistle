@@ -51,3 +51,5 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+// Path: client\src\utils\queries.js

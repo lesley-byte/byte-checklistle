@@ -12,7 +12,7 @@ const Editor = () => {
   const { data: queryData } = useQuery(QUERY_CHECKLIST, {
     variables: { checklistId },
   });
-
+console.log("queryData value in Editor.js:", queryData)
   const [checklist, setChecklist] = useState(null);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Editor = () => {
   if (!checklist) {
     return <Typography variant="h6">Loading...</Typography>;
   }
-
+console.log("checklist value in Editor.js:", checklist)
   return (
     <Box sx={{ mt: 5, height: "80vh", overflowY: "scroll" }}>
       <Typography variant="h4" gutterBottom>
@@ -36,3 +36,5 @@ const Editor = () => {
 };
 
 export default Editor;
+
+// Path: client\src\pages\Editor.js

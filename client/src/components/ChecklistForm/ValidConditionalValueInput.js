@@ -1,18 +1,24 @@
 import React from "react";
 import { MenuItem, Select, OutlinedInput, FormControl } from "@mui/material";
 
-const ValidConditionValueInput = ({
+const ValidConditionalValueInput = ({
   steps,
   currentStepIndex,
   value,
   onChange,
 }) => {
+  if (!Array.isArray(steps)) {
+    return null;
+  }
+
   const validValues = steps
     .filter((_, index) => index !== currentStepIndex)
     .map((step) => step.position.toString());
 
   const handleChange = (event) => {
+    console.log("event.target.value", event.target.value);
     const newSelectedValues = event.target.value;
+    console.log("newSelectedValues", newSelectedValues);
 
     // Make sure newSelectedValues is an array
     if (!Array.isArray(newSelectedValues)) {
@@ -74,4 +80,6 @@ const ValidConditionValueInput = ({
   );
 };
 
-export default ValidConditionValueInput;
+export default ValidConditionalValueInput;
+
+// Path: client\src\components\ChecklistForm\ValidConditionalValueInput.js

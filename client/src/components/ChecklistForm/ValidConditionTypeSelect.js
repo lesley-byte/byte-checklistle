@@ -2,7 +2,6 @@ import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const ValidConditionTypeSelect = ({
-  steps,
   currentStepIndex,
   value,
   onChange,
@@ -38,3 +37,5 @@ const ValidConditionTypeSelect = ({
 };
 
 export default ValidConditionTypeSelect;
+
+// path: client\src\components\ChecklistForm\ValidConditionTypeSelect.js

@@ -28,3 +28,5 @@ const Modal = ({ isModalOpen, setIsModalOpen, modalText }) => {
 };
 
 export default Modal;
+
+// Path: client\src\components\ChecklistForm\Modal.js

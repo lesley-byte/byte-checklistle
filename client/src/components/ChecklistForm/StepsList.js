@@ -1,54 +1,37 @@
 import React from "react";
-import { Grid, Typography, Box, Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import DraggableStep from "./DraggableStep";
 
-import ValidConditionalValueInput from "./ValidConditionalValueInput";
-
-import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
-
+// Add steps to the destructured props list
 const StepsList = ({
   steps,
+  checklist,
   handleStepsChange,
   deleteStep,
-  moveStepUp,
-  moveStepDown,
+  moveStep,
 }) => {
   return (
-    <div id="step">
-      {steps.map((step, index) => (
-        <Grid item xs={12} key={index}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="h6">Step {index + 1}</Typography>
-            <TextField
-              id={`text-${index}`}
-              name="text"
-              value={step.text || ""}
-              onChange={(e) => handleStepsChange(e, index)}
-              fullWidth
-            />
-            <ValidConditionTypeSelect
-              id="condition-type"
-              steps={steps}
-              currentStepIndex={index}
-              value={step.conditionType || ""}
-              onChange={handleStepsChange}
-            />
-            <ValidConditionalValueInput
-
-              id="condition-value"
-              steps={steps}
-              currentStepIndex={index}
-              value={step.conditionValue || []}
-              onChange={(e) => handleStepsChange(e, index)}
-            />
-            <Button onClick={() => moveStepUp(index)}>Move Up</Button>
-            <Button onClick={() => moveStepDown(index)}>Move Down</Button>
-            <Button onClick={() => deleteStep(index)}>Delete</Button>
-          </Box>
-        </Grid>
-      ))}
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <div id="step">
+        {steps.map((step, index) => (
+          <DraggableStep
+            key={index}
+            step={step}
+            steps={steps}
+            index={index}
+            handleStepsChange={handleStepsChange}
+            deleteStep={deleteStep}
+            moveStep={moveStep}
+            checklist={checklist}
+          />
+        ))}
+      </div>
+    </DndProvider>
   );
 };
 
+
 export default StepsList;
+
+// Path: client\src\components\ChecklistForm\StepsList.js

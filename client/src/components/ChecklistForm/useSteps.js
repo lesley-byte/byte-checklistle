@@ -4,6 +4,13 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
   const [steps, setSteps] = useState(initialSteps);
 
   const handleStepsChange = (e, index) => {
+    console.log("handleStepsChange event:", e);
+    console.log("handleStepsChange index:", index);
+    console.log("handleStepsChange event:", steps);
+    console.log("handleStepsChange index:", index);
+    console.log(e.target);
+    console.log("handleStepsChange event:", e);
+    console.log("handleStepsChange index:", index);
     const newSteps = [...steps];
 
     if (e.target.name === "conditionValue") {
@@ -18,37 +25,43 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
         position: index + 1,
       };
     }
+    console.log("handleStepsChange new steps:", newSteps);
 
     setSteps(newSteps);
   };
 
   const addStep = () => {
-    setSteps([...steps, { text: "", position: steps.length + 1 }]);
+    console.log("In addStep (useSteps.js) steps:", steps);
+    console.log("In addStep (useSteps.js) steps.length:", steps.length);
+    console.log("Adding a new step...");
+    const newStep = {
+      text: "",
+      position: steps.length + 1,
+      conditionType: null,
+      conditionValue: [],
+    };
+    console.log("Steps length before adding new step:", steps.length);
+
+    console.log("New step:", newStep);
+    setSteps([...steps, newStep]); // Replace the handleStepsChange call with setSteps
+    console.log("Steps after adding new step:", steps);
+    console.log("Steps length after adding new step:", steps.length);
   };
 
   const deleteStep = (indexToDelete) => {
+    console.log("Deleting step at index:", indexToDelete);
+
     const newSteps = steps.filter((_, index) => index !== indexToDelete);
     setSteps(newSteps);
   };
 
-  const moveStepUp = (index) => {
-    if (index === 0) return;
+  const moveStep = (dragIndex, hoverIndex) => {
+    console.log("Moving step from index:", dragIndex, "to index:", hoverIndex);
 
+    const temp = steps[dragIndex];
     const newSteps = [...steps];
-    const temp = newSteps[index - 1];
-    newSteps[index - 1] = { ...newSteps[index], position: index };
-    newSteps[index] = { ...temp, position: index + 1 };
-
-    setSteps(newSteps);
-  };
-
-  const moveStepDown = (index) => {
-    if (index === steps.length - 1) return;
-
-    const newSteps = [...steps];
-    const temp = newSteps[index + 1];
-    newSteps[index + 1] = { ...newSteps[index], position: index + 2 };
-    newSteps[index] = { ...temp, position: index + 1 };
+    newSteps[dragIndex] = newSteps[hoverIndex];
+    newSteps[hoverIndex] = temp;
 
     setSteps(newSteps);
   };
@@ -88,10 +101,11 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
     handleStepsChange,
     addStep,
     deleteStep,
-    moveStepUp,
-    moveStepDown,
     validateCondition,
+    moveStep,
   };
 };
 
 export default useSteps;
+
+// Path: client\src\components\ChecklistForm\useSteps.js

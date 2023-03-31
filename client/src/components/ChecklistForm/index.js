@@ -15,8 +15,13 @@ import Modal from "./Modal";
 import useSteps from "./useSteps";
 import AuthService from "../../utils/auth";
 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 const ChecklistForm = ({ checklistId, checklist }) => {
   useIntro();
+  console.log("In src/components/index checklist:", checklist);
+  console.log("In src/components/index checklistId:", checklistId);
 
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,9 +33,8 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     handleStepsChange,
     addStep,
     deleteStep,
-    moveStepUp,
-    moveStepDown,
     validateCondition,
+    moveStep,
   } = useSteps(
     checklist.steps.map((step) => ({
       ...step,
@@ -39,10 +43,22 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     setIsModalOpen,
     setModalText
   );
+  console.table(
+    "In src/components/index steps:",
+    steps,
+    "checklist.steps:",
+    checklist.steps
+  );
 
-  const [updateChecklist, { loading, error }] = useMutation(UPDATE_CHECKLIST);
+  const [updateChecklist] = useMutation(UPDATE_CHECKLIST);
 
   const handleTitleChange = (e) => {
+    console.log(
+      "In src/components/index handleTitleChange.handleTitleChange e.target.value:",
+      e.target.value
+    );
+    console.log("handleTitleChange value: ", e.target.value);
+
     setTitle(e.target.value);
   };
 
@@ -54,13 +70,25 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     }
 
     try {
+      console.log("steps before cleaning:", steps);
       const cleanedSteps = steps.map(({ __typename, ...step }, index) => ({
         ...step,
         position: index + 1,
       }));
+      console.log("cleanedSteps:", cleanedSteps);
 
       const user = AuthService.getProfile();
       const userId = user.id;
+
+      console.log("mutation variables:", {
+        checklistId,
+        title,
+        steps: cleanedSteps,
+        userId,
+      });
+
+      console.log("steps: ", steps);
+      console.log("cleanedSteps: ", cleanedSteps);
 
       await updateChecklist({
         variables: { checklistId, title, steps: cleanedSteps, userId },
@@ -69,6 +97,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
           { query: QUERY_CHECKLIST, variables: { checklistId } },
         ],
       });
+      console.log("The mutation was successful!");
       setTitle("");
 
       navigate("/checklistManagement");
@@ -93,13 +122,14 @@ const ChecklistForm = ({ checklistId, checklist }) => {
               />
             </Box>
           </Grid>
-          <StepsList
-            steps={steps}
-            handleStepsChange={handleStepsChange}
-            deleteStep={deleteStep}
-            moveStepUp={moveStepUp}
-            moveStepDown={moveStepDown}
-          />
+          <DndProvider backend={HTML5Backend}>
+            <StepsList
+              steps={steps}
+              handleStepsChange={handleStepsChange}
+              deleteStep={deleteStep}
+              moveStep={moveStep} // replace moveStepUp and moveStepDown with moveStep
+            />
+          </DndProvider>
           <Grid item xs={12}>
             <div
               style={{
@@ -154,3 +184,5 @@ const ChecklistForm = ({ checklistId, checklist }) => {
 };
 
 export default ChecklistForm;
+
+// Path: client\src\components\ChecklistForm\index.js
