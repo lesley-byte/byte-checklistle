@@ -80,7 +80,7 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
   };
 
   const validateCondition = (steps) => {
-    for (const step of steps) {
+    for (const [index, step] of steps.entries()) {
       const { conditionType, conditionValue } = step;
 
       if (
@@ -88,7 +88,11 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
         conditionValue.length !== 1
       ) {
         setModalText(
-          "Please use exactly one value for conditionValue with IF or NOT operators."
+          `In Step ${
+            index + 1
+          }, you selected the ${conditionType} operator but provided ${
+            conditionValue.length
+          } value(s). Please use exactly one value for conditionValue with the IF or NOT operators.`
         );
         setIsModalOpen(true);
         return false;
@@ -99,7 +103,48 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
         conditionValue.length !== 2
       ) {
         setModalText(
-          "Please use exactly two values for conditionValue with XOR or XNOR operators."
+          `In Step ${
+            index + 1
+          }, you selected the ${conditionType} operator but provided ${
+            conditionValue.length
+          } value(s). Please use exactly two values for conditionValue with the XOR or XNOR operators.`
+        );
+        setIsModalOpen(true);
+        return false;
+      }
+
+      if (
+        (conditionType === "AND" ||
+          conditionType === "NAND" ||
+          conditionType === "OR" ||
+          conditionType === "NOR") &&
+        conditionValue.length < 2
+      ) {
+        setModalText(
+          `In Step ${
+            index + 1
+          }, you selected the ${conditionType} operator but provided ${
+            conditionValue.length
+          } value(s). Please use at least two values for conditionValue with the AND, NAND, OR, or NOR operators.`
+        );
+        setIsModalOpen(true);
+        return false;
+      }
+
+      if (conditionType && !conditionValue.length) {
+        setModalText(
+          `In Step ${
+            index + 1
+          }, you selected the ${conditionType} operator but didn't provide any values for conditionValue. Please use at least one value for conditionValue with any operator.`
+        );
+        setIsModalOpen(true);
+        return false;
+      }
+      if (conditionValue.length && !conditionType) {
+        setModalText(
+          `In Step ${index + 1}, you provided ${
+            conditionValue.length
+          } value(s) for conditionValue but didn't select an operator. Please use an operator with at least one value for conditionValue.`
         );
         setIsModalOpen(true);
         return false;
