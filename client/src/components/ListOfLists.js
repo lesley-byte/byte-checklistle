@@ -73,7 +73,7 @@ const ListOfLists = () => {
   const handleEdit = (checklistId) => {
     console.log(
       "Edit checklist:",
-      checklistId || "No checklist ID found to edit"
+      checklistId || "No checklistId found to edit"
     );
     navigate(`/editor/${checklistId}`);
   };

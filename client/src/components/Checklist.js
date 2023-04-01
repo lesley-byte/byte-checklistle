@@ -13,11 +13,13 @@ const Checklist = ({ title, steps }) => {
   const [checkboxStates, setCheckboxStates] = useState({});
 
   useEffect(() => {
-    const initialCheckboxStates = steps.reduce(
-      (states, step) => ({ ...states, [step.position]: false }),
-      {}
-    );
-    setCheckboxStates(initialCheckboxStates);
+    if (Array.isArray(steps)) {
+      const initialCheckboxStates = steps.reduce(
+        (states, step) => ({ ...states, [step.position]: false }),
+        {}
+      );
+      setCheckboxStates(initialCheckboxStates);
+    }
   }, [steps]);
 
   const handleCheckboxChange = (e, step) => {
@@ -124,7 +126,7 @@ const Checklist = ({ title, steps }) => {
                           sx={{
                             "& .MuiSvgIcon-root": {
                               transform: "scale(2)",
-                              color: colors.dark // default color
+                              color: colors.dark, // default color
                             },
                             "& .Mui-checked": {
                               color: colors.dark, // Checked color

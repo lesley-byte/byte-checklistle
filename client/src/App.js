@@ -37,6 +37,7 @@ const httpLink = new HttpLink({ uri: "/graphql" });
 const client = new ApolloClient({
   link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache(),
+  addTypename: false, // Disable automatic addition of __typename
 });
 
 function App() {

@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const stepSchema = new mongoose.Schema(
   {
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      default: mongoose.Types.ObjectId,
+    },
     text: {
       type: String,
       required: true,
@@ -16,16 +21,10 @@ const stepSchema = new mongoose.Schema(
     },
     conditionValue: {
       type: [String],
-      validate: {
-        validator: function (values) {
-          return values.every((val) => !mongoose.Types.ObjectId.isValid(val));
-        },
-        message: "conditionValue should not contain ObjectId",
-      },
       default: [],
     },
   },
-  { _id: false }
-); // set _id option to false to exclude the _id field
+  { _id: true } // Change _id: false to _id: true
+);
 
 module.exports = stepSchema;

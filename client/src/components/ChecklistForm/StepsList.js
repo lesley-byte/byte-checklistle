@@ -11,6 +11,8 @@ const StepsList = ({
   deleteStep,
   moveStep,
 }) => {
+  console.log(steps);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div id="step">

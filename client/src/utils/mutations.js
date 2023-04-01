@@ -37,7 +37,7 @@ export const UPDATE_CHECKLIST = gql`
   mutation updateChecklist(
     $checklistId: ID!
     $title: String
-    $steps: [StepInput]
+    $steps: [StepInputWithId]
     $userId: ID
   ) {
     updateChecklist(
@@ -48,6 +48,7 @@ export const UPDATE_CHECKLIST = gql`
     ) {
       title
       steps {
+        _id
         text
         position
         conditionType

@@ -1,6 +1,7 @@
 const { Checklist, User } = require("../models");
 const { signToken } = require("../utils/auth"); // Import the signToken function
 const { AuthenticationError } = require("apollo-server-express");
+const mongoose = require("mongoose"); // Add this line to import mongoose
 
 const resolvers = {
   Query: {
@@ -24,10 +25,28 @@ const resolvers = {
         if (!user) {
           throw new AuthenticationError("You need to be logged in!");
         }
-        return Checklist.findOne({ _id: checklistId, userId: user._id });
+        const checklist = await Checklist.findOne({
+          _id: checklistId,
+          userId: user._id,
+        }).lean();
+
+        if (!checklist) {
+          throw new Error("Checklist not found.");
+        }
+
+        // Map the steps and extract the _id from the $oid field
+        checklist.steps = checklist.steps.map((step) => {
+          const { _id, ...rest } = step; // Destructure the _id from the step object
+          return {
+            ...rest,
+            _id: _id.toString(), // Convert the _id field to a string
+          };
+        });
+
+        return checklist;
       } catch (error) {
         console.error("Error fetching checklist:", error);
-        throw new Error("Error fetching checklist.");
+        throw error;
       }
     },
 
@@ -76,13 +95,30 @@ const resolvers = {
 
     // In server-side resolver.js
 
-    addChecklist: async (parent, { title, userId }, context) => {
+    // Modify the addChecklist function definition to include the steps parameter
+    addChecklist: async (parent, { title, userId, steps = [] }, context) => {
       try {
         const { user } = context;
         if (!user) {
           throw new AuthenticationError("You need to be logged in!");
         }
-        const checklist = await Checklist.create({ title, userId });
+
+        // Generate ObjectIds for the steps
+        steps = steps.map((step) => ({
+          ...step,
+          _id: new mongoose.Types.ObjectId(),
+        }));
+
+        console.log("User ID:", userId);
+        console.log("Title:", title);
+        console.log("Steps:", steps);
+
+        const checklist = await Checklist.create({
+          title,
+          userId,
+          steps,
+        });
+
         await User.findOneAndUpdate(
           { _id: userId },
           { $addToSet: { checklists: checklist._id } }
@@ -118,9 +154,27 @@ const resolvers = {
           );
         }
 
-        console.log("Before update:", steps); // Check the value of steps before updating
-        const update = { ...(title && { title }), ...(steps && { steps }) };
-        console.log("After update:", update.steps); // Check the value of steps after updating
+        // Generate ObjectIds for new steps
+        const newSteps = steps.filter((step) => !step._id);
+        const newStepsWithIds = newSteps.map((step) => ({
+          ...step,
+          _id: new mongoose.Types.ObjectId(),
+        }));
+
+        // Remove __typename field from each step object
+        const cleanedSteps = steps.map(({ __typename, ...step }) => step);
+
+        // Update the steps array with the new steps with ObjectIds
+        const updatedSteps = cleanedSteps
+          .filter((step) => step._id) // Only keep existing steps
+          .map(({ _id, ...step }, index) => ({
+            ...step,
+            _id: new mongoose.Types.ObjectId(_id), // Convert _id to ObjectId
+            position: index + 1,
+          }))
+          .concat(newStepsWithIds);
+
+        const update = { ...(title && { title }), steps: updatedSteps };
 
         const updatedChecklist = await Checklist.findOneAndUpdate(
           { _id: checklistId },

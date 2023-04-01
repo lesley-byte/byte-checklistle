@@ -43,12 +43,7 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     setIsModalOpen,
     setModalText
   );
-  console.table(
-    "In src/components/index steps:",
-    steps,
-    "checklist.steps:",
-    checklist.steps
-  );
+  console.log(steps);
 
   const [updateChecklist] = useMutation(UPDATE_CHECKLIST);
 
@@ -63,6 +58,8 @@ const ChecklistForm = ({ checklistId, checklist }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(steps);
+
     e.preventDefault();
 
     if (!validateCondition(steps)) {
@@ -71,10 +68,12 @@ const ChecklistForm = ({ checklistId, checklist }) => {
 
     try {
       console.log("steps before cleaning:", steps);
-      const cleanedSteps = steps.map(({ __typename, ...step }, index) => ({
+      const cleanedSteps = steps.map(({ __typename, _id, ...step }, index) => ({
         ...step,
+        _id: _id, // Use "_id" without creating temporary IDs
         position: index + 1,
       }));
+
       console.log("cleanedSteps:", cleanedSteps);
 
       const user = AuthService.getProfile();

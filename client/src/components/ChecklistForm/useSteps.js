@@ -11,6 +11,8 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
     console.log(e.target);
     console.log("handleStepsChange event:", e);
     console.log("handleStepsChange index:", index);
+    console.log(steps);
+
     const newSteps = [...steps];
 
     if (e.target.name === "conditionValue") {

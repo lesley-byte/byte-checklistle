@@ -8,6 +8,7 @@ const typeDefs = gql`
   }
 
   type Step {
+    _id: ID!
     text: String
     position: Int
     conditionType: String
@@ -40,13 +41,14 @@ const typeDefs = gql`
     updateChecklist(
       checklistId: ID!
       title: String
-      steps: [StepInput]
+      steps: [StepInputWithId]
       userId: ID
     ): Checklist
     deleteChecklist(checklistId: ID!, userId: ID!): Checklist
   }
 
-  input StepInput {
+  input StepInputWithId {
+    _id: ID
     text: String
     position: Int
     conditionType: String
