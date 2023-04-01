@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
   const [steps, setSteps] = useState(initialSteps);
@@ -41,6 +42,7 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
       position: steps.length + 1,
       conditionType: null,
       conditionValue: [],
+      tempId: uuidv4(),
     };
     console.log("Steps length before adding new step:", steps.length);
 
@@ -57,8 +59,17 @@ const useSteps = (initialSteps, setIsModalOpen, setModalText) => {
     setSteps(newSteps);
   };
 
-  const moveStep = (dragIndex, dropIndex) => {
-    if (dragIndex === dropIndex) return;
+  const moveStep = (dragId, dropId) => {
+    if (dragId === dropId) return;
+
+    const dragIndex = steps.findIndex(
+      (step) => step._id === dragId || step.tempId === dragId
+    );
+    const dropIndex = steps.findIndex(
+      (step) => step._id === dropId || step.tempId === dropId
+    );
+
+    if (dragIndex === -1 || dropIndex === -1) return;
 
     const updatedSteps = [...steps];
     const draggedStep = updatedSteps.splice(dragIndex, 1)[0];

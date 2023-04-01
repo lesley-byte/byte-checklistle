@@ -68,11 +68,13 @@ const ChecklistForm = ({ checklistId, checklist }) => {
 
     try {
       console.log("steps before cleaning:", steps);
-      const cleanedSteps = steps.map(({ __typename, _id, ...step }, index) => ({
-        ...step,
-        _id: _id, // Use "_id" without creating temporary IDs
-        position: index + 1,
-      }));
+      const cleanedSteps = steps.map(
+        ({ __typename, tempId, _id, ...step }, index) => ({
+          ...step,
+          _id: _id,
+          position: index + 1,
+        })
+      );
 
       console.log("cleanedSteps:", cleanedSteps);
 

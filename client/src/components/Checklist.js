@@ -15,9 +15,10 @@ const Checklist = ({ title, steps }) => {
   useEffect(() => {
     if (Array.isArray(steps)) {
       const initialCheckboxStates = steps.reduce(
-        (states, step) => ({ ...states, [step.position]: false }),
+        (states, step) => ({ ...states, [step._id]: false }),
         {}
       );
+
       setCheckboxStates(initialCheckboxStates);
     }
   }, [steps]);
@@ -25,57 +26,49 @@ const Checklist = ({ title, steps }) => {
   const handleCheckboxChange = (e, step) => {
     setCheckboxStates({
       ...checkboxStates,
-      [step.position]: e.target.checked,
+      [step._id]: e.target.checked,
     });
   };
 
   const shouldDisplayStep = (step) => {
     if (!step.conditionType || step.conditionType === "") return true;
 
-    const stepConditionValues = step.conditionValue.map((value) =>
-      parseInt(value)
-    );
+    const stepConditionValues = step.conditionValue;
     const conditionTypeUpper = step.conditionType.toUpperCase();
 
     switch (conditionTypeUpper) {
       case "AND":
-        // Check if all referenced steps are checked
         return stepConditionValues.every(
           (value) => checkboxStates[value] === true
         );
 
       case "OR":
-        // Check if any referenced steps are checked
         return stepConditionValues.some(
           (value) => checkboxStates[value] === true
         );
 
       case "IF":
-        // If the first referenced step is checked, display the step
         return checkboxStates[stepConditionValues[0]] === true;
 
       case "NOT":
-        // If the first referenced step is not checked, display the step
         return checkboxStates[stepConditionValues[0]] !== true;
+
+      case "NAND":
+        return stepConditionValues.some(
+          (value) => checkboxStates[value] !== true
+        );
 
       case "NOR":
         // Check if none of the referenced steps are checked
         return stepConditionValues.every(
           (value) => checkboxStates[value] !== true
         );
-
-      case "NAND":
-        // Check if not all referenced steps are checked
-        return stepConditionValues.some(
-          (value) => checkboxStates[value] !== true
-        );
       case "XOR":
         return (
           stepConditionValues.filter((value) => checkboxStates[value] === true)
-            .length %
-            2 ===
-          1
+            .length === 1
         );
+
       case "XNOR":
         return (
           stepConditionValues.filter((value) => checkboxStates[value] === true)
@@ -91,7 +84,7 @@ const Checklist = ({ title, steps }) => {
 
   const resetCheckboxes = () => {
     const initialCheckboxStates = steps.reduce(
-      (states, step) => ({ ...states, [step.position]: false }),
+      (states, step) => ({ ...states, [step._id]: false }),
       {}
     );
     setCheckboxStates(initialCheckboxStates);
@@ -120,8 +113,8 @@ const Checklist = ({ title, steps }) => {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          id={`checkbox-${step.position}`}
-                          checked={checkboxStates[step.position] || false}
+                          id={`checkbox-${step._id}`}
+                          checked={checkboxStates[step._id] || false}
                           onChange={(e) => handleCheckboxChange(e, step)}
                           sx={{
                             "& .MuiSvgIcon-root": {

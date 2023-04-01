@@ -14,25 +14,22 @@ const StepsList = ({
   console.log(steps);
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div id="step">
-        {steps.map((step, index) => (
-          <DraggableStep
-            key={index}
-            step={step}
-            steps={steps}
-            index={index}
-            handleStepsChange={handleStepsChange}
-            deleteStep={deleteStep}
-            moveStep={moveStep}
-            checklist={checklist}
-          />
-        ))}
-      </div>
-    </DndProvider>
+    <div id="step">
+      {steps.map((step, index) => (
+        <DraggableStep
+          key={index}
+          step={step}
+          steps={steps}
+          index={index}
+          handleStepsChange={handleStepsChange}
+          deleteStep={deleteStep}
+          moveStep={moveStep}
+          checklist={checklist}
+        />
+      ))}
+    </div>
   );
 };
-
 
 export default StepsList;
 

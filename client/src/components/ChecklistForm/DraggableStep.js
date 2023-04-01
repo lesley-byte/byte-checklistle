@@ -28,19 +28,42 @@ const DraggableStep = ({
     setOpen(false);
   };
 
-  const [, drag] = useDrag(() => ({
-    type: "step",
-    item: { index },
-  }));
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: "step",
+      item: { id: step._id, index },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }),
+    [step._id, index]
+  );
 
-  const [, drop] = useDrop(() => ({
-    accept: "step",
-    drop(item) {
-      const dragIndex = item.index;
-      const dropIndex = index;
-      moveStep(dragIndex, dropIndex);
-    },
-  }));
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: "step",
+      canDrop: (item) => item.id !== step._id,
+      hover: (item) => {
+        if (!item) {
+          return;
+        }
+
+        const dragId = item.id;
+        const dropId = step._id;
+
+        if (dragId === dropId) {
+          return;
+        }
+
+        moveStep(dragId, dropId);
+        item.index = index;
+      },
+      collect: (monitor) => ({
+        isOver: monitor.isOver(),
+      }),
+    }),
+    [step._id, index, moveStep]
+  );
 
   return (
     <div ref={(node) => drag(drop(node))}>

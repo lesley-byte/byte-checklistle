@@ -13,12 +13,10 @@ const ValidConditionalValueInput = ({
 
   const validValues = steps
     .filter((_, index) => index !== currentStepIndex)
-    .map((step) => step.position.toString());
+    .map((step) => step._id || step.tempId);
 
   const handleChange = (event) => {
-    console.log("event.target.value", event.target.value);
     const newSelectedValues = event.target.value;
-    console.log("newSelectedValues", newSelectedValues);
 
     // Make sure newSelectedValues is an array
     if (!Array.isArray(newSelectedValues)) {
@@ -38,19 +36,14 @@ const ValidConditionalValueInput = ({
       }
     }
 
-    // Remove any object ids from the array before updating state
-    const newValue = newSelectedValues.filter(
-      (val) => !val.includes("ObjectId")
-    );
-
     onChange({
       ...event,
-      target: { ...event.target, value: newValue },
+      target: { ...event.target, value: newSelectedValues },
     });
   };
 
   return (
-    <FormControl fullWidth variant="outlined" size="small">
+    <FormControl fullWidth variant="outlined">
       <Select
         name="conditionValue"
         multiple
@@ -69,7 +62,7 @@ const ValidConditionalValueInput = ({
         <MenuItem disabled value="">
           <em>Select a value</em>
         </MenuItem>
-        <MenuItem value="none">None</MenuItem> {/* Add this line */}
+        <MenuItem value="none">None</MenuItem>
         {validValues.map((val) => (
           <MenuItem key={val} value={val}>
             {val}
@@ -81,5 +74,3 @@ const ValidConditionalValueInput = ({
 };
 
 export default ValidConditionalValueInput;
-
-// Path: client\src\components\ChecklistForm\ValidConditionalValueInput.js
