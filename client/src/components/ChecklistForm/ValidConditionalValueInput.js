@@ -13,7 +13,7 @@ const ValidConditionalValueInput = ({
 
   const validValues = steps
     .filter((_, index) => index !== currentStepIndex)
-    .map((step) => step._id || step.tempId);
+    .map((step) => ({ id: step._id || step.tempId, text: step.text }));
 
   const handleChange = (event) => {
     const newSelectedValues = event.target.value;
@@ -42,6 +42,19 @@ const ValidConditionalValueInput = ({
     });
   };
 
+  const renderSelectedText = (selected) => {
+    if (selected.length === 0) {
+      return <em>Select a value</em>;
+    }
+
+    return selected
+      .map((selectedId) => {
+        const step = validValues.find((step) => step.id === selectedId);
+        return step ? step.text.substring(0, 15) : "";
+      })
+      .join(", ");
+  };
+
   return (
     <FormControl fullWidth variant="outlined">
       <Select
@@ -51,12 +64,7 @@ const ValidConditionalValueInput = ({
         value={value}
         onChange={handleChange}
         input={<OutlinedInput />}
-        renderValue={(selected) => {
-          if (selected.length === 0) {
-            return <em>Select a value</em>;
-          }
-          return selected.join(", ");
-        }}
+        renderValue={renderSelectedText}
         inputProps={{ "aria-label": "Without label" }}
       >
         <MenuItem disabled value="">
@@ -64,8 +72,8 @@ const ValidConditionalValueInput = ({
         </MenuItem>
         <MenuItem value="none">None</MenuItem>
         {validValues.map((val) => (
-          <MenuItem key={val} value={val}>
-            {val}
+          <MenuItem key={val.id} value={val.id}>
+            {val.text.substring(0, 15)}
           </MenuItem>
         ))}
       </Select>
