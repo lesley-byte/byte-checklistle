@@ -38,11 +38,21 @@ const ChecklistForm = ({ checklistId, checklist }) => {
   } = useSteps(
     checklist.steps.map((step) => ({
       ...step,
-      conditionValue: step.conditionValue || [],
+      conditions: step.conditions || {
+        AND: [],
+        IF: [],
+        NAND: [],
+        NOR: [],
+        NOT: [],
+        OR: [],
+        XNOR: [],
+        XOR: [],
+      },
     })),
     setIsModalOpen,
     setModalText
   );
+  
   console.log(steps);
 
   const [updateChecklist] = useMutation(UPDATE_CHECKLIST);
@@ -67,14 +77,28 @@ const ChecklistForm = ({ checklistId, checklist }) => {
     }
 
     try {
+      const removeTypename = (input) => {
+        if (Array.isArray(input)) {
+          return input.map(item => removeTypename(item));
+        } else if (input !== null && typeof input === 'object') {
+          const newInput = {};
+          for (const key in input) {
+            if (key !== '__typename') {
+              newInput[key] = removeTypename(input[key]);
+            }
+          }
+          return newInput;
+        }
+        return input;
+      };
+      
       console.log("steps before cleaning:", steps);
-      const cleanedSteps = steps.map(
-        ({ __typename, tempId, _id, ...step }, index) => ({
-          ...step,
-          _id: _id,
-          position: index + 1,
-        })
-      );
+      const cleanedSteps = steps.map(({ __typename, tempId, _id, conditions, ...step }, index) => ({
+        ...step,
+        _id: _id,
+        position: index + 1,
+        conditions: removeTypename(conditions),
+      }));
 
       console.log("cleanedSteps:", cleanedSteps);
 

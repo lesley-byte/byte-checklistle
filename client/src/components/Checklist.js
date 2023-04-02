@@ -31,55 +31,69 @@ const Checklist = ({ title, steps }) => {
   };
 
   const shouldDisplayStep = (step) => {
-    if (!step.conditionType || step.conditionType === "") return true;
+    const { conditions } = step;
+    console.log("conditions:", conditions);
 
-    const stepConditionValues = step.conditionValue;
-    const conditionTypeUpper = step.conditionType.toUpperCase();
+    if (!conditions || Object.keys(conditions).length === 0) return true;
 
-    switch (conditionTypeUpper) {
-      case "AND":
-        return stepConditionValues.every(
-          (value) => checkboxStates[value] === true
-        );
+    const checkedConditions = Object.entries(conditions)
+      .filter(([conditionType, _]) => conditionType !== "__typename")
+      .map(([conditionType, conditionValues]) => {
+        // If the conditionValues array is empty, return true
+        if (conditionValues.length === 0) return true;
 
-      case "OR":
-        return stepConditionValues.some(
-          (value) => checkboxStates[value] === true
-        );
+        let conditionResult;
 
-      case "IF":
-        return checkboxStates[stepConditionValues[0]] === true;
+        switch (conditionType) {
+          case "AND":
+            conditionResult = conditionValues.every(
+              (value) => checkboxStates[value] === true
+            );
+            break;
+          case "OR":
+            conditionResult = conditionValues.some(
+              (value) => checkboxStates[value] === true
+            );
+            break;
+          case "IF":
+            conditionResult = checkboxStates[conditionValues[0]] === true;
+            break;
+          case "NOT":
+            conditionResult = checkboxStates[conditionValues[0]] !== true;
+            break;
+          case "NAND":
+            conditionResult = conditionValues.some(
+              (value) => checkboxStates[value] !== true
+            );
+            break;
+          case "NOR":
+            conditionResult = conditionValues.every(
+              (value) => checkboxStates[value] !== true
+            );
+            break;
+          case "XOR":
+            conditionResult =
+              conditionValues.filter((value) => checkboxStates[value] === true)
+                .length === 1;
+            break;
+          case "XNOR":
+            conditionResult =
+              conditionValues.filter((value) => checkboxStates[value] === true)
+                .length %
+                2 ===
+              0;
+            console.log("conditionResult:", conditionType, conditionResult); // Add this line
+            break;
+          default:
+            return true;
+        }
 
-      case "NOT":
-        return checkboxStates[stepConditionValues[0]] !== true;
+        console.log("conditionResult:", conditionType, conditionResult);
+        return conditionResult;
+      });
 
-      case "NAND":
-        return stepConditionValues.some(
-          (value) => checkboxStates[value] !== true
-        );
-
-      case "NOR":
-        // Check if none of the referenced steps are checked
-        return stepConditionValues.every(
-          (value) => checkboxStates[value] !== true
-        );
-      case "XOR":
-        return (
-          stepConditionValues.filter((value) => checkboxStates[value] === true)
-            .length === 1
-        );
-
-      case "XNOR":
-        return (
-          stepConditionValues.filter((value) => checkboxStates[value] === true)
-            .length %
-            2 ===
-          0
-        );
-
-      default:
-        return false;
-    }
+    console.log("checkedConditions:", checkedConditions);
+    return checkedConditions.every((condition) => condition === true);
   };
 
   const resetCheckboxes = () => {
@@ -108,7 +122,7 @@ const Checklist = ({ title, steps }) => {
           {steps ? (
             <div>
               {steps.map((step) => (
-                <div key={step.text}>
+                <div key={step._id || step.tempId}>
                   {shouldDisplayStep(step) && (
                     <FormControlLabel
                       control={

@@ -18,8 +18,16 @@ export const QUERY_CHECKLIST = gql`
         _id
         text
         position
-        conditionType
-        conditionValue
+        conditions {
+          AND
+          IF
+          NAND
+          NOR
+          NOT
+          OR
+          XNOR
+          XOR
+        }
       }
     }
   }

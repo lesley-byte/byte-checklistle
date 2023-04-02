@@ -33,6 +33,7 @@ export const ADD_CHECKLIST = gql`
   }
 `;
 
+// client-side mutations.js
 export const UPDATE_CHECKLIST = gql`
   mutation updateChecklist(
     $checklistId: ID!
@@ -51,8 +52,16 @@ export const UPDATE_CHECKLIST = gql`
         _id
         text
         position
-        conditionType
-        conditionValue
+        conditions {
+          AND
+          IF
+          NAND
+          NOR
+          NOT
+          OR
+          XNOR
+          XOR
+        }
       }
     }
   }

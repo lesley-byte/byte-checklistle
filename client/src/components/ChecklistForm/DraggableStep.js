@@ -3,8 +3,7 @@ import { Grid, Typography, Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useDrag, useDrop } from "react-dnd";
 
-import ValidConditionalValueInput from "./ValidConditionalValueInput";
-import ValidConditionTypeSelect from "./ValidConditionTypeSelect";
+import Conditions from "./Conditions";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -94,21 +93,22 @@ const DraggableStep = ({
               fullWidth
               size="small"
             />
-            <ValidConditionTypeSelect
-              id="condition-type"
+            <Conditions
               steps={steps}
               currentStepIndex={index}
-              value={step.conditionType || ""}
+              conditions={
+                step.conditions || {
+                  AND: [],
+                  IF: [],
+                  NAND: [],
+                  NOR: [],
+                  NOT: [],
+                  OR: [],
+                  XNOR: [],
+                  XOR: [],
+                }
+              }
               onChange={handleStepsChange}
-              size="small"
-            />
-            <ValidConditionalValueInput
-              id="condition-value"
-              steps={steps}
-              currentStepIndex={index}
-              value={step.conditionValue || []}
-              onChange={(e) => handleStepsChange(e, index)}
-              size="small"
             />
             <Box mt={2}>
               <Button onClick={() => deleteStep(index)} size="small">

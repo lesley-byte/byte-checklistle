@@ -24,6 +24,8 @@ const SingleChecklist = () => {
   });
 
   const checklist = data?.checklist || [];
+console.log("checklist:", checklist); // Add this line
+
   return (
     <Box sx={{ mt: 5 }}>
       <Container maxWidth="sm">

@@ -11,8 +11,18 @@ const typeDefs = gql`
     _id: ID!
     text: String
     position: Int
-    conditionType: String
-    conditionValue: [String]
+    conditions: ConditionsMap
+  }
+
+  type ConditionsMap {
+    AND: [String]
+    IF: [String]
+    NAND: [String]
+    NOR: [String]
+    NOT: [String]
+    OR: [String]
+    XNOR: [String]
+    XOR: [String]
   }
 
   type User {
@@ -51,8 +61,18 @@ const typeDefs = gql`
     _id: ID
     text: String
     position: Int
-    conditionType: String
-    conditionValue: [String]
+    conditions: ConditionsInput
+  }
+
+  input ConditionsInput {
+    AND: [String]
+    IF: [String]
+    NAND: [String]
+    NOR: [String]
+    NOT: [String]
+    OR: [String]
+    XNOR: [String]
+    XOR: [String]
   }
 `;
 

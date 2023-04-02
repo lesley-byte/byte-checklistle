@@ -15,13 +15,10 @@ const stepSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    conditionType: {
-      type: String,
-      required: false,
-    },
-    conditionValue: {
-      type: [String],
-      default: [],
+    conditions: { // Replace conditionType and conditionValue with conditions object
+      type: Map,
+      of: [String],
+      default: {},
     },
   },
   { _id: true } // Change _id: false to _id: true
