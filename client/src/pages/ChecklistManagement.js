@@ -50,3 +50,5 @@ const ChecklistManagement = () => {
 };
 
 export default ChecklistManagement;
+
+// Path: client\src\pages\ChecklistManagement.js
