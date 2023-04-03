@@ -2,7 +2,7 @@ const exampleChecklist = [
   {
     _id: 1,
     title:
-    "Example Airplane Malfunction Checklist (for example ONLY, not a real pilot's checklist)",
+      "Example Airplane Malfunction Checklist (for example ONLY, not a real pilot's checklist)",
     steps: [
       {
         text: "Determine the type of malfunction",
@@ -37,33 +37,8 @@ const exampleChecklist = [
         },
       },
       {
-        text: "Manifold problems",
-        position: 77,
-        _id: "0e3c996b-e583-49ea-85cf-20978481b139",
-        conditions: {
-          AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
-          NAND: [],
-          NOR: [
-            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
-            "927f97c3-a12f-4d12-b744-846981005a44",
-            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
-            "39c379a0-d74f-4e27-b930-18921f3e6f84",
-            "d9419531-477a-494d-aa38-f1fc30fd08e6",
-            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
-            "b491103a-6b44-4594-8f19-d14ccb4c22be",
-            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
-            "a755ab54-be8d-466d-be92-cfb23b07d660",
-          ],
-          NOT: [],
-          OR: [],
-          XNOR: [],
-          XOR: [],
-        },
-      },
-      {
         text: "Oil Temp problems",
-        position: 78,
+        position: 2,
         _id: "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
         conditions: {
           AND: [],
@@ -87,33 +62,8 @@ const exampleChecklist = [
         },
       },
       {
-        text: "Oil Pressure problems",
-        position: 79,
-        _id: "927f97c3-a12f-4d12-b744-846981005a44",
-        conditions: {
-          AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
-          NAND: [],
-          NOR: [
-            "39c379a0-d74f-4e27-b930-18921f3e6f84",
-            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
-            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
-            "0e3c996b-e583-49ea-85cf-20978481b139",
-            "d9419531-477a-494d-aa38-f1fc30fd08e6",
-            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
-            "b491103a-6b44-4594-8f19-d14ccb4c22be",
-            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
-            "a755ab54-be8d-466d-be92-cfb23b07d660",
-          ],
-          NOT: [],
-          OR: [],
-          XNOR: [],
-          XOR: [],
-        },
-      },
-      {
         text: "Cylinder head problems",
-        position: 80,
+        position: 3,
         _id: "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
         conditions: {
           AND: [],
@@ -137,8 +87,58 @@ const exampleChecklist = [
         },
       },
       {
+        text: "Oil Pressure problems",
+        position: 4,
+        _id: "927f97c3-a12f-4d12-b744-846981005a44",
+        conditions: {
+          AND: [],
+          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          NAND: [],
+          NOR: [
+            "39c379a0-d74f-4e27-b930-18921f3e6f84",
+            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
+            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
+            "0e3c996b-e583-49ea-85cf-20978481b139",
+            "d9419531-477a-494d-aa38-f1fc30fd08e6",
+            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
+            "b491103a-6b44-4594-8f19-d14ccb4c22be",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+            "a755ab54-be8d-466d-be92-cfb23b07d660",
+          ],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
+        text: "Manifold problems",
+        position: 5,
+        _id: "0e3c996b-e583-49ea-85cf-20978481b139",
+        conditions: {
+          AND: [],
+          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          NAND: [],
+          NOR: [
+            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
+            "927f97c3-a12f-4d12-b744-846981005a44",
+            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
+            "39c379a0-d74f-4e27-b930-18921f3e6f84",
+            "d9419531-477a-494d-aa38-f1fc30fd08e6",
+            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
+            "b491103a-6b44-4594-8f19-d14ccb4c22be",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+            "a755ab54-be8d-466d-be92-cfb23b07d660",
+          ],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
         text: "Rpm problems",
-        position: 81,
+        position: 6,
         _id: "39c379a0-d74f-4e27-b930-18921f3e6f84",
         conditions: {
           AND: [],
@@ -163,7 +163,7 @@ const exampleChecklist = [
       },
       {
         text: "Loss of rpm during cruise flight (non-altitude engines)",
-        position: 2,
+        position: 7,
         _id: "ee3f5f62-5088-4116-bc8e-ac72769171ca",
         conditions: {
           AND: [],
@@ -194,7 +194,7 @@ const exampleChecklist = [
       },
       {
         text: "Loss of manifold pressure during cruise flight.",
-        position: 3,
+        position: 8,
         _id: "0d7fb065-fa8b-44b1-a095-2cc863837787",
         conditions: {
           AND: [],
@@ -225,7 +225,7 @@ const exampleChecklist = [
       },
       {
         text: "Gain of manifold pressure during cruise flight.",
-        position: 4,
+        position: 9,
         _id: "47b5737b-9cd8-47ee-89b2-8bb4e91b77b0",
         conditions: {
           AND: [],
@@ -256,7 +256,7 @@ const exampleChecklist = [
       },
       {
         text: "High oil temperature.",
-        position: 5,
+        position: 10,
         _id: "3b6e90a5-6fad-4226-9791-0763e9d8e0e8",
         conditions: {
           AND: [],
@@ -287,7 +287,7 @@ const exampleChecklist = [
       },
       {
         text: "Low oil temperature",
-        position: 6,
+        position: 11,
         _id: "d126871d-351a-4d4e-b5c8-8d72dbbf0a54",
         conditions: {
           AND: [],
@@ -318,7 +318,7 @@ const exampleChecklist = [
       },
       {
         text: "High oil pressure.",
-        position: 7,
+        position: 12,
         _id: "47b1b307-3a7a-4b24-a8dd-b979d119b6cc",
         conditions: {
           AND: [],
@@ -349,7 +349,7 @@ const exampleChecklist = [
       },
       {
         text: "Low oil pressure.",
-        position: 8,
+        position: 13,
         _id: "a4e9fb10-e719-4d7b-8f95-c46cdff51e97",
         conditions: {
           AND: [],
@@ -380,7 +380,7 @@ const exampleChecklist = [
       },
       {
         text: "Fluctuating oil pressure",
-        position: 9,
+        position: 14,
         _id: "79f5e3b3-9f27-42cc-a62a-5c6abba3d996",
         conditions: {
           AND: [],
@@ -411,7 +411,7 @@ const exampleChecklist = [
       },
       {
         text: "High cylinder head temperature.",
-        position: 10,
+        position: 15,
         _id: "d05b599d-8368-4121-b065-e10f64158000",
         conditions: {
           AND: [],
@@ -442,7 +442,7 @@ const exampleChecklist = [
       },
       {
         text: "Low cylinder head temperature.",
-        position: 11,
+        position: 16,
         _id: "21ae58dc-d719-4d31-955d-c5c832e048e2",
         conditions: {
           AND: [],
@@ -473,7 +473,7 @@ const exampleChecklist = [
       },
       {
         text: "Ammeter indicating discharge.",
-        position: 12,
+        position: 17,
         _id: "d9419531-477a-494d-aa38-f1fc30fd08e6",
         conditions: {
           AND: [],
@@ -504,7 +504,7 @@ const exampleChecklist = [
       },
       {
         text: "Load meter indicating zero.",
-        position: 13,
+        position: 18,
         _id: "cf37bcc0-9c93-497f-bff9-7840be957bb4",
         conditions: {
           AND: [],
@@ -535,7 +535,7 @@ const exampleChecklist = [
       },
       {
         text: "Surging rpm and overspeeding.",
-        position: 14,
+        position: 19,
         _id: "e62f2119-40b8-4ba4-91f3-0e23e80be9e6",
         conditions: {
           AND: [],
@@ -566,7 +566,7 @@ const exampleChecklist = [
       },
       {
         text: "Loss of airspeed in cruise flight with manifold pressure and rpm constant.",
-        position: 15,
+        position: 20,
         _id: "b491103a-6b44-4594-8f19-d14ccb4c22be",
         conditions: {
           AND: [],
@@ -597,7 +597,7 @@ const exampleChecklist = [
       },
       {
         text: "Rough running engine.",
-        position: 16,
+        position: 21,
         _id: "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
         conditions: {
           AND: [],
@@ -628,7 +628,7 @@ const exampleChecklist = [
       },
       {
         text: "Loss of fuel pressure.",
-        position: 17,
+        position: 22,
         _id: "a755ab54-be8d-466d-be92-cfb23b07d660",
         conditions: {
           AND: [],
@@ -659,7 +659,7 @@ const exampleChecklist = [
       },
       {
         text: "Carburetor or induction icing or air filter clogging.",
-        position: 18,
+        position: 23,
         _id: "2dd7e188-9778-4b57-b328-ac1ea57de852",
         conditions: {
           AND: [],
@@ -677,7 +677,7 @@ const exampleChecklist = [
       },
       {
         text: "Turbocharger failure",
-        position: 19,
+        position: 24,
         _id: "2d5517fa-0e46-4387-8556-76db1220b720",
         conditions: {
           AND: [],
@@ -692,7 +692,7 @@ const exampleChecklist = [
       },
       {
         text: "Throttle has opened, propeller controll has decreased rpm, or improper method of power reduction",
-        position: 20,
+        position: 25,
         _id: "95e5a102-73cf-4a9f-a491-4dfa8515bc2a",
         conditions: {
           AND: [],
@@ -707,7 +707,7 @@ const exampleChecklist = [
       },
       {
         text: "Oil congealed in cooler.",
-        position: 21,
+        position: 26,
         _id: "03af553f-beff-4325-8cd5-15a936ba2db3",
         conditions: {
           AND: [],
@@ -722,7 +722,7 @@ const exampleChecklist = [
       },
       {
         text: "Inadequate engine cooling",
-        position: 22,
+        position: 27,
         _id: "e64804cd-db28-4bb4-b7d7-f1bac6126ece",
         conditions: {
           AND: [],
@@ -737,7 +737,7 @@ const exampleChecklist = [
       },
       {
         text: "Detonation or preignition",
-        position: 23,
+        position: 28,
         _id: "a3515f16-9eee-42ab-a700-787647aaae1e",
         conditions: {
           AND: [],
@@ -756,7 +756,7 @@ const exampleChecklist = [
       },
       {
         text: "Forthcoming internal engine failure.",
-        position: 24,
+        position: 29,
         _id: "6b21d398-4f89-4fb0-b659-ba66fcc2ee03",
         conditions: {
           AND: [],
@@ -771,7 +771,7 @@ const exampleChecklist = [
       },
       {
         text: "Defective thermostatic oil cooler control",
-        position: 25,
+        position: 30,
         _id: "39e7a2b8-4748-44ba-8bbc-d1737419f25e",
         conditions: {
           AND: [],
@@ -786,7 +786,7 @@ const exampleChecklist = [
       },
       {
         text: "Engine not warmed up to operating temperature.",
-        position: 26,
+        position: 31,
         _id: "8098aa70-5806-4b16-bb50-14608d03c9c2",
         conditions: {
           AND: [],
@@ -801,7 +801,7 @@ const exampleChecklist = [
       },
       {
         text: "Cold oil",
-        position: 27,
+        position: 32,
         _id: "576c267f-c199-4288-8049-2df6e5da67de",
         conditions: {
           AND: [],
@@ -816,7 +816,7 @@ const exampleChecklist = [
       },
       {
         text: "Possible internal plugging",
-        position: 28,
+        position: 33,
         _id: "337e0116-5458-4202-8fc0-fc3c944c76f5",
         conditions: {
           AND: [],
@@ -831,7 +831,7 @@ const exampleChecklist = [
       },
       {
         text: "Broken pressure relief valve.",
-        position: 29,
+        position: 34,
         _id: "d616b914-d628-4236-bf6a-7543eaf00afc",
         conditions: {
           AND: [],
@@ -846,7 +846,7 @@ const exampleChecklist = [
       },
       {
         text: "Insufficient Oil",
-        position: 30,
+        position: 35,
         _id: "e9a04091-3d09-4876-b6dc-9256e135f584",
         conditions: {
           AND: [],
@@ -861,7 +861,7 @@ const exampleChecklist = [
       },
       {
         text: "Burned out bearings. ",
-        position: 31,
+        position: 36,
         _id: "3839b5a7-1cb9-4beb-8bc9-73a9856e82d4",
         conditions: {
           AND: [],
@@ -876,7 +876,7 @@ const exampleChecklist = [
       },
       {
         text: "Low oil supply, loose oil lines, defective pressure relief valve.",
-        position: 32,
+        position: 37,
         _id: "1240ce20-c762-4cca-9d91-6d260c1ff30e",
         conditions: {
           AND: [],
@@ -891,7 +891,7 @@ const exampleChecklist = [
       },
       {
         text: "Improper cowl flap adjustment.",
-        position: 33,
+        position: 38,
         _id: "fbdb90f6-d1fd-4c12-9fb7-69c236b24ca4",
         conditions: {
           AND: [],
@@ -906,7 +906,7 @@ const exampleChecklist = [
       },
       {
         text: "Insufficient airspeed for cooling",
-        position: 34,
+        position: 39,
         _id: "3b70d778-ac12-4747-a634-dba2b7a8f787",
         conditions: {
           AND: [],
@@ -921,7 +921,7 @@ const exampleChecklist = [
       },
       {
         text: "Improper mixture adjustment",
-        position: 35,
+        position: 40,
         _id: "a0c7a0d4-8ffc-48f1-a133-0156b05ecbdd",
         conditions: {
           AND: [],
@@ -936,7 +936,7 @@ const exampleChecklist = [
       },
       {
         text: "Excessive cowl flap opening.",
-        position: 36,
+        position: 41,
         _id: "0c355428-aa34-4e8a-8015-f0317e7394a4",
         conditions: {
           AND: [],
@@ -951,7 +951,7 @@ const exampleChecklist = [
       },
       {
         text: "Excessively rich mixture",
-        position: 37,
+        position: 42,
         _id: "b7af3781-7c22-43a5-bf1c-a9fc3e902b46",
         conditions: {
           AND: [],
@@ -966,7 +966,7 @@ const exampleChecklist = [
       },
       {
         text: "Extended glides without clearing engine",
-        position: 38,
+        position: 43,
         _id: "4f145efc-162b-4cce-b477-8266dc5ffd82",
         conditions: {
           AND: [],
@@ -981,7 +981,7 @@ const exampleChecklist = [
       },
       {
         text: "Alternator or generator failure.",
-        position: 39,
+        position: 44,
         _id: "ed639316-409a-4f11-860c-97f7eb848199",
         conditions: {
           AND: [],
@@ -999,7 +999,7 @@ const exampleChecklist = [
       },
       {
         text: "Defective propeller",
-        position: 40,
+        position: 45,
         _id: "dd1414c9-1635-43f6-a4bf-0fb8d8bb88e7",
         conditions: {
           AND: [],
@@ -1014,7 +1014,7 @@ const exampleChecklist = [
       },
       {
         text: "Defective engine",
-        position: 41,
+        position: 46,
         _id: "d8c19e6a-28e3-4655-80e1-01fbcbed21f4",
         conditions: {
           AND: [],
@@ -1029,7 +1029,7 @@ const exampleChecklist = [
       },
       {
         text: "Defective propeller governor.",
-        position: 42,
+        position: 47,
         _id: "f2eb745e-64b5-43e3-9bbb-8d9ae30d8b50",
         conditions: {
           AND: [],
@@ -1044,7 +1044,7 @@ const exampleChecklist = [
       },
       {
         text: "Defective tachometer",
-        position: 43,
+        position: 48,
         _id: "abc99cd4-7b3c-4fb1-a5a0-1c0b5ed4948e",
         conditions: {
           AND: [],
@@ -1059,7 +1059,7 @@ const exampleChecklist = [
       },
       {
         text: "Improper mixture setting",
-        position: 44,
+        position: 49,
         _id: "b368aba8-f66e-4209-8125-faf96bdac7bf",
         conditions: {
           AND: [],
@@ -1074,7 +1074,7 @@ const exampleChecklist = [
       },
       {
         text: "Possible loss of one or more cylinders.",
-        position: 45,
+        position: 50,
         _id: "47fa9229-5aee-4483-b811-f04cebfe30f5",
         conditions: {
           AND: [],
@@ -1089,7 +1089,7 @@ const exampleChecklist = [
       },
       {
         text: "Improper mixture control setting",
-        position: 46,
+        position: 51,
         _id: "c3c47ec6-dfa5-4363-8cce-c7becd6abfd2",
         conditions: {
           AND: [],
@@ -1104,7 +1104,7 @@ const exampleChecklist = [
       },
       {
         text: "Defective ignition or valves",
-        position: 47,
+        position: 52,
         _id: "9ad5fcec-a5c8-4cba-aab4-acb0b1baa1ed",
         conditions: {
           AND: [],
@@ -1119,7 +1119,7 @@ const exampleChecklist = [
       },
       {
         text: "Induction air leak",
-        position: 48,
+        position: 53,
         _id: "4be77963-4e2a-483f-9030-5c9de9c31bd9",
         conditions: {
           AND: [],
@@ -1134,7 +1134,7 @@ const exampleChecklist = [
       },
       {
         text: "Plugged fuel nozzle(fuel injection)",
-        position: 49,
+        position: 54,
         _id: "eb8fd9b9-cb5e-43ca-a46b-b20dfe11b507",
         conditions: {
           AND: [],
@@ -1149,7 +1149,7 @@ const exampleChecklist = [
       },
       {
         text: "Excessive fuel pressure or fuel flow.",
-        position: 50,
+        position: 55,
         _id: "d0ab361c-fafa-4691-917c-ed46593be0ea",
         conditions: {
           AND: [],
@@ -1164,7 +1164,7 @@ const exampleChecklist = [
       },
       {
         text: "Engine-driven pump failure No fuel.",
-        position: 51,
+        position: 56,
         _id: "f355a0b7-9085-4a52-94de-97b27cd105a7",
         conditions: {
           AND: [],
@@ -1179,7 +1179,7 @@ const exampleChecklist = [
       },
       {
         text: "Apply carburetor heat, If dirty filter is suspected and non-filtered air is available, switch selector to unfiltered position",
-        position: 52,
+        position: 57,
         _id: "a82ce982-1c66-49fc-8457-7b1fe3f2f0c5",
         conditions: {
           AND: [],
@@ -1194,7 +1194,7 @@ const exampleChecklist = [
       },
       {
         text: "Possible exhaust leak. Shut down engine or use lowest practicable power setting. Land as soon as possible.",
-        position: 53,
+        position: 58,
         _id: "c6244cb6-7a18-4b63-b761-07f5098941e1",
         conditions: {
           AND: [],
@@ -1209,7 +1209,7 @@ const exampleChecklist = [
       },
       {
         text: "Readjust throttle and tighten friction lock. Reduce manifold pressure prior to reducing rpm.",
-        position: 54,
+        position: 59,
         _id: "06ef5ab5-6f1b-4904-92fa-70bd7ea2203a",
         conditions: {
           AND: [],
@@ -1224,7 +1224,7 @@ const exampleChecklist = [
       },
       {
         text: "Reduce power. Land. Preheat engine.",
-        position: 55,
+        position: 60,
         _id: "ba8197d2-9128-4de6-92ea-4684298f43ff",
         conditions: {
           AND: [],
@@ -1239,7 +1239,7 @@ const exampleChecklist = [
       },
       {
         text: "Reduce power. Increase airspeed.",
-        position: 56,
+        position: 61,
         _id: "8b5cdd34-a52a-4130-b5eb-3d501a5f03c0",
         conditions: {
           AND: [],
@@ -1254,7 +1254,7 @@ const exampleChecklist = [
       },
       {
         text: "Observe cylinder head temperatures for high reading. Reduce manifold pressure. Enrich mixture.",
-        position: 57,
+        position: 62,
         _id: "4e8f3975-64d1-49f2-849b-f9fdb7517002",
         conditions: {
           AND: [
@@ -1272,7 +1272,7 @@ const exampleChecklist = [
       },
       {
         text: "Land as soon as possible or feather propeller and stop engine.",
-        position: 58,
+        position: 63,
         _id: "b088de16-2fdf-424a-bf91-2f1a58f961bf",
         conditions: {
           AND: [],
@@ -1293,7 +1293,7 @@ const exampleChecklist = [
       },
       {
         text: "Land as soon as possible. Consult maintenance personnel.",
-        position: 59,
+        position: 64,
         _id: "af678df5-c579-401d-b8ae-faf0161c19bb",
         conditions: {
           AND: [],
@@ -1308,7 +1308,7 @@ const exampleChecklist = [
       },
       {
         text: "Warm engine in prescribed manner.",
-        position: 60,
+        position: 65,
         _id: "b2195751-a60d-4c21-b7c4-e8fb4a766205",
         conditions: {
           AND: [],
@@ -1326,7 +1326,7 @@ const exampleChecklist = [
       },
       {
         text: "Adjust cowl flaps.",
-        position: 61,
+        position: 66,
         _id: "60ffee74-81df-4cff-9064-6ad34019eb51",
         conditions: {
           AND: [],
@@ -1344,7 +1344,7 @@ const exampleChecklist = [
       },
       {
         text: "Adjust mixture control.",
-        position: 62,
+        position: 67,
         _id: "84c1a7a3-eff5-481c-abe9-c9300d35fc3d",
         conditions: {
           AND: [],
@@ -1359,7 +1359,7 @@ const exampleChecklist = [
       },
       {
         text: "Clear engine long enough to keep temps at minimum range",
-        position: 63,
+        position: 68,
         _id: "b1052571-aed2-4d64-a60c-63dcf5fa4071",
         conditions: {
           AND: [],
@@ -1374,7 +1374,7 @@ const exampleChecklist = [
       },
       {
         text: "Shed unnecessary electrical load. Land as soon as practicable.",
-        position: 64,
+        position: 69,
         _id: "867e4635-5d6f-445c-9920-fadeb05af272",
         conditions: {
           AND: [],
@@ -1389,7 +1389,7 @@ const exampleChecklist = [
       },
       {
         text: "Adjust propeller rpm",
-        position: 65,
+        position: 70,
         _id: "523e15aa-ffad-4fb4-a9ac-54e752e26469",
         conditions: {
           AND: [],
@@ -1404,7 +1404,7 @@ const exampleChecklist = [
       },
       {
         text: "Consult maintenance",
-        position: 66,
+        position: 71,
         _id: "65d8c8f2-295a-41f2-8004-0e7afb71e77f",
         conditions: {
           AND: [],
@@ -1422,7 +1422,7 @@ const exampleChecklist = [
       },
       {
         text: "Adjust propeller control. Attempt to restore normal operation",
-        position: 67,
+        position: 72,
         _id: "2cbb99a4-2c58-4618-ac75-bf9b4fef13a9",
         conditions: {
           AND: [],
@@ -1437,7 +1437,7 @@ const exampleChecklist = [
       },
       {
         text: "Readjust mixture for smmooth operation.",
-        position: 68,
+        position: 73,
         _id: "88e01bbe-067d-414e-bfe4-ae2be6a50753",
         conditions: {
           AND: [],
@@ -1452,7 +1452,7 @@ const exampleChecklist = [
       },
       {
         text: "Land as soon as possible",
-        position: 69,
+        position: 74,
         _id: "1110877b-9d85-43eb-adec-b1e389ca718b",
         conditions: {
           AND: [],
@@ -1467,7 +1467,7 @@ const exampleChecklist = [
       },
       {
         text: "Adjust mixture for smooth operation",
-        position: 70,
+        position: 75,
         _id: "24e9e476-fead-4125-b236-966afea575bf",
         conditions: {
           AND: [],
@@ -1482,7 +1482,7 @@ const exampleChecklist = [
       },
       {
         text: "Consult maintenance personnel",
-        position: 71,
+        position: 76,
         _id: "eb3ea33a-cdba-4eaf-aa7a-be786a6d4d1a",
         conditions: {
           AND: [],
@@ -1497,7 +1497,7 @@ const exampleChecklist = [
       },
       {
         text: "Reduce power, enrich mixture, open cowl flaps to reduce cylinder head temp. Land as soon as possible.",
-        position: 72,
+        position: 77,
         _id: "95762d96-5c95-4377-a546-b422618bf9ae",
         conditions: {
           AND: [
@@ -1515,7 +1515,7 @@ const exampleChecklist = [
       },
       {
         text: "Reduce power Consult maintenance.",
-        position: 73,
+        position: 78,
         _id: "f23ce2db-830f-4268-84c2-2f4639613380",
         conditions: {
           AND: [],
@@ -1533,7 +1533,7 @@ const exampleChecklist = [
       },
       {
         text: "Lean mixture control",
-        position: 74,
+        position: 79,
         _id: "d11fe7fb-a352-46b8-84ad-0a701ab36e74",
         conditions: {
           AND: [],
@@ -1548,7 +1548,7 @@ const exampleChecklist = [
       },
       {
         text: "Turn on boost pumps. Switch tanks, turn on fuel.",
-        position: 75,
+        position: 80,
         _id: "039d4d89-767f-40ba-ae63-e916c0cfcf34",
         conditions: {
           AND: [],
@@ -1563,7 +1563,7 @@ const exampleChecklist = [
       },
       {
         text: "Reduce power. enrich mixture, increase cooling airflow",
-        position: 76,
+        position: 81,
         _id: "03bb2030-d813-4691-8c4d-73dc8836e693",
         conditions: {
           AND: [
