@@ -47,7 +47,7 @@ const PlaygroundConditions = ({
         >
           {otherSteps.map((otherStep) => (
             <MenuItem key={otherStep._id} value={otherStep._id}>
-              {`Step ${otherStep.position}`}
+              {`Step ${otherStep.text}`}
             </MenuItem>
           ))}
         </Select>
