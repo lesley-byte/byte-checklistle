@@ -21,6 +21,11 @@ const Help = () => {
                   <a href="#logging-in">Logging In</a>
                 </li>
                 <li>
+                  <a href="#using-the-checklist-editor">
+                    Using the Checklist Editor
+                  </a>
+                </li>
+                <li>
                   <a href="#managing-checklists">Managing Checklists</a>
                   <ul>
                     <li>
@@ -32,14 +37,14 @@ const Help = () => {
                       <a href="#editing-a-checklist">Editing a Checklist</a>
                     </li>
                     <li>
+                      <a href="#updating-checklist-steps">
+                        Updating Checklist Steps
+                      </a>
+                    </li>
+                    <li>
                       <a href="#deleting-a-checklist">Deleting a Checklist</a>
                     </li>
                   </ul>
-                </li>
-                <li>
-                  <a href="#using-the-checklist-editor">
-                    Using the Checklist Editor
-                  </a>
                 </li>
                 <li>
                   <a href="#conditional-logic">Conditional Logic</a>
@@ -96,6 +101,30 @@ const Help = () => {
                 <li>Click the "Log In" button to access your account.</li>
               </ol>
 
+              <h2 id="using-the-checklist-editor">
+                Using the Checklist Editor
+              </h2>
+
+              <p>
+                The Checklist Editor allows you to add, edit, and delete steps
+                within your checklists. You can also specify conditions for each
+                step based on the state of other steps in the list.
+              </p>
+
+              <ol>
+                <li>Click the "ADD STEP" button to add a new step.</li>
+                <li>Enter a description for the step in the text field.</li>
+                <li>
+                  Choose a condition type (e.g., AND, OR, IF, NOT, NOR, NAND,
+                  XOR, XNOR) from the dropdown menu.
+                </li>
+                <li>
+                  Specify the condition value by selecting the corresponding
+                  steps.
+                </li>
+                <li>Click the "Save" button to save your changes.</li>
+              </ol>
+
               <h2 id="managing-checklists">Managing Checklists</h2>
 
               <h3 id="creating-a-new-checklist">Creating a New Checklist</h3>
@@ -123,6 +152,23 @@ const Help = () => {
                 <li>Click the "Save Changes" button to save your changes.</li>
               </ol>
 
+              <h3 id="updating-checklist-steps">Updating Checklist Steps</h3>
+
+              <p>
+                To update the status of a checklist step, simply click on the
+                step. Clicking on the step will toggle its status between
+                checked and unchecked. This will also automatically update any
+                conditions that depend on the state of the updated step.
+              </p>
+
+              <p>
+                You can rearrange the order of the steps in a checklist by using
+                the drag and drop functionality. To do this, click and hold on
+                the step you want to move, then drag it to the desired position
+                within the checklist, either up or down. Release the click to
+                place the step in its new position.
+              </p>
+
               <h3 id="deleting-a-checklist">Deleting a Checklist</h3>
 
               <ol>
@@ -136,101 +182,31 @@ const Help = () => {
                 </li>
               </ol>
 
-              <h2 id="using-the-checklist-editor">
-                Using the Checklist Editor
-              </h2>
-
-              <p>
-                The Checklist Editor allows you to add, edit, and delete steps
-                within your checklists. You can also specify conditions for each
-                step based on the state of other steps in the list.
-              </p>
-
-              <ol>
-                <li>Click the "+" button to add a new step.</li>
-                <li>Enter a description for the step in the text field.</li>
-                <li>
-                  Choose a condition type (e.g., AND, OR, IF, NOT, NOR, NAND,
-                  XOR, XNOR) from the dropdown menu.
-                </li>
-                <li>
-                  Specify the condition value by selecting the corresponding
-                  steps.
-                </li>
-                <li>Click the "Save" button to save your changes.</li>
-              </ol>
-
               <h2 id="conditional-logic">Conditional Logic</h2>
 
               <p>
-                Checklistle supports multiple types of conditional logic to
-                create complex workflows:
+                Conditional logic allows you to create dynamic checklists that
+                adapt to the completion status of the steps within the list. By
+                specifying conditions for each step, you can ensure that steps
+                are only displayed or enabled when certain criteria are met.
               </p>
 
-              <ul>
-                <li>
-                  <strong>AND</strong>: The step is displayed if all specified
-                  steps are checked.
-                </li>
-                <li>
-                  <strong>OR</strong>: The step is displayed if any of the
-                  specified steps are checked.
-                </li>
-                <li>
-                  <strong>IF</strong>: The step is displayed if the first
-                  specified step is checked.
-                </li>
-                <li>
-                  <strong>NOT</strong>: The step is displayed if the first
-                  specified step is not checked.
-                </li>
-                <li>
-                  <strong>NOR</strong>: The step is displayed if none of the
-                  specified steps are checked.
-                </li>
-                <li>
-                  <strong>NAND</strong>: The step is displayed if not all
-                  specified steps are checked.
-                </li>
-                <li>
-                  <strong>XOR</strong>: The step is displayed if exactly one of
-                  the specified steps are checked.
-                </li>
-                <li>
-                  <strong>XNOR</strong>: The step is displayed if an even number
-                  of the specified steps are checked.
-                </li>
-              </ul>
+              <p>
+                To learn more about the different types of conditions available
+                and how to use them, please refer to the "Using the Checklist
+                Editor" section above.
+              </p>
 
               <h2 id="troubleshooting-and-support">
                 Troubleshooting and Support
               </h2>
 
               <p>
-                If you encounter any issues while using Checklistle or have any
-                questions, please refer to the following resources for
-                assistance:
+                If you encounter any issues while using Checklistle, please
+                consult the FAQ section for guidance. If you cannot find a
+                solution in the FAQ, feel free to contact our support team by
+                clicking the "Contact Us" link at the bottom of the page.
               </p>
-
-              <ul>
-                <li>
-                  <strong>FAQs</strong>: Browse our Frequently Asked Questions
-                  to find answers to common questions.
-                </li>
-                <li>
-                  <strong>User Guide</strong>: Refer to the Checklistle User
-                  Guide for detailed information about features and
-                  functionality.
-                </li>
-                <li>
-                  <strong>Contact Us</strong>: If you still need help, please
-                  contact our support team by clicking the "Contact Us" link in
-                  the application footer or by sending an email to
-                  support@checklistle.com.
-                </li>
-              </ul>
-
-              <p>Thank you for using Checklistle, and happy task managing!</p>
             </Paper>
           </Grid>
         </Grid>

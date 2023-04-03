@@ -6,7 +6,6 @@ Byte-Checklistle is a powerful web application designed to streamline task manag
 
 - [Introduction](#introduction)
 - [Technologies](#technologies)
-- [System Requirements](#system-requirements)
 - [Installation & Setup](#installation--setup)
 - [Application Architecture](#application-architecture)
 - [Database Design](#database-design)
@@ -37,23 +36,11 @@ Whether you're a project manager overseeing multiple tasks, a quality control in
 - Express: Web application framework for Node.js
 - React: JavaScript library for building user interfaces
 - Node.js: JavaScript runtime environment
-- [List additional libraries and tools used on the client-side, e.g., Redux, Axios]
-
-## System Requirements
-
-- Software requirements:
-  - Node.js (version X.X.X or higher)
-  - npm (version X.X.X or higher)
-  - MongoDB (version X.X.X or higher)
-- Hardware requirements:
-  - [Specify memory, CPU, and storage requirements, if applicable]
 
 ## Installation & Setup
 
 1. Clone the repository
 2. Install server-side dependencies by running `cd server && npm install`
-3. [Add instructions for setting up the client-side dependencies]
-4. [Configuration settings, e.g., environment variables, database connection]
 
 ## Application Architecture
 
@@ -108,8 +95,9 @@ Each collection has the following fields:
 - `Step`
   - `text`: String
   - `position`: Int
-  - `conditionType`: String
-  - `conditionValue`: [String]
+  - `conditions`: Map
+    - `type`: String
+    - `value`: String
 - `User`
   - `_id`: ID
   - `username`: String
@@ -172,7 +160,7 @@ The client-side application uses the following dependencies:
 }
 ```
 
-## Frontend Components
+## Notable Frontend Components
 
 ### Pages
 
@@ -189,7 +177,7 @@ The client-side application uses the following dependencies:
 
 2. `ListOfLists.js`: The ListOfLists component displays a list of checklists that belong to the current user. It fetches the checklists using the `QUERY_CHECKLISTS` GraphQL query and maps through the checklists to display each one as a list item with a link to view that specific checklist. The component also provides "Edit" and "Delete" buttons for each checklist, allowing the user to edit or delete them.
 
-3. `ChecklistForm.js`: The ChecklistForm component is responsible for rendering and handling the form for creating or editing checklists. It allows users to update the checklist title, add, edit, or delete steps, and change the conditions (i.e., IF, NOT, XOR, XNOR) associated with each step. The component validates the input provided by users and ensures that the proper values are used for the condition type. Once the form is submitted, it updates the checklist using the `UPDATE_CHECKLIST` GraphQL mutation.
+3. `/ChecklistForm`: The ChecklistForm component is responsible for rendering and handling the form for creating or editing checklists. It allows users to update the checklist title, add, edit, or delete steps, and change the conditions (i.e., IF, NOT, XOR, XNOR) associated with each step. The component validates the input provided by users and ensures that the proper values are used for the condition type. Once the form is submitted, it updates the checklist using the `UPDATE_CHECKLIST` GraphQL mutation.
 
 4. `Checklist.js`: The Checklist component is a reusable component that displays a checklist with a given title and steps. Each step has a position, text, and conditional properties (conditionType and conditionValue) that determine if the step should be displayed based on the state of other steps in the list. The component supports multiple conditional logic types (AND, OR, IF, NOT, NOR, NAND, XOR, XNOR) to handle various scenarios. The component also includes a reset button to uncheck all steps and a custom styling for checkboxes using the Material-UI library.
 
