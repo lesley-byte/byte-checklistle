@@ -22,7 +22,8 @@ const Editor = () => {
   }, [queryData]);
 
   if (!checklist) {
-    return <Typography variant="h6">Loading...</Typography>;
+    console.log("loading...");
+    return <Typography variant="h6">loading ...</Typography>;
   }
   console.log("checklist value in Editor.js:", checklist);
   return (

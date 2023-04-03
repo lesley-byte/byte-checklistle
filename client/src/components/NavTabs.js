@@ -9,17 +9,17 @@ const NavTabs = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Tabs value={false} indicatorColor="primary" textColor="primary" centered>
-      {loggedIn && (
-        <Tab
-          label="Home"
-          component={Link}
-          to="/"
-          sx={{ textDecoration: "none" }}
-        />
-      )}
         {loggedIn && (
           <Tab
-            label="ChecklistManagement"
+            label="Home"
+            component={Link}
+            to="/"
+            sx={{ textDecoration: "none" }}
+          />
+        )}
+        {loggedIn && (
+          <Tab
+            label="Checklist Management"
             component={Link}
             to="/checklistManagement"
             sx={{ textDecoration: "none" }}
@@ -30,6 +30,14 @@ const NavTabs = () => {
             label="Help"
             component={Link}
             to="/help"
+            sx={{ textDecoration: "none" }}
+          />
+        )}
+        {!loggedIn && (
+          <Tab
+            label="Test Playground"
+            component={Link}
+            to="/playground/checklistManagement"
             sx={{ textDecoration: "none" }}
           />
         )}

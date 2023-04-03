@@ -19,6 +19,10 @@ import SingleChecklist from "./pages/SingleChecklist";
 import { ChecklistProvider } from "./contexts/ChecklistContext";
 import Layout from "./components/Layout";
 import Help from "./pages/Help";
+import TestPlayground from "./components/TestPlayground";
+import TestPlaygroundManagement from "./pages/TestPlaygroundManagement";
+import PlaygroundEditor from "./pages/PlaygroundEditor";
+import PlaygroundSingleChecklist from "./pages/PlaygroundSingleChecklist";
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   const token = authService.getToken();
@@ -58,9 +62,31 @@ function App() {
                 element={<SingleChecklist />}
               />
               <Route path="/help" element={<Help />} />
+              <Route path="/test" element={<TestPlayground />} />
+              // Add new routes for Test Playground
+              <Route
+                path="/playground/checklistManagement"
+                element={<TestPlaygroundManagement />}
+              />
+              <Route
+                path="/playground/editor/:checklistId"
+                element={<PlaygroundEditor />}
+              />
+              <Route
+                path="/playground/checklistManagement"
+                element={<TestPlaygroundManagement />}
+              />
+              <Route
+                path="/playground/editor/:checklistId"
+                element={<PlaygroundEditor />}
+              />
+              <Route
+                path="/playground/checklist/:checklistId"
+                element={<PlaygroundSingleChecklist />}
+              />
+              // Existing routes continue
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-
               <Route path="/logout" element={<Landing />} />
               <Route path="*" element={<Landing />} />
             </Routes>
