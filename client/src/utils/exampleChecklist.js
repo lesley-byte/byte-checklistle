@@ -42,7 +42,7 @@ const exampleChecklist = [
         _id: "ee3f5f62-5088-4116-bc8e-ac72769171ca",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["39c379a0-d74f-4e27-b930-18921f3e6f84"],
           NAND: [],
           NOR: [
             "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
@@ -73,7 +73,7 @@ const exampleChecklist = [
         _id: "0d7fb065-fa8b-44b1-a095-2cc863837787",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["0e3c996b-e583-49ea-85cf-20978481b139"],
           NAND: [],
           NOR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
@@ -104,7 +104,7 @@ const exampleChecklist = [
         _id: "47b5737b-9cd8-47ee-89b2-8bb4e91b77b0",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["0e3c996b-e583-49ea-85cf-20978481b139"],
           NAND: [],
           NOR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
@@ -135,7 +135,7 @@ const exampleChecklist = [
         _id: "3b6e90a5-6fad-4226-9791-0763e9d8e0e8",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["53ef7229-f42b-4c7d-bf0c-966f512b96f8"],
           NAND: [],
           NOR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
@@ -166,7 +166,7 @@ const exampleChecklist = [
         _id: "d126871d-351a-4d4e-b5c8-8d72dbbf0a54",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["53ef7229-f42b-4c7d-bf0c-966f512b96f8"],
           NAND: [],
           NOR: [
             "0d7fb065-fa8b-44b1-a095-2cc863837787",
@@ -197,7 +197,7 @@ const exampleChecklist = [
         _id: "47b1b307-3a7a-4b24-a8dd-b979d119b6cc",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["927f97c3-a12f-4d12-b744-846981005a44"],
           NAND: [],
           NOR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
@@ -228,7 +228,7 @@ const exampleChecklist = [
         _id: "a4e9fb10-e719-4d7b-8f95-c46cdff51e97",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["927f97c3-a12f-4d12-b744-846981005a44"],
           NAND: [],
           NOR: [
             "0d7fb065-fa8b-44b1-a095-2cc863837787",
@@ -259,7 +259,7 @@ const exampleChecklist = [
         _id: "79f5e3b3-9f27-42cc-a62a-5c6abba3d996",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["927f97c3-a12f-4d12-b744-846981005a44"],
           NAND: [],
           NOR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
@@ -290,7 +290,7 @@ const exampleChecklist = [
         _id: "d05b599d-8368-4121-b065-e10f64158000",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["78c5130e-7780-4ebb-a4d9-ba923dc0d0b5"],
           NAND: [],
           NOR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
@@ -321,7 +321,7 @@ const exampleChecklist = [
         _id: "21ae58dc-d719-4d31-955d-c5c832e048e2",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["78c5130e-7780-4ebb-a4d9-ba923dc0d0b5"],
           NAND: [],
           NOR: [
             "0d7fb065-fa8b-44b1-a095-2cc863837787",
@@ -414,7 +414,7 @@ const exampleChecklist = [
         _id: "e62f2119-40b8-4ba4-91f3-0e23e80be9e6",
         conditions: {
           AND: [],
-          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          IF: ["39c379a0-d74f-4e27-b930-18921f3e6f84"],
           NAND: [],
           NOR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
@@ -541,7 +541,7 @@ const exampleChecklist = [
           IF: [],
           NAND: [],
           NOR: [],
-          NOT: [],
+          NOT: ["2d5517fa-0e46-4387-8556-76db1220b720"],
           OR: [
             "ee3f5f62-5088-4116-bc8e-ac72769171ca",
             "0d7fb065-fa8b-44b1-a095-2cc863837787",
@@ -559,7 +559,7 @@ const exampleChecklist = [
           IF: ["0d7fb065-fa8b-44b1-a095-2cc863837787"],
           NAND: [],
           NOR: [],
-          NOT: [],
+          NOT: ["2dd7e188-9778-4b57-b328-ac1ea57de852"],
           OR: [],
           XNOR: [],
           XOR: [],
@@ -1132,8 +1132,11 @@ const exampleChecklist = [
         position: 57,
         _id: "4e8f3975-64d1-49f2-849b-f9fdb7517002",
         conditions: {
-          AND: [],
-          IF: ["a3515f16-9eee-42ab-a700-787647aaae1e"],
+          AND: [
+            "a3515f16-9eee-42ab-a700-787647aaae1e",
+            "3b6e90a5-6fad-4226-9791-0763e9d8e0e8",
+          ],
+          IF: [],
           NAND: [],
           NOR: [],
           NOT: [],
@@ -1372,8 +1375,11 @@ const exampleChecklist = [
         position: 72,
         _id: "95762d96-5c95-4377-a546-b422618bf9ae",
         conditions: {
-          AND: [],
-          IF: ["a3515f16-9eee-42ab-a700-787647aaae1e"],
+          AND: [
+            "a3515f16-9eee-42ab-a700-787647aaae1e",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+          ],
+          IF: [],
           NAND: [],
           NOR: [],
           NOT: [],
@@ -1424,6 +1430,149 @@ const exampleChecklist = [
           IF: ["f355a0b7-9085-4a52-94de-97b27cd105a7"],
           NAND: [],
           NOR: [],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
+        text: "Reduce power. enrich mixture, increase cooling airflow",
+        position: 76,
+        _id: "03bb2030-d813-4691-8c4d-73dc8836e693",
+        conditions: {
+          AND: [
+            "a3515f16-9eee-42ab-a700-787647aaae1e",
+            "d05b599d-8368-4121-b065-e10f64158000",
+          ],
+          IF: [],
+          NAND: [],
+          NOR: [],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
+        text: "Manifold problems",
+        position: 77,
+        _id: "0e3c996b-e583-49ea-85cf-20978481b139",
+        conditions: {
+          AND: [],
+          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          NAND: [],
+          NOR: [
+            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
+            "927f97c3-a12f-4d12-b744-846981005a44",
+            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
+            "39c379a0-d74f-4e27-b930-18921f3e6f84",
+            "d9419531-477a-494d-aa38-f1fc30fd08e6",
+            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
+            "b491103a-6b44-4594-8f19-d14ccb4c22be",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+            "a755ab54-be8d-466d-be92-cfb23b07d660",
+          ],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
+        text: "Oil Temp problems",
+        position: 78,
+        _id: "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
+        conditions: {
+          AND: [],
+          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          NAND: [],
+          NOR: [
+            "0e3c996b-e583-49ea-85cf-20978481b139",
+            "927f97c3-a12f-4d12-b744-846981005a44",
+            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
+            "39c379a0-d74f-4e27-b930-18921f3e6f84",
+            "d9419531-477a-494d-aa38-f1fc30fd08e6",
+            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
+            "b491103a-6b44-4594-8f19-d14ccb4c22be",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+            "a755ab54-be8d-466d-be92-cfb23b07d660",
+          ],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
+        text: "Oil Pressure problems",
+        position: 79,
+        _id: "927f97c3-a12f-4d12-b744-846981005a44",
+        conditions: {
+          AND: [],
+          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          NAND: [],
+          NOR: [
+            "39c379a0-d74f-4e27-b930-18921f3e6f84",
+            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
+            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
+            "0e3c996b-e583-49ea-85cf-20978481b139",
+            "d9419531-477a-494d-aa38-f1fc30fd08e6",
+            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
+            "b491103a-6b44-4594-8f19-d14ccb4c22be",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+            "a755ab54-be8d-466d-be92-cfb23b07d660",
+          ],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
+        text: "Cylinder head problems",
+        position: 80,
+        _id: "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
+        conditions: {
+          AND: [],
+          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          NAND: [],
+          NOR: [
+            "0e3c996b-e583-49ea-85cf-20978481b139",
+            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
+            "927f97c3-a12f-4d12-b744-846981005a44",
+            "39c379a0-d74f-4e27-b930-18921f3e6f84",
+            "d9419531-477a-494d-aa38-f1fc30fd08e6",
+            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
+            "b491103a-6b44-4594-8f19-d14ccb4c22be",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+            "a755ab54-be8d-466d-be92-cfb23b07d660",
+          ],
+          NOT: [],
+          OR: [],
+          XNOR: [],
+          XOR: [],
+        },
+      },
+      {
+        text: "Rpm problems",
+        position: 81,
+        _id: "39c379a0-d74f-4e27-b930-18921f3e6f84",
+        conditions: {
+          AND: [],
+          IF: ["df47c230-3726-4d93-9e7c-7171fb6c54da"],
+          NAND: [],
+          NOR: [
+            "0e3c996b-e583-49ea-85cf-20978481b139",
+            "53ef7229-f42b-4c7d-bf0c-966f512b96f8",
+            "927f97c3-a12f-4d12-b744-846981005a44",
+            "78c5130e-7780-4ebb-a4d9-ba923dc0d0b5",
+            "d9419531-477a-494d-aa38-f1fc30fd08e6",
+            "cf37bcc0-9c93-497f-bff9-7840be957bb4",
+            "b491103a-6b44-4594-8f19-d14ccb4c22be",
+            "b853def4-ac38-42d5-92ba-9f616bdaa3bd",
+            "a755ab54-be8d-466d-be92-cfb23b07d660",
+          ],
           NOT: [],
           OR: [],
           XNOR: [],
