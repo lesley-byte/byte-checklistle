@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -15,10 +15,11 @@ import {
   getChecklistsFromLocalStorage,
 } from "../utils/localStorageUtils";
 
-const ListOfPlaygroundLists = () => {
+const ListOfPlaygroundLists = ({ onUpdate, checklists }) => {
   const navigate = useNavigate();
   const key = "playgroundChecklists";
-  const checklists = getChecklistsFromLocalStorage();
+  // const [checklists, setChecklists] = useState(getChecklistsFromLocalStorage());
+
   if (!Array.isArray(checklists)) {
     console.error("Checklists is not an array:", checklists);
     return null;
@@ -29,6 +30,8 @@ const ListOfPlaygroundLists = () => {
       (checklist) => checklist._id !== checklistId
     );
     saveChecklistsToLocalStorage(updatedChecklists);
+    // setChecklists(updatedChecklists); // Update the state to trigger a re-render
+  onUpdate(); // Call the onUpdate function to update the checklists in the parent component
   };
 
   const handleEdit = (checklistId) => {

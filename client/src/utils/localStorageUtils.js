@@ -1,3 +1,5 @@
+import exampleChecklist from "./exampleChecklist.js";
+
 const CHECKLISTS_KEY = "playgroundChecklists";
 export const PLAYGROUND_CHECKLISTS_KEY = "playgroundChecklists";
 
@@ -6,24 +8,20 @@ export const saveChecklistsToLocalStorage = (checklists) => {
     const serializedChecklists = JSON.stringify(checklists);
     localStorage.setItem(CHECKLISTS_KEY, serializedChecklists);
   } catch (error) {
-    console.error('Error saving checklists to local storage:', error);
+    console.error("Error saving checklists to local storage:", error);
   }
 };
-
 
 export const getChecklistsFromLocalStorage = () => {
-  try {
-    const serializedChecklists = localStorage.getItem(CHECKLISTS_KEY);
-    if (serializedChecklists === null) {
-      return [];
-    }
-    return JSON.parse(serializedChecklists);
-  } catch (error) {
-    console.error('Error getting checklists from local storage:', error);
-    return [];
+  const checklists = localStorage.getItem(CHECKLISTS_KEY);
+  if (checklists) {
+    return JSON.parse(checklists);
+  } else {
+    // If no checklists are found in local storage, create an example checklist
+    localStorage.setItem(CHECKLISTS_KEY, JSON.stringify(exampleChecklist));
+    return exampleChecklist;
   }
 };
-
 
 export const saveChecklistToLocalStorage = (checklist) => {
   const checklists = getChecklistsFromLocalStorage();

@@ -7,7 +7,7 @@ import {
   getChecklistsFromLocalStorage,
 } from "../utils/localStorageUtils";
 
-const NewPlayground = () => {
+const NewPlayground = ({ onUpdate }) => {
   const navigate = useNavigate();
 
   const [formState, setFormState] = useState({
@@ -16,7 +16,6 @@ const NewPlayground = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const key = "playgroundChecklists";
       const savedChecklists = getChecklistsFromLocalStorage();
@@ -27,12 +26,10 @@ const NewPlayground = () => {
       };
 
       saveChecklistsToLocalStorage([...savedChecklists, newChecklist]);
-
+      onUpdate(); // Call the onUpdate function to update the checklists in the parent component
       setFormState({
         title: "",
       });
-
-      navigate("/testplaygroundmanagement");
     } catch (e) {
       console.error("Error:", e || "No error found");
     }
@@ -40,7 +37,6 @@ const NewPlayground = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormState({
       ...formState,
       [name]: value,

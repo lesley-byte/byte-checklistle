@@ -1,11 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import NewPlayground from "../components/NewPlayground";
 import ListOfPlaygroundLists from "../components/ListOfPlaygroundLists";
 import introJs from "intro.js";
 import "intro.js/minified/introjs.min.css";
+import { getChecklistsFromLocalStorage } from "../utils/localStorageUtils";
 
 const TestPlaygroundManagement = () => {
+  const [checklists, setChecklists] = useState(getChecklistsFromLocalStorage());
+
+  const handleChecklistUpdate = () => {
+    console.log("Updating checklists..."); // Add this line for debugging
+    setChecklists(getChecklistsFromLocalStorage());
+  };
+
   useEffect(() => {
     const tutorialShown = sessionStorage.getItem("playgroundTutorialShown");
 
@@ -34,16 +42,18 @@ const TestPlaygroundManagement = () => {
     }
   }, []);
 
+  //...
   return (
     <Container maxWidth="md" sx={{ minHeight: "80vh" }}>
       <Typography variant="h3" component="h1" gutterBottom>
         Checklist Management
       </Typography>
       <Box mt={4} id="new-checklist">
-        <NewPlayground />
+        <NewPlayground onUpdate={handleChecklistUpdate} />
       </Box>
       <Box mt={4} id="list-of-lists">
-        <ListOfPlaygroundLists />
+      <ListOfPlaygroundLists checklists={checklists} onUpdate={handleChecklistUpdate} />
+
       </Box>
     </Container>
   );

@@ -112,6 +112,7 @@ const PlayGroundChecklistForm = ({
 
     // Save the updated list of checklists
     updateChecklistsInLocalStorage(savedChecklists);
+    navigate("/playground/checklistManagement")
     console.log("Data saved to localStorage:", savedChecklists);
   };
 
