@@ -14,6 +14,10 @@ const Conditions = ({ steps, currentStepIndex, conditions, onChange }) => {
   };
 
   const renderConditionSelect = (conditionType) => {
+    if (conditionType === "__typename") {
+      return null;
+    }
+
     const otherSteps = steps.filter((_, index) => index !== currentStepIndex);
 
     return (
@@ -37,7 +41,7 @@ const Conditions = ({ steps, currentStepIndex, conditions, onChange }) => {
         >
           {otherSteps.map((otherStep) => (
             <MenuItem
-              key={otherStep.tempId}
+              key={`${conditionType}-${otherStep.tempId}`}
               value={otherStep._id || otherStep.tempId}
             >
               {`Step ${otherStep.text}`}
