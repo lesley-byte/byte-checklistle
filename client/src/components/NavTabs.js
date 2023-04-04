@@ -35,7 +35,7 @@ const NavTabs = () => {
         )}
         {!loggedIn && (
           <Tab
-            label="Test Playground"
+            label="Tutorial Playground"
             component={Link}
             to="/playground/checklistManagement"
             sx={{ textDecoration: "none" }}
