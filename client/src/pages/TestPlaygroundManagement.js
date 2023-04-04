@@ -5,6 +5,8 @@ import ListOfPlaygroundLists from "../components/ListOfPlaygroundLists";
 import introJs from "intro.js";
 import "intro.js/minified/introjs.min.css";
 import { getChecklistsFromLocalStorage } from "../utils/localStorageUtils";
+import playgroundTutorialSteps from "../tutorials/playgroundTutorialSteps";
+import listOfPlaygroundListsTutorialSteps from "../tutorials/listOfPlaygroundListsTutorialSteps";
 
 const TestPlaygroundManagement = () => {
   const [checklists, setChecklists] = useState(getChecklistsFromLocalStorage());
@@ -22,23 +24,18 @@ const TestPlaygroundManagement = () => {
 
       intro.setOptions({
         steps: [
-          {
-            element: "#new-playground-checklist",
-            intro: "Here you can create a new checklist.",
-            position: "bottom",
-          },
-          {
-            element: "#list-of-playground-lists",
-            intro:
-              "This is the list of all your checklists. you can view, edit, or delete them here.",
-            position: "top",
-          },
+          ...playgroundTutorialSteps,
+          ...listOfPlaygroundListsTutorialSteps,
         ],
       });
 
-      intro.start();
+      const startTutorial = () => {
+        intro.start();
+        sessionStorage.setItem("playgroundTutorialShown", "true");
+      };
 
-      sessionStorage.setItem("playgroundTutorialShown", "true");
+      // Wait for 500 milliseconds before starting the tutorial
+      setTimeout(startTutorial, 500);
     }
   }, []);
 
@@ -48,12 +45,14 @@ const TestPlaygroundManagement = () => {
       <Typography variant="h3" component="h1" gutterBottom>
         Checklist Management
       </Typography>
-      <Box mt={4} id="new-checklist">
+      <Box mt={4} id="new-playground-checklist">
         <NewPlayground onUpdate={handleChecklistUpdate} />
       </Box>
-      <Box mt={4} id="list-of-lists">
-      <ListOfPlaygroundLists checklists={checklists} onUpdate={handleChecklistUpdate} />
-
+      <Box mt={4} id="list-of-playground-lists">
+        <ListOfPlaygroundLists
+          checklists={checklists}
+          onUpdate={handleChecklistUpdate}
+        />
       </Box>
     </Container>
   );

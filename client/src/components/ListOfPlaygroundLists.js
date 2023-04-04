@@ -15,7 +15,7 @@ import {
   getChecklistsFromLocalStorage,
 } from "../utils/localStorageUtils";
 
-const ListOfPlaygroundLists = ({ onUpdate, checklists }) => {
+const ListOfPlaygroundLists = ({ onUpdate, checklists, startTutorial }) => {
   const navigate = useNavigate();
   const key = "playgroundChecklists";
   // const [checklists, setChecklists] = useState(getChecklistsFromLocalStorage());
@@ -62,6 +62,7 @@ const ListOfPlaygroundLists = ({ onUpdate, checklists }) => {
             </Link>
             <ListItemSecondaryAction>
               <Button
+              id="edit-button"
                 sx={{
                   backgroundColor: colors.teal,
                   color: colors.ice,
@@ -75,6 +76,7 @@ const ListOfPlaygroundLists = ({ onUpdate, checklists }) => {
                 Edit
               </Button>
               <Button
+              id="delete-button"
                 sx={{
                   backgroundColor: colors.yellow,
                   color: colors.dark,

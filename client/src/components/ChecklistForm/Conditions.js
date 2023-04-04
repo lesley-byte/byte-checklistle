@@ -40,7 +40,7 @@ const Conditions = ({ steps, currentStepIndex, conditions, onChange }) => {
               key={otherStep.tempId}
               value={otherStep._id || otherStep.tempId}
             >
-              {`Step ${otherStep.position}`}
+              {`Step ${otherStep.text}`}
             </MenuItem>
           ))}
         </Select>

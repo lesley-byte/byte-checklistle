@@ -1,38 +1,29 @@
+// Path: client\src\pages\ChecklistManagement.js
 import React, { useEffect } from "react";
 import { Container, Typography, Box } from "@mui/material";
 import New from "../components/New";
 import ListOfLists from "../components/ListOfLists";
 import introJs from "intro.js";
 import "intro.js/minified/introjs.min.css";
+// Path: client\src\pages\ChecklistManagement.js
+import tutorialSteps from "../tutorials/tutorialSteps";
 
 const ChecklistManagement = () => {
-  useEffect(() => {
-    const tutorialShown = sessionStorage.getItem("tutorialShown");
+  // useEffect(() => {
+  //   const tutorialShown = sessionStorage.getItem("tutorialShown");
 
-    if (!tutorialShown) {
-      const intro = introJs();
+  //   if (!tutorialShown) {
+  //     const intro = introJs();
 
-      intro.setOptions({
-        steps: [
-          {
-            element: "#new-checklist",
-            intro: "Here you can create a new checklist.",
-            position: "bottom",
-          },
-          {
-            element: "#list-of-lists",
-            intro:
-              "This is the list of all your checklists. you can view, edit, or delete them here.",
-            position: "top",
-          },
-        ],
-      });
+  //     intro.setOptions({
+  //       steps: tutorialSteps,
+  //     });
 
-      intro.start();
+  //     intro.start();
 
-      sessionStorage.setItem("tutorialShown", "true");
-    }
-  }, []);
+  //     sessionStorage.setItem("tutorialShown", "true");
+  //   }
+  // }, []);
 
   return (
     <Container maxWidth="md" sx={{ minHeight: "80vh" }}>
@@ -50,5 +41,3 @@ const ChecklistManagement = () => {
 };
 
 export default ChecklistManagement;
-
-// Path: client\src\pages\ChecklistManagement.js
